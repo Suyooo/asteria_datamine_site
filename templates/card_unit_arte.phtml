@@ -1,0 +1,17 @@
+		<div class="smallstats split <?php if ($num == 1) { echo "margins"; } else { echo "artemargins"; } ?>">
+			<span><?=$v($name)?></span>
+			<span class="small">Chance: <?=$v($chance)?>%</span>
+		</div>
+		<?php if ($voice): ?>
+			<div class="voice">
+				<img src="/asteria/image/icon_voice.svg" alt="Arte Use" title="Arte Use" class="closeInfo" onClick="toggleCard(this.parentElement)">
+				<audio class="openInfo" controls src="/asteria/assets/<?=$v($voice)?>" preload="none"></audio>
+			</div>
+		<?php endif ?>
+		<div class="small margins left">
+			<?=$v($description)?>
+			<?php if ($bond): ?>
+				<br>
+				<b>Bond Potential:</b> <?=$v($bond)?>
+			<?php endif ?>
+		</div>

@@ -1,0 +1,16 @@
+<?php $v->layout('layout', ['title' => 'Patch List']) ?>
+
+<div class="container patchlist">
+	<table>
+		<?php foreach($patches as $patch): ?>
+			<tr>
+				<td><div><a href="/asteria/patch/<?=$v($patch["id"])?>"><?=$v($patch["name"])?></a></div></td>
+				<td>
+					<?php foreach($patch["list"] as $unit): ?>
+						<a href="/asteria/unit/<?=$v($unit)?>"><img src="/asteria/image_thumb/<?=$v($unit)?>"></a>
+					<?php endforeach ?>
+				</td>
+			</tr>
+		<?php endforeach ?>
+	</table>
+</div>

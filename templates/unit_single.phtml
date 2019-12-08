@@ -1,0 +1,11 @@
+<?php $v->layout('layout', ['title' => str_replace("&nbsp;"," ",$unit["name"]) . " • Unit", 'image' => "https://suyo.be/asteria/image_thumb/" . $unit["id"]]) ?>
+
+<div class="container">
+	<div class="itemgrid" id="cardContainer">
+		<span>&nbsp;</span>
+		<?php
+			$unit["force_open"] = true;
+			$v->insert('card_unit', $unit);
+		?>
+	</div>
+</div>

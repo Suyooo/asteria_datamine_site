@@ -1,0 +1,10 @@
+* {
+	user-select: text !important;
+	-webkit-user-select: text !important;
+	-moz-user-select: text !important;
+}
+body {
+	background-color: #082737 !important;
+	position: absolute;
+	width: 320px;
+}

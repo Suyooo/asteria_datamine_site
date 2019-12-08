@@ -1,0 +1,349 @@
+<div class="card_unit<?php if ($force_open) { echo " open"; } ?>">
+	<div class="imagecontainer togglebutton" onClick="<?php if (!$force_open) { echo "toggleCard(this.parentElement)"; } ?>">
+		<img class="image" src="/asteria/image_detail/<?=$v($id)?>">
+		<span class="element <?=$v($element)?>"></span>
+		<span class="rarity r<?=$v($rarity)?>"></span>
+		<?php if ($patch_change): ?>
+			<span class="patch-change"><?=$v($patch_change)?></span>
+		<?php endif ?>
+	</div>
+	
+	<div class="name">
+		<?=str_replace("&amp;nbsp;", "&nbsp;", $v($name))?>
+		<div class="openInfo small">
+			<?=$v($game)?>
+			<div class="smallstats">
+				<?php if (in_array($id, $collection_ids)): ?>
+					<a class="icon remove smallbutton" onClick="toggleCollection(this, '<?=$v($id)?>')">Remove</a>
+				<?php else: ?>
+					<a class="icon add smallbutton" onClick="toggleCollection(this, '<?=$v($id)?>')">Add</a>
+				<?php endif ?>
+				<a class="icon copy smallbutton" onClick="copyInfo(this, '<?=$v($copyinfo)?>')">Copy</a>
+				<a href="/asteria/unit/<?=$v($id)?>" class="icon link smallbutton">Link</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="closeInfo">
+		<div class="smallstats">
+			<span class="icon hp text-hp"><?=$v($stats_hp)?></span>
+			<span class="icon atk text-atk"><?=$v($stats_atk)?></span>
+			<span class="icon def text-def"><?=$v($stats_def)?></span>
+		</div>
+		<div class="smallstats">
+			<span><?php if ($ma_name) { echo $v($ma_summary_short); } else { echo "&nbsp;"; } ?></span>
+			<span><?=$v($coop_type)?> Type</span>
+		</div>
+	</div>
+	
+	<div class="openInfo">
+		<?php if ($awaken_info): ?>
+			<div class="smallstats artemargins">
+				<span class="icon star <?=$v($awaken_star_type)?>"><?=$v($awaken_info)?></span>
+			</div>
+		<?php endif ?>
+		
+		<h5>Stats</h5>
+		<div class="smallstats margins">
+			<div>
+				<span class="icon hp">Max HP</span><br>
+				<span class="icon atk">Attack</span><br>
+				<span class="icon def">Defense</span>
+			</div>
+			<div>
+				<span class="text-hp"><?=$v($stats_hp)?></span><br>
+				<span class="text-atk"><?=$v($stats_atk)?></span><br>
+				<span class="text-def"><?=$v($stats_def)?></span>
+			</div>
+		</div>
+		
+		<h6>Co-op Battle Stats</h6>
+		<div class="smallstats margins small">
+			<div>
+				<div>&nbsp;</div>
+				<div class="icon hp">Max HP</div>
+				<div class="icon atk slim">Physical ATK</div>
+				<div class="icon slim">Magical ATK</div>
+				<div class="icon def slim">Physical DEF</div>
+				<div class="icon slim">Magical DEF</div>
+			</div>
+			<div>
+				<div>&nbsp;</div>
+				<div><?=$v($coop_hp + $coop_bonus_hp)?></div>
+				<div><?=$v($coop_patk + $coop_bonus_patk)?></div>
+				<div><?=$v($coop_matk + $coop_bonus_matk)?></div>
+				<div><?=$v($coop_pdef + $coop_bonus_pdef)?></div>
+				<div><?=$v($coop_mdef + $coop_bonus_mdef)?></div>
+			</div>
+			<div class="text-<?=$v($coop_type_short)?>">
+				<div><?=$v($coop_type)?> Bonus</div>
+				<div><?php if ($coop_bonus_hp>0) { echo "(+ ".$v($coop_bonus_hp).")"; } else { echo "&nbsp;"; } ?></div>
+				<div><?php if ($coop_bonus_patk>0) { echo "(+ ".$v($coop_bonus_patk).")"; } else { echo "&nbsp;"; } ?></div>
+				<div><?php if ($coop_bonus_matk>0) { echo "(+ ".$v($coop_bonus_matk).")"; } else { echo "&nbsp;"; } ?></div>
+				<div><?php if ($coop_bonus_pdef>0) { echo "(+ ".$v($coop_bonus_pdef).")"; } else { echo "&nbsp;"; } ?></div>
+				<div><?php if ($coop_bonus_mdef>0) { echo "(+ ".$v($coop_bonus_mdef).")"; } else { echo "&nbsp;"; } ?></div>
+			</div>
+		</div>
+		
+		<?php if ($ex_skill_tf): ?>
+			<h5>Transformation</h5>
+			<div class="small margins left"><?=$v($ex_skill_tf)?></div>
+		<?php endif ?>
+		
+		<?php if ($artes): ?>
+			<h5>Artes</h5>
+			<?php if ($tf_baseartes): ?>
+				<?php foreach($tf_baseartes as $arte): ?>
+					<?php $v->insert('card_unit_arte', $arte) ?>
+				<?php endforeach ?>
+				<h6><?=$v($tf_label)?></h6>
+			<?php endif ?>
+			<?php foreach($artes as $arte): ?>
+				<?php $v->insert('card_unit_arte', $arte) ?>
+			<?php endforeach ?>
+		<?php endif ?>
+		
+		<?php if ($ma_name): ?>
+			<h5>Mystic Arte</h5>
+			<div class="smallstats split margins left">
+				<span><?=$v($ma_name)?></span>
+				<span class="element <?=$v($ma_element)?>"></span>
+			</div>
+			<div class="small bold margins left">
+				<?=$v($ma_summary)?>
+			</div>
+			<?php if ($ma_voice_use): ?>
+				<div class="voice">
+					<img src="/asteria/image/icon_voice.svg" alt="MA Use" title="MA Use" class="closeInfo" onClick="toggleCard(this.parentElement)">
+					<audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_voice_use)?>" preload="none"></audio>
+				</div>
+			<?php endif ?>
+			<?php if ($ma_voice_ready): ?>
+				<div class="voice">
+					<img src="/asteria/image/icon_voice.svg" alt="MA Ready" title="MA Ready" class="closeInfo" onClick="toggleCard(this.parentElement)">
+					<audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_voice_ready)?>" preload="none"></audio>
+				</div>
+			<?php endif ?>
+			<div class="small margins left">
+				<?=$v($ma_description)?><br>
+				<?php if ($ma_coopdiff): ?>
+					<b>In Co-op Battle:</b> <?=$v($ma_coopdiff)?><br>
+				<?php endif ?>
+				<?php if ($ma_bond): ?>
+					<b>Bond Potential:</b> <?=$v($ma_bond)?><br>
+				<?php endif ?>
+				<b>OL Charge:</b> <?=$v($ma_charge)?> (avg. <?=$v($ma_chargeturns["avg"])?> turn<?=$v($ma_chargeturns["avg_plural"])?>)
+				<div style="display: inline">
+					<span onClick="toggleCard(this.parentElement)" class="icon toggle"></span>
+					<div style="background-color:white; padding:2px 5px;" class="openInfo">
+						<img style="width: 100%" src="/asteria/image_stat_charge/<?=$v($id)?>">
+						<small>* assuming matched frame every turn</small>
+					</div>
+				</div>
+			</div>
+			<?php if ($ma_ex_summary): ?>
+				<h6>EX Mystic Arte</h6>
+				<div class="small bold margins left">
+					<?=$v($ma_ex_summary)?>
+				</div>
+				<?php if ($ma_ex_voice_use): ?>
+					<div class="voice">
+						<img src="/asteria/image/icon_voice.svg" alt="EX MA Use" title="EX MA Use" class="closeInfo" onClick="toggleCard(this.parentElement)">
+						<audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_ex_voice_use)?>" preload="none"></audio>
+					</div>
+				<?php endif ?>
+				<?php if ($ma_ex_voice_ready): ?>
+					<div class="voice">
+						<img src="/asteria/image/icon_voice.svg" alt="EX MA Ready" title="EX MA Ready" class="closeInfo" onClick="toggleCard(this.parentElement)">
+						<audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_ex_voice_ready)?>" preload="none"></audio>
+					</div>
+				<?php endif ?>
+				<div class="small margins left">
+					<?=$v($ma_ex_description)?><br>
+					<?php if ($ma_ex_coopdiff): ?>
+						<b>In Co-op Battle:</b> <?=$v($ma_ex_coopdiff)?><br>
+					<?php endif ?>
+					<?php if ($ma_ex_bond): ?>
+						<b>Bond Potential:</b> <?=$v($ma_ex_bond)?><br>
+					<?php endif ?>
+					<div>
+						<b>OL Charge:</b> <?=$v($ma_charge + $ma_ex_charge)?> (<?=$v($ma_charge)?> + <?=$v($ma_ex_charge)?>, avg. <?=$v($ma_ex_chargeturns["avg"])?> turn<?=$v($ma_ex_chargeturns["avg_plural"])?>)
+						<span onClick="toggleCard(this.parentElement)" class="icon toggle"></span>
+						<div style="background-color:white; padding:2px 5px;" class="openInfo">
+							<img style="width: 100%" src="/asteria/image_stat_charge/<?=$v($id)?>EX">
+							<small>* assuming matched frame every turn</small>
+						</div>
+					</div>
+				</div>
+			<?php endif ?>
+		<?php endif ?>
+		
+		<?php if ($ma_dual_name): ?>
+			<div class="dualmaheader smallstats split left">
+				<h5>Dual Mystic Arte</h5>
+				<a href="/asteria/soul/<?=$v($ma_dual_soul_id)?>"><div class="inlinethumb soul"><img src="/asteria/assets/<?=$v($ma_dual_soul_image)?>"></div></a>
+			</div>
+			<div class="small margins left dualmargin">
+				Required Soul: <a href="/asteria/soul/<?=$v($ma_dual_soul_id)?>"><?=$v($ma_dual_soul_name)?></a>
+			</div>
+			<div class="smallstats split margins left">
+				<span><?=$v($ma_dual_name)?></span>
+				<span class="element <?=$v($ma_dual_element)?>"></span>
+			</div>
+			<div class="small bold margins left">
+				<?=$v($ma_dual_summary)?>
+			</div>
+			<?php if ($ma_dual_voice_use): ?>
+				<div class="voice">
+					<img src="/asteria/image/icon_voice.svg" alt="Dual MA Use" title="Dual MA Use" class="closeInfo" onClick="toggleCard(this.parentElement)">
+					<audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_dual_voice_use)?>" preload="none"></audio>
+				</div>
+			<?php endif ?>
+			<?php if ($ma_dual_voice_ready): ?>
+				<div class="voice">
+					<img src="/asteria/image/icon_voice.svg" alt="Dual MA Ready" title="Dual MA Ready" class="closeInfo" onClick="toggleCard(this.parentElement)">
+					<audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_dual_voice_ready)?>" preload="none"></audio>
+				</div>
+			<?php endif ?>
+			<div class="small margins left">
+				<?=$v($ma_dual_description)?><br>
+				<?php if ($ma_dual_coopdiff): ?>
+					<b>In Co-op Battle:</b> <?=$v($ma_dual_coopdiff)?><br>
+				<?php endif ?>
+				<?php if ($ma_dual_bond): ?>
+					<b>Bond Potential:</b> <?=$v($ma_dual_bond)?><br>
+				<?php endif ?>
+				<b>OL Charge:</b> <?=$v($ma_dual_charge)?> (avg. <?=$v($ma_dual_chargeturns["avg"])?> turn<?=$v($ma_dual_chargeturns["avg_plural"])?>)
+				<div style="display: inline">
+					<span onClick="toggleCard(this.parentElement)" class="icon toggle"></span>
+					<div style="background-color:white; padding:2px 5px;" class="openInfo">
+						<img style="width: 100%" src="/asteria/image_stat_charge/<?=$v($id)?>D">
+						<small>* assuming matched frame every turn</small>
+					</div>
+				</div>
+			</div>
+			<?php if ($ma_dual_ex_summary): ?>
+				<h6>Dual EX Mystic Arte</h6>
+				<div class="small bold margins left">
+					<?=$v($ma_dual_ex_summary)?>
+				</div>
+				<?php if ($ma_dual_ex_voice_use): ?>
+					<div class="voice">
+						<img src="/asteria/image/icon_voice.svg" alt="Dual EX MA Use" title="Dual EX MA Use" class="closeInfo" onClick="toggleCard(this.parentElement)">
+						<audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_dual_ex_voice_use)?>" preload="none"></audio>
+					</div>
+				<?php endif ?>
+				<?php if ($ma_dual_ex_voice_ready): ?>
+					<div class="voice">
+						<img src="/asteria/image/icon_voice.svg" alt="Dual EX MA Ready" title="Dual EX MA Ready" class="closeInfo" onClick="toggleCard(this.parentElement)">
+						<audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_dual_ex_voice_ready)?>" preload="none"></audio>
+					</div>
+				<?php endif ?>
+				<div class="small margins left">
+					<?=$v($ma_dual_ex_description)?><br>
+					<?php if ($ma_dual_ex_coopdiff): ?>
+						<b>In Co-op Battle:</b> <?=$v($ma_dual_ex_coopdiff)?><br>
+					<?php endif ?>
+					<?php if ($ma_dual_ex_bond): ?>
+						<b>Bond Potential:</b> <?=$v($ma_dual_ex_bond)?><br>
+					<?php endif ?>
+					<div>
+						<b>OL Charge:</b> <?=$v($ma_dual_charge + $ma_dual_ex_charge)?> (<?=$v($ma_dual_charge)?> + <?=$v($ma_dual_ex_charge)?>, avg. <?=$v($ma_dual_ex_chargeturns["avg"])?> turn<?=$v($ma_dual_ex_chargeturns["avg_plural"])?>)
+						<span onClick="toggleCard(this.parentElement)" class="icon toggle"></span>
+						<div style="background-color:white; padding:2px 5px;" class="openInfo">
+							<img style="width: 100%" src="/asteria/image_stat_charge/<?=$v($id)?>DEX">
+							<small>* assuming matched frame every turn</small>
+						</div>
+					</div>
+				</div>
+			<?php endif ?>
+		<?php endif ?>
+		
+		<?php if ($ex_skill): ?>
+			<h5>EX Skill</h5>
+			<div class="small margins left"><?=$v($ex_skill)?></div>
+		<?php endif ?>
+		
+		<h5>Co-op Skill</h5>
+		<div class="smallstats split margins">
+			<span><?=$v($coop_name)?></span>
+			<span class="element <?=$v($coop_element)?>"></span>
+		</div>
+		<div class="small margins left">
+			<?=$v($coop_description)?>
+		</div>
+		
+		<?php if ($souls): ?>
+			<?php if (count($souls) > 1): ?>
+				<h5>Soulmates</h5>
+			<?php else: ?>
+				<h5>Soulmate</h5>
+			<?php endif ?>
+			<?php foreach($souls as $soul): ?>
+				<div class="smallstats split margins soulline">
+					<span>
+						<a href="/asteria/soul/<?=$v($soul["id"])?>"><div class="inlinethumb soul"><img src="/asteria/assets/<?=$v($soul["image"])?>"></div></a>
+						<a href="/asteria/soul/<?=$v($soul["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($soul["name"]))?></a>
+					</span>
+					<span class="small"><?=$v($soul["effect"])?></span>
+				</div>
+			<?php endforeach ?>
+		<?php endif ?>
+		
+		<?php if (count($partner_info["partners"]) > 0): ?>
+			<?php if (count($partner_info["partners"]) > 1): ?>
+				<h5>Awakening Partners</h5>
+			<?php else: ?>
+				<h5>Awakening Partner</h5>
+			<?php endif ?>
+			<?php foreach($partner_info["partners"] as $partner): ?>
+				<div class="smallstats split margins matchline">
+					<span>
+						<a href="/asteria/partner/<?=$v($partner["id"])?>"><div class="inlinethumb"><img src="/asteria/image_thumb/<?=$v($partner["id"])?>"></div></a>
+						<a href="/asteria/partner/<?=$v($partner["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($partner["name"]))?></a>
+					</span>
+					<span>
+						<div class="element inline <?=$v($partner["element"])?>"></div>
+					</span>
+				</div>
+			<?php endforeach ?>
+		<?php endif ?>
+		
+		<?php if ($subquests): ?>
+			<h5>Subquests</h5>
+			<?php foreach($subquests as $subquest): ?>
+			<div class="smallstats split margins">
+				<span><?=$v($subquest["name"])?></span>
+				<span class="small">(unlocks at Level <?=$v($subquest["level"])?>)</span>
+			</div>
+			<?php endforeach ?>
+		<?php endif ?>
+			
+		<h5>Images</h5>
+		<div class="margins left imagelinks">
+			<div class="legalese">By downloading any of these images, you agree to not remove or alter the Asteria watermark and copyright notice, and agree to not add any of your own watermarks.</div>
+			<a href="/asteria/image_detail/<?=$v($id)?>">Unit View Image</a><br>
+			<a href="/asteria/image_full/<?=$v($id)?>">Full Image</a><br>
+			<a class="underline clicky" onClick="document.getElementById('cleans-<?=$v($id)?>').style.display = '';">Show Clean Images</a><br>
+		</div>
+		<div id="cleans-<?=$v($id)?>" style="display: none">
+			<h6>Clean Images</h6>
+			<div class="margins left imagelinks">
+				<div class="legalese">Clean images are provided mainly for transformative or private use. By downloading any of these images, you agree to not post them on social networks or distribute them otherwise unless used in transformative work (as defined by fair use). If you want to share images of units, please use the watermarked images with the Asteria logo.</div>
+				<a href="/asteria/assets/<?=$v($image_detail)?>">Unit View Image</a><br>
+				<a href="/asteria/assets/<?=$v($image_mypage)?>">Full Image (transparent)</a><br>
+				<a href="/asteria/assets/<?=$v($image_background)?>">Background Image</a><br>
+				<?php if ($ma_name): ?>
+					<a href="/asteria/assets/<?=$v($ma_image_cutin)?>">Mystic Arte Cut In</a>
+				<?php endif ?>
+			</div>
+		</div>
+		<div style="height:0.5em"></div>
+	</div>
+	<?php if (!$force_open): ?>
+		<div class="name togglebutton" onClick="toggleCard(this.parentElement)">
+			<span class="uparrow">&#x25B2;</span>
+			<span class="downarrow">&#x25BC;</span>
+		</div>
+	<?php endif ?>
+</div>

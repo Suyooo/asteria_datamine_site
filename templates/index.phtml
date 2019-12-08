@@ -1,0 +1,113 @@
+<?php $v->layout('layout', ['title' => 'Index']) ?>
+<div class="container" style="padding-top: 0.66em">
+	<div class="index-featured" style="width:100%;overflow:hidden;position: relative;">
+		<div style="background: url('/asteria/assets/<?=$v($feature["idxf_bg_image"])?>');background-size: cover;background-position-y: <?=$v($feature["idxf_bg_image_pos"])?>%;background-repeat: no-repeat;filter: blur(5px);height: 100%;width: 100%;position: absolute;z-index: -2;"></div>
+		<div class="row" style="
+			height: 15em;
+			">
+			<div class="one-half column" style="background-color: rgba(221,221,221,0.75);height: 100%;display: flex;flex-direction: column;flex-wrap: nowrap;justify-content: center;align-content: flex-start;align-items: center;font-weight: bold;padding: 2em;">
+				<span>Current Gacha</span>
+				<a href="/asteria/patch/<?=$v($feature["idxf_patch_id"])?>" style="color: black; text-decoration: none;"><span style="font-size:200%;line-height: 1.2em;"><?=$v($feature["idxf_title"])?></span></a>
+				<div>
+					<a href="/asteria/patch/<?=$v($feature["idxf_patch_id"])?>" style="text-decoration: none;">
+						<?php foreach($feature["idxf_thumb_units"] as $sub): ?>
+							<img src="/asteria/image_thumb/<?=$v($sub)?>" style="width:3em">
+						<?php endforeach ?>
+					</a>
+				</div>
+				<a href="/asteria/patch/<?=$v($feature["idxf_patch_id"])?>" style="color: black;">View All Units &gt;&gt;</a>
+			</div>
+			<div class="one-half column" style="height: 100%;position: relative;">
+				<a href="/asteria/patch/<?=$v($feature["idxf_patch_id"])?>" style="text-decoration: none;"><img src="/asteria/assets/<?=$v($feature["idxf_unit_image"])?>" style="position: absolute;height: 220%;top: <?=$v($feature["idxf_unit_image_pos"])?>%;left: 50%;transform: translate(-50%, -50%);z-index: -1;"></a>
+				<img src="/asteria/image/watermark_small.png" style="position:absolute;right:2px;bottom:2px; max-width: 100%; max-height: 10px">
+			</div>
+		</div>
+	</div>
+	<div class="index-featured" style="width:100%;overflow:hidden;position: relative;margin-top:3em;position:relative">
+		<?php if (count($partners)>0): ?>
+			<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:-3;display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: flex-start; align-content: stretch; align-items: stretch;">
+				<?php foreach($partners as $partner): ?>
+					<div style="order: 0; flex: 1 1 auto; align-self: auto; position: relative;background-color:
+					<?php if ($partner["element"] == "fire"): ?>
+						#c94b48
+					<?php elseif ($partner["element"] == "water"): ?>
+						#1b86ca
+					<?php elseif ($partner["element"] == "wind"): ?>
+						#309b30
+					<?php elseif ($partner["element"] == "earth"): ?>
+						#d0b44e
+					<?php elseif ($partner["element"] == "light"): ?>
+						#aeaeae
+					<?php elseif ($partner["element"] == "dark"): ?>
+						#532264
+					<?php endif ?>
+					;">&nbsp;</div>
+				<?php endforeach ?>
+			</div>
+		<?php else: ?>
+			<div style="position:absolute;top:0;left:0;width:100%;height:100%;z-index:-3;display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: flex-start; align-content: stretch; align-items: stretch; background-color:#888">&nbsp;</div>
+		<?php endif ?>
+		<?php if (1==0): ?>
+		<div>
+			<div style="background-color: rgba(221,221,221,0.75);width:100%;padding:10px 0">
+				<span style="font-size:200%;line-height: 1.2em;">Current Partner Quests</span><br>
+				<?php if ($live === true): ?>
+				<div><span id="partner-countdown" style="font-weight: bold">00:00</span> left</div>
+				</div>
+				<div style="display: flex; flex-direction: row; flex-wrap: nowrap; justify-content: flex-start; align-content: stretch; align-items: stretch;">
+					<?php foreach($partners as $partner): ?>
+						<div style="order: 0; flex: 1 1 auto; flex-basis: 1px; align-self: auto; position: relative;">
+							<a href="/asteria/partner/<?=$v($partner["id"])?>"><img src="/asteria/image_detail/<?=$v($partner["id"])?>" style="width: 100%"></a>
+						<div style="background-color: rgba(221,221,221,0.75);width:100%;padding:10px 0; margin-top: -7px;">
+							<a href="/asteria/partner/<?=$v($partner["id"])?>"><?=$v($partner["name"])?></a>
+						</div>
+						</div>
+					<?php endforeach ?>
+				</div>
+				<?php else: ?>
+				<div>Next round of quests begins in <span id="partner-countdown" style="font-weight: bold">0:00:00</span></div>
+				</div>
+				<?php endif ?>
+		</div>
+		<?php endif ?>
+	</div>
+</div>
+
+<?php if (1==0): ?>
+<script>
+var endTime = <?=$v($endTime)?>;
+
+	console.log(endTime);
+var countdown;
+var cd = function() {
+	var secsLeft = endTime - Math.floor(Date.now() / 1000);
+	var s = "";
+	if (secsLeft <= 0) {
+		clearInterval(countdown);
+		<?php if ($live === true): ?>
+		s = "00:00";
+		<?php else: ?>
+		s = "0:00:00";
+		<?php endif ?>
+	} else {
+		<?php if ($live === true): ?>
+		var mins = Math.floor(secsLeft / 60);
+		if (mins < 10) mins = "0" + mins;
+		var secs = secsLeft % 60;
+		if (secs < 10) secs = "0" + secs;
+		s = mins + ":" + secs;
+		<?php else: ?>
+		var hrs = Math.floor(secsLeft / 3600);
+		var mins = Math.floor(secsLeft / 60) % 60;
+		if (mins < 10) mins = "0" + mins;
+		var secs = secsLeft % 60;
+		if (secs < 10) secs = "0" + secs;
+		s = hrs + ":" + mins + ":" + secs;
+		<?php endif ?>
+	}
+    document.getElementById("partner-countdown").innerHTML = s;
+}
+cd();
+countdown = setInterval(cd, 1000);
+<?php endif ?>
+</script>

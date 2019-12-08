@@ -1,0 +1,140 @@
+<?php
+	if (isset($titleoverride)):
+		$v->layout('layout', ['title' => $titleoverride]);
+	else:
+		$v->layout('layout', ['title' => 'Souls']);
+	endif
+?>
+
+<div class="row">
+	<?php if ($showfilters): ?>
+		<div class="nine columns">
+	<?php else: ?>
+		<div class="twelve columns">
+	<?php endif ?>
+		<div class="container">
+			<?php if (count($souls) == 0): ?>
+				No souls match your filter criteria.
+			<?php else: ?>
+				<?php if ($page > 0): ?>
+					<div class="pagination">
+						<?php if ($page > 1): ?>
+							<a class="smallbutton" href="/asteria/soullist/<?=$v($page - 1)?>/<?=$v($filters)?>">&lt;</a>
+						<?php endif ?>
+						Page <?=$v($page)?>
+						<?php if ($has_next_page): ?>
+							<a class="smallbutton" href="/asteria/soullist/<?=$v($page + 1)?>/<?=$v($filters)?>">&gt;</a>
+						<?php endif ?>
+					</div>
+				<?php endif ?>
+				<?php $v->insert('grid_cards', ["cardtype" => "card_soul", "cards" => $souls]) ?>
+				<?php if ($page > 0): ?>
+					<div class="pagination">
+						<?php if ($page > 1): ?>
+							<a class="smallbutton" href="/asteria/soullist/<?=$v($page - 1)?>/<?=$v($filters)?>">&lt;</a>
+						<?php endif ?>
+						Page <?=$v($page)?>
+						<?php if ($has_next_page): ?>
+							<a class="smallbutton" href="/asteria/soullist/<?=$v($page + 1)?>/<?=$v($filters)?>">&gt;</a>
+						<?php endif ?>
+					</div>
+				<?php endif ?>
+			<?php endif ?>
+		</div>
+	</div>
+	<?php if ($showfilters): ?>
+		<div class="three columns filter-column">
+			In-Game Soul ID
+			<input name="ingameid" style="width: 100%" type="number">
+			Source
+			<select name="source">
+				<?php $v->insert('filters_source') ?>
+			</select>
+			Character
+			<select name="char">
+				<?php $v->insert('filters_character') ?>
+			</select>
+			Type
+			<select name="type">
+				<option value="0">-</option>
+				<option value="1">+ATK</option>
+				<option value="2">+DEF</option>
+				<option value="3">+Max HP</option>
+				<option value="4">+ATK, +DEF</option>
+				<option value="5">+ATK, +Max HP</option>
+				<option value="6">+DEF, +Max HP</option>
+				<option value="7">+ATK, +DEF and +Max HP</option>
+				<option value="8">Heal Every Turn</option>
+				<option value="10">Reduce Damage Taken</option>
+				<option value="11">OL on Quest Start</option>
+			</select>
+			Other
+			<div class="row">
+				<div class="one-half column">
+					<label><input type="checkbox" name="limited" value="1" /> Is Limited</label>
+					<label><input type="checkbox" name="allmatch" value="1" /> Matches All Units</label>
+				</div>
+				<div class="one-half column">
+					<a class="button" href="#" onClick="submitFilter()">Filter</a>
+				</div>
+			</div>
+		</div>
+	<?php endif ?>
+</div>
+<script>
+function handleCurrentFilterSelections() {
+	var filters = {};
+	window.location.pathname.split("/").slice(4).map(function(v) {
+			filters[v.split(":")[0]] = v.split(":").slice(1);
+		});
+	if (filters["id"]) {
+		document.getElementsByName("ingameid")[0].value = filters["id"][0];
+	}
+	selectOptionForSelect("source", filters["source"]);
+	selectOptionForSelect("char", filters["char"]);
+	selectOptionForSelect("type", filters["type"]);
+	selectOptionForCheckboxes("limited", (filters["limited"] != undefined) ? ["1"] : []);
+	selectOptionForCheckboxes("allmatch", (filters["allmatch"] != undefined) ? ["1"] : []);
+}
+
+function selectOptionForSelect(name, value) {
+	if (value === undefined) return;
+	document.getElementsByName(name)[0].value = value.join(":");
+}
+
+function selectOptionForCheckboxes(name, value) {
+	if (value === undefined) return;
+	var boxes = document.getElementsByName(name);
+	for (var i = 0; i < boxes.length; i++) {
+		if (value.includes(boxes[i].value)) boxes[i].checked = true;
+	}
+}
+
+handleCurrentFilterSelections();
+
+function submitFilter() {
+	var filters = [];
+	
+	if (document.getElementsByName("ingameid")[0].value != "") {
+		var idval = parseInt(document.getElementsByName("ingameid")[0].value);
+		if (idval > 0) filters.push("id:" + idval);
+	}
+	makeFilterForSelect(filters, "source");
+	makeFilterForSelect(filters, "char");
+	makeFilterForSelect(filters, "type");
+	makeFilterForCheckbox(filters, "limited");
+	makeFilterForCheckbox(filters, "allmatch");
+	
+	window.location.href = "https://suyo.be/asteria/soullist/1/" + filters.join("/");
+}
+
+function makeFilterForSelect(filters, name) {
+	var value = document.getElementsByName(name)[0].value;
+	if (value != 0) filters.push(name + ":" + value);
+}
+
+function makeFilterForCheckbox(filters, name) {
+	var boxes = document.getElementsByName(name);
+	if (boxes[0].checked) filters.push(name);
+}
+</script>

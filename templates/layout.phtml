@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title><?=$v($title)?> &bull; Asteria Database</title>
+	<meta name="description" content="Statistics, extracted images and more for Tales of Asteria (Android/iOS)">
+	<meta name="author" content="Suyooo">
+	
+	<meta property="og:site_name" content="Asteria Database">
+	<meta property="og:title" content="<?=$v($title)?>">
+	<meta property="og:type" content="website">
+	<?php if (isset($image)): ?>
+		<meta property="og:image" content="<?=$v($image)?>">
+	<?php else: ?>
+		<meta property="og:image" content="https://suyo.be/asteria/image/favicon.png">
+	<?php endif ?>
+	<?php if (isset($description)): ?>
+		<meta property="og:description" content="<?=$v($description)?>">
+	<?php else: ?>
+		<meta property="og:description" content="Statistics, extracted images and more for Tales of Asteria (Android/iOS)">
+	<?php endif ?>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+	<link rel="icon" type="image/png" sizes="128x128" href="/asteria/image/favicon.png">
+	<!--<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css">-->
+
+	<link rel="stylesheet" href="/asteria/css/normalize.css">
+	<link rel="stylesheet" href="/asteria/css/skeleton.css">
+	<link rel="stylesheet" href="/asteria/css/style.css">
+
+	<script>
+		function toggleCard(card) {
+			card.classList.toggle("open");
+		}
+		function copyInfo(element, text) {
+			if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+				var textarea = document.createElement("textarea");
+				textarea.textContent = text;
+				textarea.style.position = "fixed";
+				document.body.appendChild(textarea);
+				textarea.select();
+				try {
+					document.execCommand("copy");
+				} catch (ex) {
+					prompt("Copying automatically didn't work... Please copy this text manually!", text);
+				} finally {
+					document.body.removeChild(textarea);
+					element.classList.add('done');
+					element.innerHTML = "Copied";
+					setTimeout(function() {
+						element.classList.remove('done');
+						element.innerHTML = "Copy";
+					}, 3000);
+				}
+			} else {
+				prompt("Your browser doesn't support copying automatically... Please copy this text manually!", text);
+			}
+		}
+		
+		function toggleCollection(element, id) {
+			var set = getCookie("collection");
+			var arr = [];
+			if (set === undefined || set === "") {
+				arr.push(id);
+				removeButton(element);
+			} else {
+				var arr = set.split("/");
+				if (arr.includes(id)) {
+					arr = arr.filter(function(e) { return e != id; });
+					addButton(element);
+				} else {
+					arr.push(id);
+					removeButton(element);
+				}
+			}
+			
+			set = arr.join("/");
+			if (setCookie("collection", set, 365)) {
+				document.getElementById("collectionNumber").innerHTML = arr.length;
+				var mcsl = document.getElementById("myCollectionShareLink");
+				if (mcsl != null) mcsl.innerHTML = "Please refresh to see the share link!";
+			}
+		}
+		function addButton(element) {
+			element.classList.remove('remove');
+			element.classList.add('add');
+			element.innerHTML = "Add";
+		}
+		function removeButton(element) {
+			element.classList.remove('add');
+			element.classList.add('remove');
+			element.innerHTML = "Remove";
+		}
+		function clearCollection(id) {
+			if (setCookie("collection", "", 0)) {
+				window.location = "https://suyo.be/asteria/collection/";
+			}
+		}
+		function saveCollection() {
+			if (setCookie("collection", window.location.pathname.substring(20), 365)) { // cut off /asteria/collection (needs to be adjusted when moving URL)
+				window.location = "https://suyo.be/asteria/collection/";
+			}
+		}
+		
+		var COOKIE_POLICY = "### COOKIE POLICY\n\nAsteria Database uses cookies to store your preferences and inputs for later " +
+		"use. It will only do so if you agree to this message.\nThe page is still functional without if you do " +
+		"not allow storage, however, you will be unable to use the Collection feature. No other data is " +
+		"stored, and this information is not saved on the server or used to identify you.\nYou can revoke your consent at " +
+		"any time by removing all cookies saved on your device by this site.";
+
+		function setCookie(key, value, days) {
+			if (document.cookie !== "" || confirm(COOKIE_POLICY + "\n\nDo you agree with the cookie policy and allow this site to store cookies on your device?")) {
+				var expiryDate = new Date();
+				expiryDate.setTime(expiryDate.getTime() + (days * 24 * 60 * 60 * 1000));
+				document.cookie = key + "=" + value + "; expires=" + expiryDate.toUTCString() + "; path=/asteria";
+				return true;
+			}
+			return false;
+		}
+
+		function getCookie(key) {
+			var cookies = document.cookie.split(";");
+
+			for (var i = 0; i < cookies.length; i++) {
+				var cookie = cookies[i];
+				var eqPos = cookie.indexOf("=");
+				if (eqPos != -1 && cookie.substr(0, eqPos).trim() == key) {
+					return cookie.substr(eqPos + 1, cookie.length).trim();
+				}
+			}
+			return undefined;
+		}
+	</script>
+
+	<!-- <link rel="icon" type="image/png" href="images/favicon.png"> -->
+</head>
+<body>
+	<div class="fullwidth header">
+		<div class="container">
+			<a href="/asteria">Asteria Database</a>
+			<div><a href="https://suyo.be/asteria/unitlist">Units</a> &bull; <a href="https://suyo.be/asteria/soullist">Souls</a> &bull; <a href="https://suyo.be/asteria/newslist">News</a> &bull; <a href="https://suyo.be/asteria/patchlist">Patches</a> &bull; <a href="https://suyo.be/asteria/collection/">Collection</a><a href="https://suyo.be/asteria/collection/" style="text-decoration: none">&nbsp;<span class="collectionno" id="collectionNumber"><?=$v(count($collection_ids))?></span></a></div>
+		</div><!--
+		<div class="container" style="display: block; width: 100%; text-align: center; background-color: #b55234; padding: 3px;">
+			<a href="https://docs.google.com/forms/d/e/1FAIpQLScsJv0q0r5Gs4Kgy8u9slel2TjdXJPfgYG4R_RYzUo0PTbJ0A/viewform" style="font-size:100%;font-weight:bold; text-decoration: underline;">If you have a minute, please answer this short survey about unit information - thank you :)</a>
+		</div>-->
+	</div>
+	<a name="top"></a>
+	<div style="padding-top: 6em">
+		<?=$v->section('content')?>
+	</div>
+	<div class="fullwidth footer">
+		<div>Contact me: Suyooo#7026 on Discord<br><br>This site is not associated with Tales of Asteria. Tales of Asteria, Tales of, all images and data (C) Bandai Namco Entertainment, KLab Games, Fujishima Kousuke and Inomata Mutsumi.</div>
+	</div>
+</body>
+</html>

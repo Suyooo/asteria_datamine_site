@@ -1,0 +1,51 @@
+<?php $v->layout('layout', ['title' => $title . " • News Post", 'image' => $image, 'description' => (($version == 1) ? "Posted" : "Updated") . " on " . $fromDate . " in " . $category ]) ?>
+
+<div class="container">
+	<div class="boldtitle"><?=$v($title)?></div>
+	<?php if ($version == 1): ?>
+		Posted 
+	<?php else: ?>
+		Updated 
+	<?php endif ?>
+	on <b><?=$v($fromDate)?></b> in <b><?=$v($category)?></b>
+	<?php if ($max_version>1): ?><br>
+		<?php if ($version == 1): ?>
+			Newer 
+		<?php else: ?>
+			Older 
+		<?php endif ?>
+		versions available below the post
+	<?php endif ?><br><br>
+		
+	<a href="https://translate.google.com/translate?js=n&sl=jp&tl=en&u=https://suyo.be/asteria/news/<?=$v($page_id)?>/<?=$v($version)?>" target="_blank">Translate This Post With Google Translate</a>
+		
+	<div id="postDiv" class="newspost">
+		<iframe id="postIframe" class="newspost" src="/asteria/assets/news/<?=$v($page_id)?>-<?=$v($version)?>.html"></iframe>
+	</div>
+	
+	<?php if ($max_version>1): ?>
+	<br><b>Other Versions Available:</b>
+		<?php foreach($all_versions as $other_version): ?>
+		<br>
+		<?php if ($other_version['link']): ?><a href="/asteria/news/<?=$v($page_id)?>/<?=$v($other_version['version'])?>"><?php endif ?>
+		Version <?=$v($other_version['version'])?> from <?=$v($other_version['date'])?><?php if ($other_version['link']): ?></a><?php else: ?> (this)<?php endif ?>
+		<?php endforeach ?>
+	<?php endif ?>
+</div>
+
+<script>
+	var postDiv = document.getElementById("postDiv");
+	var postIframe = document.getElementById("postIframe");
+	
+	setInterval(function() {
+		try {
+			var zoom = postDiv.clientWidth / 320;
+			postIframe.style.transform = "scale(" + zoom + "," + zoom + ")";
+			postDiv.style.height = (postIframe.contentDocument.body.scrollHeight * zoom) +'px';
+			postIframe.contentDocument.documentElement.style.zoom = 1;
+		} catch (err) {
+			// iframe not loaded yet
+		}
+	}, 333);
+	
+</script>

@@ -1,0 +1,31 @@
+<?php $v->layout('layout', ['title' => $partner["name"] . " • Partner"]) ?>
+
+<div class="container">
+	<img src="/asteria/image_thumb/<?=$v($partner["id"])?>" style="max-width:100%"><br>
+	<span class="card_unit" style="max-width:350px;display:block;margin:auto;">
+		<div class="smallstats split margins matchline" style="margin-top: 1em">
+			<span>
+				<a href="/asteria/unit/<?=$v($partner["id"])?>"><div class="inlinethumb"><img src="/asteria/image_thumb/<?=$v($partner["id"])?>"></div></a>
+				<b>Unit:</b> <a href="/asteria/unit/<?=$v($partner["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($partner["name"]))?></a>
+			</span>
+			<span>
+				<div class="element inline <?=$v($partner["element"])?>"></div>
+			</span>
+		</div>
+	</span>
+	<br>
+	<b>Awakening Partner for:</b>
+	<span class="card_unit" style="max-width:350px;display:block;margin:auto;">
+	<?php foreach($awakens as $awk): ?>
+		<div class="smallstats split margins matchline">
+			<span>
+				<a href="/asteria/unit/<?=$v($awk["id"])?>"><div class="inlinethumb"><img src="/asteria/image_thumb/<?=$v($awk["id"])?>"></div></a>
+				<a href="/asteria/unit/<?=$v($awk["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($awk["name"]))?></a>
+			</span>
+			<span>
+				<div class="element inline <?=$v($awk["element"])?>"></div>
+			</span>
+		</div>
+	<?php endforeach ?>
+	</span>
+</div>

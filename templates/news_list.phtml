@@ -1,0 +1,30 @@
+<?php $v->layout('layout', ['title' => 'News List']) ?>
+
+<div class="container newslist">
+	<div class="newslist-categories tab-button-row">
+		<a href="/asteria/newslist/1" class="tab-button<?php if ($category==1): ?> active<?php endif ?>">Campaigns etc.</a>
+		<a href="/asteria/newslist/2" class="tab-button<?php if ($category==2): ?> active<?php endif ?>">Updates</a>
+		<a href="/asteria/newslist/3" class="tab-button<?php if ($category==3): ?> active<?php endif ?>">Errors</a>
+	</div>
+	<table>
+		<?php foreach($newslist as $news): ?>
+			<tr>
+				<td>
+					<?php if ($news["mark_new"]): ?>
+					<img src="/asteria/image/icon_new.png">
+					<?php endif ?>
+				</td>
+				<td>
+					<div class="newslist-title">
+						<a href="/asteria/news/<?=$v($news["page_id"])?>"><?=$v($news["title"])?></a>
+					</div><div class="newslist-date">
+						<a href="/asteria/news/<?=$v($news["page_id"])?>"><?=$v($news["last_update"])?></a>
+					</div>
+				</td>
+			</tr>
+		<?php endforeach ?>
+	</table>
+	<?php if ($category==1): ?>
+	<small>Campaign News from before December 13, 2018 are not available in the archive.</small>
+	<?php endif ?>
+</div>

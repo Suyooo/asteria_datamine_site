@@ -1,0 +1,11 @@
+<?php $v->layout('layout', ['title' => str_replace("&nbsp;"," ",$soul["name"]) . " • Soul", 'image' => "https://suyo.be/asteria/assets/" . $soul["image"]]) ?>
+
+<div class="container">
+	<div class="itemgrid" id="cardContainer">
+		<span>&nbsp;</span>
+		<?php
+			$soul["force_open"] = true;
+			$v->insert('card_soul', $soul);
+		?>
+	</div>
+</div>

@@ -1,0 +1,79 @@
+<div class="card_unit card_soul<?php if ($force_open) { echo " open"; } ?>">
+	<div class="imagecontainer togglebutton" onClick="<?php if (!$force_open) { echo "toggleCard(this.parentElement)"; } ?>">
+		<div class="soul big"><img src="/asteria/assets/<?=$v($image)?>"></div>
+	</div>
+	
+	<div class="name">
+		<?=str_replace("&amp;nbsp;", "&nbsp;", $v($name))?>
+		<div class="openInfo small">
+			<?=$v($game)?>
+			<div class="smallstats">
+				<a href="/asteria/soul/<?=$v($id)?>" class="icon link smallbutton">Link</a>
+			</div>
+		</div>
+	</div>
+	
+	<div class="closeInfo">
+		<div class="smallstats">
+			<span><?=$v($effect)?></span>
+			<?php if ($limited): ?>
+				<span>Limited</span>
+			<?php endif ?>
+		</div>
+	</div>
+	
+	<div class="openInfo">
+		<h5>Effect</h5>
+		<div class="margins"><?=$v($longeffect)?></div>
+		<div class="tablerows margins">
+			<table>
+				<?php foreach ($values as $i => $value): ?>
+					<?php if ($value): ?>
+						<tr><td><div class="rarity inline r<?=$i+1?>" style="margin-top: 0.3em;"></div></td><td class="small"><?=$v($value)?></td></tr>
+					<?php endif ?>
+				<?php endforeach ?>
+			</table>
+		</div>
+		
+		<h5>Availability</h5>
+		<div class="tablerows margins">
+			<table>
+				<?php foreach ($availability as $i => $rarity): ?>
+					<?php if (count($rarity) > 0): ?>
+						<tr><td><div class="rarity inline r<?=$i+1?>"></div></td><td>
+						<?php foreach ($rarity as $element): ?>
+							<div class="element inline <?=$v($element)?>"></div>
+						<?php endforeach ?>
+						</td></tr>
+					<?php endif ?>
+				<?php endforeach ?>
+			</table>
+		</div>
+		
+		<h5>Soulmates</h5>
+		<?php if ($matchtype == 0): ?>
+			<?php foreach ($matchinfo as $match): ?>
+				<div class="smallstats split margins matchline">
+					<span>
+						<a href="/asteria/unit/<?=$v($match["id"])?>"><div class="inlinethumb"><img src="/asteria/image_thumb/<?=$v($match["id"])?>"></div></a>
+						<a href="/asteria/unit/<?=$v($match["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($match["name"]))?></a>
+					</span>
+					<span>
+						<div class="element inline <?=$v($match["element"])?>"></div>
+					</span>
+				</div>
+			<?php endforeach ?>
+		<?php elseif ($matchtype == 1): ?>
+			<div class="center margins">This soul can be matched with all units</div>
+		<?php elseif ($matchtype >= 10): ?>
+			<div class="center margins">This soul can be matched with <a href="/asteria/unitlist/1/rarity:8/source:<?=$v($game_id)?>">units from <?=$v($game)?></a></div>
+		<?php endif ?>
+		<div style="height:1em"></div>
+	</div>
+	<?php if (!$force_open): ?>
+		<div class="name togglebutton" onClick="toggleCard(this.parentElement)">
+			<span class="uparrow">&#x25B2;</span>
+			<span class="downarrow">&#x25BC;</span>
+		</div>
+	<?php endif ?>
+</div>

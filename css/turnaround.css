@@ -1,0 +1,7 @@
+.card_unit .imagecontainer > img, .soul > img, .patchlist img, .index-featured > .row {
+	transform: rotate(180deg);
+}
+.card_unit .imagecontainer {
+	padding-top: 80%;
+    margin-top: -30%;
+}

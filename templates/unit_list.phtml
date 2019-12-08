@@ -1,0 +1,292 @@
+<?php
+	if (isset($titleoverride)):
+		$v->layout('layout', ['title' => $titleoverride]);
+	else:
+		$v->layout('layout', ['title' => 'Units']);
+	endif
+?>
+
+<div class="container<?php if ($showfilters): ?> wide<?php endif ?>">
+<div class="row left">
+	<?php if ($showfilters): ?>
+		<div class="eight columns">
+	<?php else: ?>
+		<div class="twelve columns">
+	<?php endif ?>
+		<?php if (count($units) == 0): ?>
+			No units match your filter criteria.
+		<?php else: ?>
+			<?php if ($page > 0): ?>
+				<div class="pagination center">
+					<?php if ($page > 1): ?>
+						<a class="smallbutton" href="/asteria/unitlist/<?=$v($page - 1)?>/<?=$v($filters)?>">&lt;</a>
+					<?php endif ?>
+					Page <?=$v($page)?>
+					<?php if ($has_next_page): ?>
+						<a class="smallbutton" href="/asteria/unitlist/<?=$v($page + 1)?>/<?=$v($filters)?>">&gt;</a>
+					<?php endif ?>
+				</div>
+			<?php endif ?>
+			<?php if (isset($tophtml) && $tophtml): ?>
+				<?=$tophtml?>
+			<?php endif ?>
+			<?php $v->insert('grid_cards', ["cardtype" => "card_unit", "cards" => $units]) ?>
+			<?php if ($page > 0): ?>
+				<div class="pagination center">
+					<?php if ($page > 1): ?>
+						<a class="smallbutton" href="/asteria/unitlist/<?=$v($page - 1)?>/<?=$v($filters)?>">&lt;</a>
+					<?php endif ?>
+					Page <?=$v($page)?>
+					<?php if ($has_next_page): ?>
+						<a class="smallbutton" href="/asteria/unitlist/<?=$v($page + 1)?>/<?=$v($filters)?>">&gt;</a>
+					<?php endif ?>
+				</div>
+			<?php endif ?>
+		<?php endif ?>
+	</div>
+	<?php if ($showfilters): ?>
+		<div class="four columns filter-column">
+			In-Game Character ID
+			<input name="ingameid" style="width: 100%" type="number">
+			Rarity
+			<select name="rarity">
+				<option value="0">-</option>
+				<option value="1">1☆</option>
+				<option value="2">2☆</option>
+				<option value="3">3☆</option>
+				<option value="4">4☆</option>
+				<option value="5">5☆</option>
+				<option value="EVO">6☆ Evolved</option>
+				<option value="AWK">6☆ Awakened</option>
+				<option value="BAW">6☆ Bond Awakenable</option>
+			</select>
+			Element
+			<select name="element">
+				<option value="0">-</option>
+				<option value="1">Fire</option>
+				<option value="2">Water</option>
+				<option value="3">Wind</option>
+				<option value="4">Earth</option>
+				<option value="5">Light</option>
+				<option value="6">Dark</option>
+			</select>
+			Source
+			<select name="source">
+				<?php $v->insert('filters_source') ?>
+			</select>
+			Character
+			<select name="char">
+				<?php $v->insert('filters_character') ?>
+			</select>
+			Arte Types
+			<div class="row">
+				<div class="one-half column">
+					<label><input type="checkbox" name="arte" value="fix_damage" /> Fixed Damage</label>
+					<label><input type="checkbox" name="arte" value="heal" /> Heal Self</label>
+					<label><input type="checkbox" name="arte" value="status" /> Status Recover Self</label>
+					<label><input type="checkbox" name="arte" value="atk_up" /> Attack Buff Self</label>
+					<label><input type="checkbox" name="arte" value="def_up" /> Defense Buff Self</label>
+					<label><input type="checkbox" name="arte" value="atk_down" /> Attack Debuff Self</label>
+					<label><input type="checkbox" name="arte" value="def_down" /> Defense Debuff Self</label>
+				</div>
+				<div class="one-half column">
+					<label><input type="checkbox" name="arte" value="aoe_damage" /> AOE Damage</label>
+					<label><input type="checkbox" name="arte" value="heal_aoe" /> AOE Heal</label>
+					<label><input type="checkbox" name="arte" value="status_aoe" /> AOE Status Recover</label>
+					<label><input type="checkbox" name="arte" value="atk_up_aoe" /> AOE Attack Buff</label>
+					<label><input type="checkbox" name="arte" value="def_up_aoe" /> AOE Defense Buff</label>
+					<label><input type="checkbox" name="arte" value="atk_down_aoe" /> AOE Attack Debuff</label>
+					<label><input type="checkbox" name="arte" value="def_down_aoe" /> AOE Defense Debuff</label>
+				</div>
+			</div>
+			MA Type
+			<div class="row">
+				<div class="one-half column">
+					<label><input type="checkbox" name="ma" value="aoe_damage" /> AOE Damage</label>
+					<label><input type="checkbox" name="ma" value="finish" /> Finish</label>
+					<label><input type="checkbox" name="ma" value="mixed" /> Mixed</label>
+					<label><input type="checkbox" name="ma" value="hit" /> Hit</label>
+				</div>
+				<div class="one-half column">
+					<label><input type="checkbox" name="ma" value="fix_damage" /> Fixed Damage</label>
+					<label><input type="checkbox" name="ma" value="heal" /> Heal</label>
+					<label><input type="checkbox" name="ma" value="time_stop" /> Time Stop</label>
+					<label><input type="checkbox" name="ma" value="quick_charge" /> Quick Charge</label>
+				</div>
+			</div>
+			Co-op Party Type
+			<select name="cooptype">
+				<option value="0">-</option>
+				<option value="1">Attack</option>
+				<option value="2">Defense</option>
+				<option value="3">Magic</option>
+			</select>
+			Co-op Skill
+			<select name="coopskill">
+				<option value="0">-</option>
+				<option value="1">Attack</option>
+				<option value="15">Appeal Target</option>
+				<option value="17">Cross Counter</option>
+				<option value="18">Guard</option>
+				<option value="19">Heal</option>
+				<option value="16">Hidden Target</option>
+				<option value="9">Magical Attack Boost</option>
+				<option value="13">Magical Defense Boost</option>
+				<option value="7">Physical Attack Boost</option>
+				<option value="11">Physical Defense Boost</option>
+				<option value="22">Poison Guard</option>
+				<option value="50">Protect</option>
+				<option value="5">Shot</option>
+			</select>
+			Co-op Skill Variant
+			<select name="coopvariant">
+				<option value="0">-</option>
+				<option value="1">Chain Plus</option>
+				<option value="2">Drain</option>
+				<option value="3">HP Lost</option>
+				<option value="4">Luck Heal</option>
+				<option value="5">Revenge</option>
+				<option value="6">Vital Pinch</option>
+			</select>
+			EX Skill
+			<select name="exskill">
+				<option value="0">-</option>
+				<option value="11:10">Attack Permanent Boost</option>
+				<option value="11:41">Attack Boost Every Turn</option>
+				<option value="11:21">Attack Up on Matching Frames</option>
+				<option value="11:31">Attack Up at Critical Health</option>
+				<option value="11:32">Attack Up at Full Health</option>
+				<option value="11:51">Attack Up for Damaged Units</option>
+				<option value="12:10">Defense Permanent Boost</option>
+				<option value="12:41">Defense Boost Every Turn</option>
+				<option value="12:32">Defense Up at Full Health</option>
+				<option value="14:21">Attack + Defense Up on Matching Frames</option>
+				<option value="13:10">Max HP Permanent Boost</option>
+				<option value="33:41">OL Charge Boost Every Turn</option>
+				<option value="33:21">OL Charge on Matching Frames</option>
+				<option value="33:51">OL Charge for Damaged Units</option>
+				<option value="51:10">Frame Bonus Attack Up</option>
+				<option value="52:10">Frame Bonus Defense Up</option>
+				<option value="53:10">Frame Bonus Heal Up</option>
+				<option value="54:10">Frame Bonus OL Charge Up</option>
+				<option value="55:10">Frame Bonus Attack + Defense Up</option>
+				<option value="56:10">Frame Bonus Attack + Heal Up</option>
+				<option value="57:10">Frame Bonus Attack + OL Charge Up</option>
+				<option value="58:10">Frame Bonus Heal + Defense Up</option>
+				<option value="60:10">Frame Bonus Heal + OL Charge Up</option>
+				<option value="83:35">Revive Unit on KO</option>
+			</select>
+			<label><input type="checkbox" name="transform" value="1" /> Has Transformation EX Skill</label>
+			Sort By
+			<select name="sort">
+				<option value="0">Card ID</option>
+				<option value="1">Rarity</option>
+				<option value="2">Max HP</option>
+				<option value="3">Attack Power</option>
+				<option value="4">Defense Power</option>
+				<option value="5">Support Stats</option>
+				<option value="6">Co-op: Physical Attack Power</option>
+				<option value="7">Co-op: Magical Attack Power</option>
+				<option value="8">Co-op: Physical Defense Power</option>
+				<option value="9">Co-op: Magical Defense Power</option>
+			</select>
+			Other
+			<div class="row">
+				<div class="one-half column">
+					<label><input type="checkbox" name="subquests" value="1" /> Has Subquests</label>
+					<label><input type="checkbox" name="voiced" value="1" /> Is Voiced</label>
+				</div>
+				<div class="one-half column">
+					<a class="button" href="#" onClick="submitFilter()">Filter</a>
+				</div>
+			</div>
+		</div>
+	<?php endif ?>
+</div>
+</div>
+
+<script>
+function handleCurrentFilterSelections() {
+	var filters = {};
+	window.location.pathname.split("/").slice(4).map(function(v) {
+			filters[v.split(":")[0]] = v.split(":").slice(1);
+		});
+	console.log(filters);
+	if (filters["id"]) {
+		document.getElementsByName("ingameid")[0].value = filters["id"][0];
+	}
+	selectOptionForSelect("rarity", filters["rarity"]);
+	selectOptionForSelect("element", filters["element"]);
+	selectOptionForSelect("source", filters["source"]);
+	selectOptionForSelect("char", filters["char"]);
+	selectOptionForCheckboxes("arte", filters["arte"]);
+	selectOptionForCheckboxes("ma", filters["ma"]);
+	selectOptionForSelect("cooptype", filters["cooptype"]);
+	selectOptionForSelect("coopskill", filters["coopskill"]);
+	selectOptionForSelect("coopvariant", filters["coopvariant"]);
+	selectOptionForSelect("exskill", filters["exskill"]);
+	selectOptionForSelect("sort", filters["sort"]);
+	selectOptionForCheckboxes("subquests", (filters["subquests"] != undefined) ? ["1"] : []);
+	selectOptionForCheckboxes("voiced", (filters["voiced"] != undefined) ? ["1"] : []);
+	selectOptionForCheckboxes("transform", (filters["transform"] != undefined) ? ["1"] : []);
+}
+
+function selectOptionForSelect(name, value) {
+	if (value === undefined) return;
+	document.getElementsByName(name)[0].value = value.join(":");
+}
+
+function selectOptionForCheckboxes(name, value) {
+	if (value === undefined) return;
+	var boxes = document.getElementsByName(name);
+	for (var i = 0; i < boxes.length; i++) {
+		if (value.includes(boxes[i].value)) boxes[i].checked = true;
+	}
+}
+
+handleCurrentFilterSelections();
+
+function submitFilter() {
+	var filters = [];
+	
+	if (document.getElementsByName("ingameid")[0].value != "") {
+		var idval = parseInt(document.getElementsByName("ingameid")[0].value);
+		if (idval > 0) filters.push("id:" + idval);
+	}
+	makeFilterForSelect(filters, "rarity");
+	makeFilterForSelect(filters, "element");
+	makeFilterForSelect(filters, "source");
+	makeFilterForSelect(filters, "char");
+	makeFilterForCheckboxes(filters, "arte");
+	makeFilterForCheckboxes(filters, "ma");
+	makeFilterForSelect(filters, "cooptype");
+	makeFilterForSelect(filters, "coopskill");
+	makeFilterForSelect(filters, "coopvariant");
+	makeFilterForSelect(filters, "exskill");
+	makeFilterForSelect(filters, "sort");
+	makeFilterForCheckbox(filters, "subquests");
+	makeFilterForCheckbox(filters, "voiced");
+	makeFilterForCheckbox(filters, "transform");
+	
+	window.location.href = "https://suyo.be/asteria/unitlist/1/" + filters.join("/");
+}
+
+function makeFilterForSelect(filters, name) {
+	var value = document.getElementsByName(name)[0].value;
+	if (value != 0) filters.push(name + ":" + value);
+}
+
+function makeFilterForCheckboxes(filters, name) {
+	var checked = [];
+	var boxes = document.getElementsByName(name);
+	for (var i = 0; i < boxes.length; i++) {
+		if (boxes[i].checked) checked.push(boxes[i].value);
+	}
+	if (checked.length > 0) filters.push(name + ":" + checked.join(":"))
+}
+
+function makeFilterForCheckbox(filters, name) {
+	var boxes = document.getElementsByName(name);
+	if (boxes[0].checked) filters.push(name);
+}
+</script>

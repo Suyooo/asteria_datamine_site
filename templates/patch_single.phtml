@@ -1,0 +1,11 @@
+<?php $v->layout('layout', ['title' => $name . " • Patch"]) ?>
+
+<div class="container">
+	<div class="boldtitle"><?=$v($name)?></div>
+	<?php foreach($categories as $category): ?>
+		<?php if ($category["name"]): ?>
+			<div class="patch-cat-name"><?=$v($category["name"])?></div>
+		<?php endif ?>
+		<?php $v->insert('grid_cards', ["cardtype" => "card_unit", "cards" => $category["units"]]) ?>
+	<?php endforeach ?>
+</div>
