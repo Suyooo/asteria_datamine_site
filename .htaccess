@@ -1,0 +1,8 @@
+Options -Indexes
+RedirectMatch 404 /\.git
+RewriteEngine On
+RewriteRule ^$ views/index.php [L]
+RewriteCond %{REQUEST_URI} ^([^/]*?)(/|$)
+RewriteCond	%{DOCUMENT_ROOT}/asteria/$1 !-d
+RewriteCond %{DOCUMENT_ROOT}/asteria/views/$1.php -f
+RewriteRule ^([^/]*?)(/|$) views/$1.php [L]

@@ -829,7 +829,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 		if (isset($bond_row)) $ret["copyinfo"] .= " (Bond Potential: " . get_bond_potential_string_short($bond_row["bpot_type"], $dualma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
 		
 		$ret['ma_summary_short'] = "Dual " . get_ma_summary_string($dualma_row["ma_type"], $dualmaex_row["maex_value"], $dualmaex_row["maex_hits"], $dualmaex_row["maex_target"]);
-		$ret["copyinfo"] .= " | Charge: " . $dualma_row["ma_charge"] . " + " . $dualmaex_row["maex_charge"] . " (avg. " . $ret["ma_ex_chargeturns"]["avg"] . " turns)";
+		$ret["copyinfo"] .= " | Charge: " . $dualma_row["ma_charge"] . " + " . $dualmaex_row["maex_charge"] . " (avg. " . $ret["ma_dual_ex_chargeturns"]["avg"] . " turns)";
 	} else $ret['ma_dual_name'] = NULL;
 	
 	$ret["copyinfo"] .= "\\nCoop: " . get_coop_type_string($unit_row["unit_coop_type"], $unit_row["unit_coop_pdef"], $unit_row["unit_coop_mdef"]) . ", " . get_coop_skill_name_string($coop_skill_row["coop_type"], $coop_skill_row["coop_element"], $coop_skill_row["coop_icon_variation"], $coop_skill_row["coop_variant_type"], $coop_skill_row["coop_rarity"], $coop_skill_row["coop_duration"]);
