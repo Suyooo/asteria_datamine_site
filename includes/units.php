@@ -67,47 +67,47 @@ function get_usub_field($usub_id, $field) {
 
 function get_element_string($element, $capitalize = true) {
 	if ($element == 0)		return "";
-	else if ($element == 1)	$ret = "fire";
-	else if ($element == 2)	$ret = "water";
-	else if ($element == 3)	$ret = "wind";
-	else if ($element == 4)	$ret = "earth";
-	else if ($element == 5)	$ret = "light";
-	else if ($element == 6)	$ret = "dark";
-	else					throw new Exception($element . " is not a known element");
+	else if ($element == 1)		$ret = "fire";
+	else if ($element == 2)		$ret = "water";
+	else if ($element == 3)		$ret = "wind";
+	else if ($element == 4)		$ret = "earth";
+	else if ($element == 5)		$ret = "light";
+	else if ($element == 6)		$ret = "dark";
+	else				throw new Exception($element . " is not a known element");
 	
-	if ($capitalize==true)	return ucfirst($ret);
-	else					return $ret;
+	if ($capitalize==true)		return ucfirst($ret);
+	else				return $ret;
 }
 
 function get_target_string($target, $capitalize = false) {
 	if ($target >= 1 && $target <= 6)
-							$ret = "all " . get_element_string($target) . " party units";
-	else if ($target == 9)	$ret = "all party units";
-	else if ($target == 10)	$ret = "one enemy";
-	else if ($target == 11)	$ret = "all enemies";
-	else if ($target == 99)	$ret = "this unit";
-	else					throw new Exception($target . " is not a known target");
+					$ret = "all " . get_element_string($target) . " party units";
+	else if ($target == 9)		$ret = "all party units";
+	else if ($target == 10)		$ret = "one enemy";
+	else if ($target == 11)		$ret = "all enemies";
+	else if ($target == 99)		$ret = "this unit";
+	else				throw new Exception($target . " is not a known target");
 	
-	if ($capitalize==true)	return ucfirst($ret);
-	else					return $ret;
+	if ($capitalize==true)		return ucfirst($ret);
+	else				return $ret;
 }
 	
 function get_target_string_short($target) {
 	if ($target >= 1 && $target <= 6)
-							return " " . get_element_string($target) . " Units";
-	else if ($target == 9)	return " All";
-	else if ($target == 10)	return "";
-	else if ($target == 11)	return " All";
-	else if ($target == 99)	return " Self";
-	else					throw new Exception($target . " is not a known target");
+					return " " . get_element_string($target) . " Units";
+	else if ($target == 9)		return " All";
+	else if ($target == 10)		return "";
+	else if ($target == 11)		return " All";
+	else if ($target == 99)		return " Self";
+	else				throw new Exception($target . " is not a known target");
 }
 
 function get_turn_string($turns, $the = false) {
 	if ($turns == 1) {
 		if ($the==true)		return "the current turn";
-		else				return "current turn";
-	} else if ($turns==2)	return "1 turn";
-	else					return ($turns - 1) . " turns";
+		else			return "current turn";
+	} else if ($turns==2)		return "1 turn";
+	else				return ($turns - 1) . " turns";
 }
 
 function get_arte_string($type, $value, $hits, $target) {
@@ -121,9 +121,10 @@ function get_arte_string($type, $value, $hits, $target) {
 	else if ($type==10)		return "Decrease defense power of " . get_target_string($target) . " by " . $value . "%";
 	else if ($type==13) {
 		if ($value==0)		return "Delay the enemy attack and stop the turn counter for one turn (hit gauge is reset to 0)";
-		else				return "Delay the enemy attack and stop the turn counter for one turn (" . $value . "% of the hit gauge is carried over)";
-	} else if ($type==14)	return "Heal " . get_target_string($target) . " for " . $value . "% and cure status effects on them";
-	else					throw new Exception($type . " is not a known arte type");
+		else			return "Delay the enemy attack and stop the turn counter for one turn (" . $value . "% of the hit gauge is carried over)";
+	} else if ($type==14)		return "Heal " . get_target_string($target) . " for " . $value . "% and cure status effects on them";
+	else if ($type==19)		return "Remove all ATK debuffs on " . get_target_string($target);
+	else				throw new Exception($type . " is not a known arte type");
 }
 
 function get_arte_string_short($type, $value, $hits, $target) {
@@ -137,12 +138,13 @@ function get_arte_string_short($type, $value, $hits, $target) {
 	else if ($type==10)		return "DEF Debuff " . $value . "%" . get_target_string_short($target);
 	else if ($type==13)		return "Time Stop (" . $value . "% gauge)";
 	else if ($type==14)		return "Status Cure + Heal " . $value . "%" . get_target_string_short($target);
-	else					throw new Exception($type . " is not a known arte type");
+	else if ($type==19)		return "Purge ATK Debuffs " . get_target_string_short($target);
+	else				throw new Exception($type . " is not a known arte type");
 }
 
 function get_ma_coop_difference_string($type, $value, $coop_value) {
-	if ($type==6)		return $coop_value . "% of damage";
-	else if ($type==13)	return "Freeze the boss for " . $coop_value . " seconds";
+	if ($type==6)			return $coop_value . "% of damage";
+	else if ($type==13)		return "Freeze the boss for " . $coop_value . " seconds";
 	else				return NULL;
 }
 
@@ -162,19 +164,19 @@ function get_ma_summary_string($type, $value, $hits, $target, $olcharge = 9999) 
 }
 
 function get_coop_type_string($type, $pdef = NULL, $mdef = NULL) {
-	if ($type==1)					return "Attack";
+	if ($type==1)			return "Attack";
 	else if ($type==2)	{
-		if ($pdef == NULL) 			return "Defense";
-		else if ($pdef > $mdef) 	return "Defense (Physical)";
-		else 						return "Defense (Magic)";
-	} else if ($type==3)			return "Magic";
-	else							throw new Exception($type . " is not a known coop party type");
+		if ($pdef == NULL) 	return "Defense";
+		else if ($pdef > $mdef) return "Defense (Physical)";
+		else 			return "Defense (Magic)";
+	} else if ($type==3)		return "Magic";
+	else				throw new Exception($type . " is not a known coop party type");
 }
 
 function get_coop_type_string_short($type) {
-	if ($type==1)		return "atk";
-	else if ($type==2)	return "def";
-	else if ($type==3)	return "matk";
+	if ($type==1)			return "atk";
+	else if ($type==2)		return "def";
+	else if ($type==3)		return "matk";
 	else				throw new Exception($type . " is not a known coop party type");
 }
 
@@ -198,32 +200,32 @@ function get_coop_skill_name_string($type, $element, $image_variation, $variant,
 	} else if ($type==19)	$ret = implode(" ", array_filter([get_coop_skill_modifier_string($image_variation, 1), "Heal"], "filter_empty_strings"));
 	else if ($type==22)		$ret = "Poison Guard";
 	else if ($type==50)		$ret = "Protect";
-	else					throw new Exception($type . " is not a known coop skill type");
+	else				throw new Exception($type . " is not a known coop skill type");
 	
 	$ret = $ret . " " . $rarity;
 	
 	if ($variant==0)		return $ret;
-	else if ($variant==1)	return $ret . " + Chain Plus";
-	else if ($variant==2)	return $ret . " + Drain";
-	else if ($variant==3)	return $ret . " + HP Lost";
-	else if ($variant==4)	return $ret . " + Luck Heal";
-	else if ($variant==5)	return $ret . " + Revenge";
-	else if ($variant==6)	return $ret . " + Vital Pinch";
-	else					throw new Exception($variant . " is not a known coop skill variant");
+	else if ($variant==1)		return $ret . " + Chain Plus";
+	else if ($variant==2)		return $ret . " + Drain";
+	else if ($variant==3)		return $ret . " + HP Lost";
+	else if ($variant==4)		return $ret . " + Luck Heal";
+	else if ($variant==5)		return $ret . " + Revenge";
+	else if ($variant==6)		return $ret . " + Vital Pinch";
+	else				throw new Exception($variant . " is not a known coop skill variant");
 }
 
 function get_coop_skill_modifier_string($image_variation, $cat) {
 	if ($cat==1)	{					# non-boost skills
-		if ($image_variation==1)		return "Fast";
+		if ($image_variation==1)	return "Fast";
 		else if ($image_variation==2)	return "";
 		else if ($image_variation==3)	return "High";
-		else 							throw new Exception($image_variation . " is not a known coop skill image variation");
+		else 				throw new Exception($image_variation . " is not a known coop skill image variation");
 	} else if ($cat==2) {				# boost skills
-		if ($image_variation==1)		return "Long";
+		if ($image_variation==1)	return "Long";
 		else if ($image_variation==2)	return "";
 		else if ($image_variation==3)	return "Short";
-		else 							throw new Exception($image_variation . " is not a known coop skill image variation");
-	} else 								throw new Exception("No idea what to do with type " . $cat);
+		else 				throw new Exception($image_variation . " is not a known coop skill image variation");
+	} else 					throw new Exception("No idea what to do with type " . $cat);
 }
 
 function get_coop_skill_desc_string($type, $element, $value, $duration, $variant, $variant_v1, $variant_v2) {
@@ -238,22 +240,22 @@ function get_coop_skill_desc_string($type, $element, $value, $duration, $variant
 	else if ($type==17)		$ret = "Reflect a part of damage taken by your party back at the boss for " . $duration . " seconds";
 	else if ($type==18) {
 		if ($duration==1)	$ret = "Reduce damage taken by your party from the boss' next attack by " . $value . "%";
-		else				$ret = "Reduce damage taken by your party from the boss' next " . $duration . " attacks by " . $value . "%";
-	} else if ($type==19)	$ret = "Heal your party for " . $value . "%";
+		else			$ret = "Reduce damage taken by your party from the boss' next " . $duration . " attacks by " . $value . "%";
+	} else if ($type==19)		$ret = "Heal your party for " . $value . "%";
 	else if ($type==22)		$ret = "Guard your party against Poison status effects for " . $duration . " seconds";
 	else if ($type==50) {
 		if ($duration==1)	$ret = "Cover " . $value . " party slots in the target range behind yours for the boss' next attack";
-		else				$ret = "Cover " . $value . " party slots in the target range behind yours for the boss' next " . $duration . " attacks";
-	} else					throw new Exception($type . " is not a known coop skill type");
+		else			$ret = "Cover " . $value . " party slots in the target range behind yours for the boss' next " . $duration . " attacks";
+	} else				throw new Exception($type . " is not a known coop skill type");
 	
 	if ($variant==0)		return $ret;
-	else if ($variant==1)	return $ret . ", and increase the Attack chain by an additional " . $variant_v1 . " points";
-	else if ($variant==2)	return $ret . ", and heal your party for a fraction of the damage dealt";
-	else if ($variant==3)	return $ret . ", sacrificing " . $variant_v1 . "% of your party's HP";
-	else if ($variant==4)	return $ret . ", plus a " . $variant_v1 . "% chance to heal your party by " . $variant_v2 . "%";
-	else if ($variant==5)	return $ret . ", and deal additional damage based on the amount of other players' parties currently KO'd";
-	else if ($variant==6)	return $ret . ", and deal additional damage if your party is at critical health (30% HP or less)";
-	else					throw new Exception($variant + " is not a known coop skill variant");
+	else if ($variant==1)		return $ret . ", and increase the Attack chain by an additional " . $variant_v1 . " points";
+	else if ($variant==2)		return $ret . ", and heal your party for a fraction of the damage dealt";
+	else if ($variant==3)		return $ret . ", sacrificing " . $variant_v1 . "% of your party's HP";
+	else if ($variant==4)		return $ret . ", plus a " . $variant_v1 . "% chance to heal your party by " . $variant_v2 . "%";
+	else if ($variant==5)		return $ret . ", and deal additional damage based on the amount of other players' parties currently KO'd";
+	else if ($variant==6)		return $ret . ", and deal additional damage if your party is at critical health (30% HP or less)";
+	else				throw new Exception($variant + " is not a known coop skill variant");
 }
 
 function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, $value2, $value3) {
@@ -277,7 +279,7 @@ function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, 
 	else if ($type==59)		return "The effect of Frame Defense bonuses increases by " . get_ex_skill_value_string(1, $value1) . " and Frame OL bonuses charge an additional " . get_ex_skill_value_string(2, $value2) . " points for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==60)		return "Frame Heal bonuses heal an additional " . get_ex_skill_value_string(1, $value1) . " and Frame OL bonuses charge an additional " . get_ex_skill_value_string(2, $value2) . " points for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==83)		return "Once per quest, " . get_ex_skill_cond_string($cond_type, $element, false) . ", revive one unit with " . get_ex_skill_value_string(1, $value1) . " HP";
-	else					throw new Exception($type . " is not a known EX skill type");
+	else				throw new Exception($type . " is not a known EX skill type");
 }
 
 function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $value1, $value2, $value3) {
@@ -301,11 +303,11 @@ function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $va
 	else if ($type==59)		return "Frame Defense +" . get_ex_skill_value_string(1, $value1) . " and OL Charge +" . get_ex_skill_value_string(2, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
 	else if ($type==60)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . " and OL Charge +" . get_ex_skill_value_string(2, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
 	else if ($type==83)		return "Revive one " . get_ex_skill_cond_string_short($cond_type, $element);
-	else					throw new Exception($type . " is not a known EX skill type");
+	else				throw new Exception($type . " is not a known EX skill type");
 }
 
 function get_ex_skill_cond_string($cond_type, $element, $capitalize = false) {
-	if ($cond_type==10)			$ret = "all " . get_element_string($element) . " units";
+	if ($cond_type==10)		$ret = "all " . get_element_string($element) . " units";
 	else if ($cond_type==21)	$ret = "all " . get_element_string($element) . " units in matching frames";
 	else if ($cond_type==31)	$ret = "all " . get_element_string($element) . " units at critical health (30% HP or less)";
 	else if ($cond_type==32)	$ret = "all " . get_element_string($element) . " units at full health";
@@ -314,14 +316,14 @@ function get_ex_skill_cond_string($cond_type, $element, $capitalize = false) {
 	else if ($cond_type==41)	$ret = "every turn, all " . get_element_string($element) . " units";
 	else if ($cond_type==51)	$ret = "at the end of every turn, all " . get_element_string($element) . " units that were damaged in this turn";
 	else if ($cond_type==61)	$ret = "for each enemy alive, all " . get_element_string($element) . " units";
-	else						throw new Exception($cond_type . " is not a known EX skill condition type");
+	else				throw new Exception($cond_type . " is not a known EX skill condition type");
 	
 	if ($capitalize==true)		return ucfirst($ret);
-	else						return $ret;
+	else				return $ret;
 }
 
 function get_ex_skill_cond_string_short($cond_type, $element) {
-	if ($cond_type==10)			return get_element_string($element) . " Units";
+	if ($cond_type==10)		return get_element_string($element) . " Units";
 	else if ($cond_type==21)	return get_element_string($element) . " Units in matching frames";
 	else if ($cond_type==31)	return get_element_string($element) . " Units at critical health";
 	else if ($cond_type==32)	return get_element_string($element) . " Units at full health";
@@ -330,32 +332,32 @@ function get_ex_skill_cond_string_short($cond_type, $element) {
 	else if ($cond_type==41)	return "Every turn,";
 	else if ($cond_type==51)	return "Damaged " . get_element_string($element) . " Units";
 	else if ($cond_type==61)	return "For each enemy,";
-	else						throw new Exception($cond_type . " is not a known EX skill condition type");
+	else				throw new Exception($cond_type . " is not a known EX skill condition type");
 }
 
 function get_ex_skill_value_string($value_type, $value) {
-	if ($value_type==0)			throw new Exception("Can't parse value type 0 - I have no idea what to do!");
+	if ($value_type==0)		throw new Exception("Can't parse value type 0 - I have no idea what to do!");
 	else if ($value_type==1)	return $value . "%";
 	else if ($value_type==2)	return $value;
-	else						throw new Exception($value_type . " is not a known EX skill value type");
+	else				throw new Exception($value_type . " is not a known EX skill value type");
 }
 
 function get_ex_skill_transform_label_string($label) {
-	if ($label == "【アクセルモード時】")				return "While in Accel Mode";
-	else if ($label == "【天使化時】")				return "While Angelized";
-	else if ($label == "【神依時】")				return "While in Armatus";
-	else if ($label == "【天元神依時】")			return "While in Armatus";
-	else if ($label == "【四属性神依時】")			return "While in Armatus";
-	else if ($label == "【骸殻化時】")				return "While in Chromatus";
-	else if ($label == "【獣人化時】")				return "While transformed";
-	else if ($label == "【魔族化時】")				return "While transformed";
-	else if ($label == "【第二形態時】")			return "While transformed";
-	else if ($label == "【メルネス化時】")			return "While transformed";
-	else if ($label == "【ガルデニア完全融合時】")		return "While fused with Gardenia:";
-	else if ($label == "【ウェヌス化時】")			return "While in Venus Form:";
-	else if ($label == "【ファイナルフォーム時】")		return "While in Final Form:";
-	else if ($label == "【ラムダ共鳴時】")			return "While in Lambda Form:";
-	else										throw new Exception("Unknown transformation type \"" . $label . "\"");
+	if ($label == "【アクセルモード時】")		return "While in Accel Mode";
+	else if ($label == "【天使化時】")		return "While Angelized";
+	else if ($label == "【神依時】")			return "While in Armatus";
+	else if ($label == "【天元神依時】")		return "While in Armatus";
+	else if ($label == "【四属性神依時】")		return "While in Armatus";
+	else if ($label == "【骸殻化時】")		return "While in Chromatus";
+	else if ($label == "【獣人化時】")		return "While transformed";
+	else if ($label == "【魔族化時】")		return "While transformed";
+	else if ($label == "【第二形態時】")		return "While transformed";
+	else if ($label == "【メルネス化時】")		return "While transformed";
+	else if ($label == "【ガルデニア完全融合時】")	return "While fused with Gardenia:";
+	else if ($label == "【ウェヌス化時】")		return "While in Venus Form:";
+	else if ($label == "【ファイナルフォーム時】")	return "While in Final Form:";
+	else if ($label == "【ラムダ共鳴時】")		return "While in Lambda Form:";
+	else						throw new Exception("Unknown transformation type \"" . $label . "\"");
 }
 
 function get_bond_potential_string($type, $parent_type, $chance, $value1, $value2, $value3, $turns, $target) {
@@ -370,41 +372,41 @@ function get_bond_potential_string($type, $parent_type, $chance, $value1, $value
 		else if ($parent_type==14)	$ret = "Heal an additional " . $value1 . "%";
 		else						throw new Exception("No idea how to apply power up bond potential to arte type " . $parent_type);
 	} else if ($type==2)			$ret = "Hit count increases by " . $value1;
-	else if ($type==3)				$ret = get_arte_string(2, $value1, 0, $target);
-	else if ($type==4)				$ret = get_arte_string(7, $value1, 0, $target) . " (" . get_turn_string($turns) . ")";
-	else if ($type==5)				$ret = get_arte_string(8, $value1, 0, $target) . " (" . get_turn_string($turns) . ")";
-	else if ($type==6)				$ret = get_arte_string(9, $value1, 0, $target) . " (" . get_turn_string($turns) . ")";
-	else if ($type==7)				$ret = get_arte_string(10, $value1, 0, $target) . " (" . get_turn_string($turns) . ")";
-	else if ($type==8)				$ret = get_arte_string(3, 0, 0, $target);
-	else if ($type==9)				$ret = "Poison " . get_target_string($target) . " for " . get_turn_string($turns, true);
-	else if ($type==10)				$ret = "Paralyze " . get_target_string($target) . " for " . get_turn_string($turns, true);
-	else if ($type==12)				$ret = "Deal an additional " . $value1 . "% of break gauge damage";
-	else if ($type==13)				$ret = "Crit chance is increased by " . $value1 . "%";
-	else							throw new Exception($type . " is not a known bond potential type");
+	else if ($type==3)			$ret = get_arte_string(2, $value1, 0, $target);
+	else if ($type==4)			$ret = get_arte_string(7, $value1, 0, $target) . " (" . get_turn_string($turns) . ")";
+	else if ($type==5)			$ret = get_arte_string(8, $value1, 0, $target) . " (" . get_turn_string($turns) . ")";
+	else if ($type==6)			$ret = get_arte_string(9, $value1, 0, $target) . " (" . get_turn_string($turns) . ")";
+	else if ($type==7)			$ret = get_arte_string(10, $value1, 0, $target) . " (" . get_turn_string($turns) . ")";
+	else if ($type==8)			$ret = get_arte_string(3, 0, 0, $target);
+	else if ($type==9)			$ret = "Poison " . get_target_string($target) . " for " . get_turn_string($turns, true);
+	else if ($type==10)			$ret = "Paralyze " . get_target_string($target) . " for " . get_turn_string($turns, true);
+	else if ($type==12)			$ret = "Deal an additional " . $value1 . "% of break gauge damage";
+	else if ($type==13)			$ret = "Crit chance is increased by " . $value1 . "%";
+	else					throw new Exception($type . " is not a known bond potential type");
 	
-	if ($chance==100)				return $ret;
-	else							return $ret + " (" . $chance . "% chance)";
+	if ($chance==100)			return $ret;
+	else					return $ret + " (" . $chance . "% chance)";
 }
 
 function get_bond_potential_string_short($type, $parent_type, $chance, $value1, $value2, $value3, $turns, $target) {
 	if ($type==1) {
-		if ($parent_type==6)		$ret = "+" . $value1 . " HP";
-		else						$ret = "+" . $value1 . "%";
-	} else if ($type==2)			$ret = "+" . $value1 . " hits";
-	else if ($type==3)				$ret = get_arte_string_short(2, $value1, 0, $target);
-	else if ($type==4)				$ret = get_arte_string_short(7, $value1, 0, $target);
-	else if ($type==5)				$ret = get_arte_string_short(8, $value1, 0, $target);
-	else if ($type==6)				$ret = get_arte_string_short(9, $value1, 0, $target);
-	else if ($type==7)				$ret = get_arte_string_short(10, $value1, 0, $target);
-	else if ($type==8)				$ret = get_arte_string_short(3, 0, 0, $target);
-	else if ($type==9)				$ret = "Poison" . get_target_string_short($target);
-	else if ($type==10)				$ret = "Paralyze" . get_target_string_short($target);
-	else if ($type==12)				$ret = $value1 . "% break gauge damage" . get_target_string_short($target);
-	else if ($type==13)				$ret = "Crit chance +" . $value1 . "%";
-	else							throw new Exception($type . " is not a known bond potential type");
+		if ($parent_type==6)	$ret = "+" . $value1 . " HP";
+		else			$ret = "+" . $value1 . "%";
+	} else if ($type==2)		$ret = "+" . $value1 . " hits";
+	else if ($type==3)		$ret = get_arte_string_short(2, $value1, 0, $target);
+	else if ($type==4)		$ret = get_arte_string_short(7, $value1, 0, $target);
+	else if ($type==5)		$ret = get_arte_string_short(8, $value1, 0, $target);
+	else if ($type==6)		$ret = get_arte_string_short(9, $value1, 0, $target);
+	else if ($type==7)		$ret = get_arte_string_short(10, $value1, 0, $target);
+	else if ($type==8)		$ret = get_arte_string_short(3, 0, 0, $target);
+	else if ($type==9)		$ret = "Poison" . get_target_string_short($target);
+	else if ($type==10)		$ret = "Paralyze" . get_target_string_short($target);
+	else if ($type==12)		$ret = $value1 . "% break gauge damage" . get_target_string_short($target);
+	else if ($type==13)		$ret = "Crit chance +" . $value1 . "%";
+	else				throw new Exception($type . " is not a known bond potential type");
 	
-	if ($chance==100)				return $ret;
-	else							return $ret . ", " . $chance . "% chance";
+	if ($chance==100)		return $ret;
+	else				return $ret . ", " . $chance . "% chance";
 }
 
 function get_object_for_unit_id($unit_id, $baseonly = false) {
