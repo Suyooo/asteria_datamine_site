@@ -46,7 +46,7 @@ $fromDate = unix_to_jp_time($news_row['news_date_from'], "M j, Y \a\\t H:i");
 $all_versions[] = ['version' => $version, 'date' => $fromDate, 'link' => false];
 $news_row = $query->fetch(\PDO::FETCH_ASSOC);
 while ($news_row != NULL) {
-	$all_versions[] = ['version' => $news_row['news_version'], 'date' => date("M j, Y \a\\t H:i", strtotime($news_row['news_date_from']) + 60 * 60 * 8), 'link' => true];
+	$all_versions[] = ['version' => $news_row['news_version'], 'date' => unix_to_jp_time($news_row['news_date_from'], "M j, Y \a\\t H:i"), 'link' => true];
 	$news_row = $query->fetch(\PDO::FETCH_ASSOC);
 }
 
