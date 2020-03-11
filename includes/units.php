@@ -155,11 +155,11 @@ function get_ma_summary_string($type, $value, $hits, $target, $olcharge = 9999) 
 	else if ($type == 2) $matypes = ["Heal"];
 	else {
 		$matypes = [];
-		if ($type == 6) $matypes[] = "Fixed Damage";
 		if ($type == 5 && $value >= 500) $matypes[] = "Finish";
 		if ($hits >= 40) $matypes[] = "Hit";
-		if (count($matypes) == 0) $matypes[] = "Mixed";
 		if ($target == 11) $matypes[] = "AOE";
+		if ($type == 6) $matypes[] = "Fixed" . ((count($matypes) == 0) ? " Damage" : "");
+		if (count($matypes) == 0) $matypes[] = "Mixed";
 	}
 	if ($olcharge <= 20) $matypes[] = "Quick Charge";
 	return implode(" + ", $matypes) . " MA";
