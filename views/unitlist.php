@@ -62,6 +62,7 @@ for ($i = FILTERS; $i < count($params); $i++) {
 	} else if ($filter[0] == "arte") {
 		if (count($filter) < 2) continue;
 		$joinconds = [];
+		$joincondsbp = [];
 		for ($j = 1; $j < count($filter); $j++) {
 			switch ($filter[$j]) {
 				case "pct_damage": $joinconds[] = "(artes.arte_type = 5) AS is_pct_damage"; $havingconds[] = "SUM(is_pct_damage) > 0"; break;
@@ -72,17 +73,20 @@ for ($i = FILTERS; $i < count($params); $i++) {
 				case "atk_up": $joinconds[] = "(artes.arte_type = 7 AND artes.arte_target = 99) AS is_atk_up"; $havingconds[] = "SUM(is_atk_up) > 0"; break;
 				case "atk_down": $joinconds[] = "(artes.arte_type = 9 AND artes.arte_target = 10) AS is_atk_down"; $havingconds[] = "SUM(is_atk_down) > 0"; break;
 				case "def_up": $joinconds[] = "(artes.arte_type = 8 AND artes.arte_target = 99) AS is_def_up"; $havingconds[] = "SUM(is_def_up) > 0"; break;
-				case "def_down": $joinconds[] = "(artes.arte_type = 10 AND artes.arte_target = 10) AS is_def_down"; $havingconds[] = "SUM(is_def_down) > 0"; break;
+				case "def_down": $joinconds[] = "(artes.arte_type = 10 AND artes.arte_target = 10) AS is_def_down"; $joincondsbp[] = "(bpot_type = 7 AND bpot_target = 10) AS is_def_down_bp"; $havingconds[] = "SUM(is_def_down) + SUM(is_def_down_bp) > 0"; break;
 				case "heal_aoe": $joinconds[] = "(artes.arte_type IN (2,14) AND artes.arte_target != 99) AS is_heal_aoe"; $havingconds[] = "SUM(is_heal_aoe) > 0"; break;
 				case "status_aoe": $joinconds[] = "(artes.arte_type IN (3,14) AND artes.arte_target != 99) AS is_status_aoe"; $havingconds[] = "SUM(is_status_aoe) > 0"; break;
 				case "atk_up_aoe": $joinconds[] = "(artes.arte_type = 7 AND artes.arte_target != 99) AS is_atk_up_aoe"; $havingconds[] = "SUM(is_atk_up_aoe) > 0"; break;
 				case "atk_down_aoe": $joinconds[] = "(artes.arte_type = 9 AND artes.arte_target != 10) AS is_atk_down_aoe"; $havingconds[] = "SUM(is_atk_down_aoe) > 0"; break;
 				case "def_up_aoe": $joinconds[] = "(artes.arte_type = 8 AND artes.arte_target != 99) AS is_def_up_aoe"; $havingconds[] = "SUM(is_def_up_aoe) > 0"; break;
 				case "def_down_aoe": $joinconds[] = "(artes.arte_type = 10 AND artes.arte_target != 10) AS is_def_down_aoe"; $havingconds[] = "SUM(is_def_down_aoe) > 0"; break;
+				case "poison": $joincondsbp[] = "(bpot_type = 9) AS is_poison"; $havingconds[] = "SUM(is_poison) > 0"; break;
+				case "paralyze": $joincondsbp[] = "(bpot_type = 10) AS is_paralyze"; $havingconds[] = "SUM(is_paralyze) > 0"; break;
 			}
 		}
-		if (count($joinconds) > 0) {
-			$joins[] = "JOIN (SELECT artes.*, " . implode(", ", $joinconds) . " FROM artes) AS artes ON artes.arte_id IN (units.unit_arte1_id, units.unit_arte2_id, units.unit_arte3_id, units.unit_tf_basearte1_id, units.unit_tf_basearte2_id, units.unit_tf_basearte3_id)";
+		if (count($joinconds) + count($joincondsbp) > 0) {
+			$joins[] = "JOIN (SELECT artes.arte_id, artes.arte_type, artes.arte_target" . (count($joinconds) > 0 ? ", " . implode(", ", $joinconds) : "") . " FROM artes) AS artes ON artes.arte_id IN (units.unit_arte1_id, units.unit_arte2_id, units.unit_arte3_id, units.unit_tf_basearte1_id, units.unit_tf_basearte2_id, units.unit_tf_basearte3_id)";
+			$joins[] = "JOIN (SELECT bpot_id, bpot_type, bpot_target" . (count($joincondsbp) > 0 ? ", " . implode(", ", $joincondsbp) : "") . " FROM bond_potentials) AS bp ON bp.bpot_id IN (units.unit_arte1_bpot_id, units.unit_arte2_bpot_id, units.unit_arte3_bpot_id, units.unit_tf_basearte1_bpot_id, units.unit_tf_basearte2_bpot_id, units.unit_tf_basearte3_bpot_id)";
 			$group = "GROUP BY units.unit_id HAVING " . implode(" AND ", $havingconds);
 		}
 	} else if ($filter[0] == "ma") {
@@ -153,6 +157,11 @@ if (count($filters) > 0) {
 
 $units = [];
 $query = get_db_connection()->prepare('SELECT units.* FROM units ' . $filterjoins . ' ' . $filterwhere . ' ' . $group .' ' . $sort .' LIMIT ' . (PAGESIZE+1) . ' OFFSET :pageoff');
+if ( false===$query ) {
+  error_log('SELECT units.* FROM units ' . $filterjoins . ' ' . $filterwhere . ' ' . $group .' ' . $sort .' LIMIT ' . (PAGESIZE+1) . ' OFFSET :pageoff');
+  error_log('prepare() failed: ' . print_r(get_db_connection()->errorInfo(),true));
+  die();
+}
 $query->execute([':pageoff' => (((int) $params[PAGE] - 1) * PAGESIZE)]);
 while ($unit = $query->fetch(\PDO::FETCH_ASSOC)) {
 	$units[] = get_object_for_unit_row($unit);
