@@ -208,13 +208,17 @@ a.smallbutton:hover, a.smallbutton:active, a.smallbutton:focus, a.smallbutton:vi
 
 hr {
 	border-top: 1px solid var(--shade4);
-	margin: 0.5em 15% 0.5em;
+	margin: 1em 15% 1.5em;
 	opacity: 0.3;
 }
 
 hr.invis {
 	border: none;
 	height: 0.3em;
+}
+
+.title {
+    border-bottom: 1px dotted var(--shade4);
 }
 
 .itemgrid {
@@ -785,4 +789,46 @@ iframe.newspost {
 	height: 100000px;
 	border: 0;
 	transform-origin: 0% 0%;
+}
+
+.fliptable {
+    width: 100%;
+    margin-bottom: 0;
+}
+
+.fliptable td {
+    text-align: center;
+}
+
+.fliptable.split-when-unflipped td:first-child {
+    text-align: left;
+}
+
+.fliptable.split-when-unflipped td:last-child {
+    text-align: right;
+}
+
+@media (min-width: 800px) {
+    .fliptable tr {
+        display: block;
+        float: left;
+    }
+    
+    .fliptable.three tr {
+        width: 33.333%;
+    }
+    
+    .fliptable.four tr {
+        width: 25%;
+    }
+    
+    .fliptable.five tr {
+        width: 20%;
+    }
+
+    .fliptable td {
+        display: block;
+        width: 100%;
+        text-align: center !important;
+    }
 }

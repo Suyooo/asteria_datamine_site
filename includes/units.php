@@ -280,6 +280,7 @@ function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, 
 	else if ($type==58)		return "Frame Heal bonuses heal an additional " . get_ex_skill_value_string(1, $value1) . " and the effect of Frame Defense bonuses increases by " . get_ex_skill_value_string(1, $value2) . " for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==59)		return "The effect of Frame Defense bonuses increases by " . get_ex_skill_value_string(1, $value1) . " and Frame OL bonuses charge an additional " . get_ex_skill_value_string(2, $value2) . " points for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==60)		return "Frame Heal bonuses heal an additional " . get_ex_skill_value_string(1, $value1) . " and Frame OL bonuses charge an additional " . get_ex_skill_value_string(2, $value2) . " points for " . get_ex_skill_cond_string($cond_type, $element);
+	else if ($type==81)		return get_ex_skill_cond_string($cond_type, $element, true) . " are healed for " . get_ex_skill_value_string(2, $value1) . " HP";
 	else if ($type==83)		return "Once per quest, " . get_ex_skill_cond_string($cond_type, $element, false) . ", revive one unit with " . get_ex_skill_value_string(1, $value1) . " HP";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
@@ -304,6 +305,7 @@ function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $va
 	else if ($type==58)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . " and Defense +" . get_ex_skill_value_string(1, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
 	else if ($type==59)		return "Frame Defense +" . get_ex_skill_value_string(1, $value1) . " and OL Charge +" . get_ex_skill_value_string(2, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
 	else if ($type==60)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . " and OL Charge +" . get_ex_skill_value_string(2, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
+	else if ($type==81)		return get_ex_skill_cond_string_short($cond_type, $element) . " heal " . get_ex_skill_value_string(2, $value1) . " HP";
 	else if ($type==83)		return "Revive one " . get_ex_skill_cond_string_short($cond_type, $element);
 	else				throw new Exception($type . " is not a known EX skill type");
 }
@@ -587,28 +589,30 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 	$charname_en = get_char_en_short_name($unit_row["unit_id"] / 10000);
 	$unitname_en = $charname_en . get_usub_en($unit_row["unit_subtitle_id"]);
 	$ret = [
-		'id'					=> $unit_row["unit_id"],
-		'name'					=> $unitname_en,
+		'id'				=> $unit_row["unit_id"],
+		'name'				=> $unitname_en,
 		'name_short'			=> $charname_en,
-		'game'					=> get_source_en_name($unit_row["unit_game_id"]),
-		'rarity'				=> $unit_row["unit_rarity"] . (($unit_row["unit_ex_type"] == 0) ? "" : " " . (($unit_row["unit_ex_type"] == 1) ? "evo" : "awk")),
-		'element'				=> get_element_string($unit_row["unit_element"], false),
+		'game'				=> get_source_en_name($unit_row["unit_game_id"]),
+		'rarity'			=> $unit_row["unit_rarity"] . (($unit_row["unit_ex_type"] == 0) ? "" : " " . (($unit_row["unit_ex_type"] == 1) ? "evo" : "awk")),
+		'element'			=> get_element_string($unit_row["unit_element"], false),
 		'awaken_info'			=> $awaken_info,
 		'awaken_star_type'		=> ($unit_row["unit_ex_type"] == 1) ? "evolve" : "awaken",
 		'awaken_related_id'		=> $unit_row["unit_id"] + $awaken_id_offset,
 		'awaken_link_label'		=> $awaken_link_label,
 		
-		'stats_hp'				=> $unit_row["unit_battle_hp"],
-		'stats_atk'				=> $unit_row["unit_battle_atk"],
-		'stats_def'				=> $unit_row["unit_battle_def"],
+		'has_bonus'         => $unit_row["unit_has_bonus_level"] == 1,
+		'level'				=> $unit_row["unit_max_level"],
+		'stats_hp'			=> $unit_row["unit_battle_hp"],
+		'stats_atk'			=> $unit_row["unit_battle_atk"],
+		'stats_def'			=> $unit_row["unit_battle_def"],
 		
-		'coop_type'				=> get_coop_type_string($unit_row["unit_coop_type"]),
+		'coop_type'			=> get_coop_type_string($unit_row["unit_coop_type"]),
 		'coop_type_short'		=> get_coop_type_string_short($unit_row["unit_coop_type"]),
-		'coop_hp'				=> $unit_row["unit_battle_hp"],
-		'coop_patk'				=> $unit_row["unit_coop_patk"],
-		'coop_pdef'				=> $unit_row["unit_coop_pdef"],
-		'coop_matk'				=> $unit_row["unit_coop_matk"],
-		'coop_mdef'				=> $unit_row["unit_coop_mdef"],
+		'coop_hp'			=> $unit_row["unit_battle_hp"],
+		'coop_patk'			=> $unit_row["unit_coop_patk"],
+		'coop_pdef'			=> $unit_row["unit_coop_pdef"],
+		'coop_matk'			=> $unit_row["unit_coop_matk"],
+		'coop_mdef'			=> $unit_row["unit_coop_mdef"],
 		'coop_bonus_hp'			=> $unit_row["unit_coop_type_bonus_hp"],
 		'coop_bonus_patk'		=> $unit_row["unit_coop_type_bonus_patk"],
 		'coop_bonus_pdef'		=> $unit_row["unit_coop_type_bonus_pdef"],
@@ -628,6 +632,25 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 		];
 	
 	if (!$coop_skill_row) return $ret;	// only get base object
+		
+	if ($unit_row["unit_has_bonus_level"] == 1) {
+	    $ret += [
+		    'level_bonus'		=> $ret["level"],
+		    'stats_hp_bonus'	=> $ret["stats_hp"],
+		    'stats_atk_bonus'	=> $ret["stats_atk"],
+		    'stats_def_bonus'	=> $ret["stats_def"],
+	    ];
+	    
+	    if ($unit_row["unit_rarity"] < 6) $r = 24 + $unit_row["unit_rarity"];
+	    else if ($unit_row["unit_ex_type"] == 1) $r = 54;
+	    else $r = 60;
+	    $oldpow = $ret["stats_hp"]/10 + $ret["stats_atk"] + $ret["stats_def"] - $r*10;
+	    
+		$ret["level"] -= 20;
+		$ret["stats_hp"] = $ret["stats_hp"] - round($ret["stats_hp"] - ($ret["stats_hp"] * $oldpow) / ($oldpow + $r * 10),-2);
+		$ret["stats_atk"] = $ret["stats_atk"] - round($ret["stats_atk"] - ($ret["stats_atk"] * $oldpow) / ($oldpow + $r * 10),-1);
+		$ret["stats_def"] = $ret["stats_def"] - round($ret["stats_def"] - ($ret["stats_def"] * $oldpow) / ($oldpow + $r * 10),-1);
+	}
 	
 	$ret["copyinfo"] = (($unit_row["unit_rarity"] > 6) ? "6" : $unit_row["unit_rarity"]) . "★ ";
 	if ($unit_row["unit_rarity"] == 5) {
