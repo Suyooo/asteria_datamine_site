@@ -1,11 +1,321 @@
-<?php $v->layout('layout', ['title' => str_replace("&nbsp;"," ",$unit["name"]) . " • Unit", 'image' => "https://suyo.be/asteria/image_thumb/" . $unit["id"]]) ?>
+<?php $v->layout('layout', ['title' => str_replace("&nbsp;"," ",$name) . " • Unit", 'image' => "https://suyo.be/asteria/image_thumb/" . $id, 'description' => str_replace("\\n", "\n", substr($copyinfo, strpos($copyinfo, " | ") + 3))]) ?>
 
-<div class="container">
-	<div class="itemgrid" id="cardContainer">
-		<span>&nbsp;</span>
-		<?php
-			$unit["force_open"] = true;
-			$v->insert('card_unit', $unit);
-		?>
+<div class="container wide">
+	<div class="row left">
+		<div class="four columns">
+			<div class="card_unit center" style="">
+				<h5 class="center"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($name))?></h5>
+				<h6 class="center"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($name_jp))?></h6>
+				<span style="display: inline-block" class="rarity r<?=$v($rarity)?> awk"></span> <span style="display: inline-block" class="element <?=$v($element)?>"></span><br>
+				<img style="max-width:100%" src="/asteria/image_full/<?=$v($id)?>"><br><br>
+				<?php if ($awaken_info): ?>
+			        <div class="smallstats artemargins">
+				        <span class="icon star <?=$v($awaken_star_type)?>"><?=$v($awaken_info)?></span>
+			        </div>
+			        <div class="center">
+			            <a class="small smallbutton" href="/asteria/<?=($awaken_related_id == $id) ? "partner" : "unit"?>/<?=$v($awaken_related_id)?>"><?=$v($awaken_link_label)?></a>
+			        </div><br><br>
+		        <?php endif ?>
+				<a class="icon add smallbutton" onClick="toggleCollection(this, '<?=$v($id)?>')">Add to Collection</a><br>
+				<a class="icon copy smallbutton" onClick="copyInfo(this, '<?=$v($copyinfo)?>')">Copy Summary To Clipboard</a>
+			</div>
+		</div>
+		<div class="eight columns" style="padding-top: 2em;">
+			<div class="row">
+				<div class="three columns">
+					<h6>Battle Stats</h6>
+				</div>
+				<div class="nine columns">
+		            <table class="fliptable four">
+		                <tr class="bold">
+		                    <td width="60%">&nbsp;</td>
+		                    <td width="20%">Level <?=$v($level)?></td>
+		                    <?php if ($level_bonus): ?>
+		                        <td width="20%">Level <?=$v($level_bonus)?></td>
+	                        <?php endif ?>
+	                    </tr>
+		                <tr>
+		                    <td><span class="icon hp">Max&nbsp;HP</span></td>
+		                    <td class="text-hp"><?=$v($stats_hp)?></td>
+		                    <?php if ($level_bonus): ?>
+		                        <td class="text-hp"><?=$v($stats_hp_bonus)?></td>
+	                        <?php endif ?>
+	                    </tr>
+		                <tr>
+		                    <td><span class="icon atk">Attack</span></td>
+		                    <td class="text-atk"><?=$v($stats_atk)?></td>
+		                    <?php if ($level_bonus): ?>
+		                        <td class="text-atk"><?=$v($stats_atk_bonus)?></td>
+	                        <?php endif ?>
+	                    </tr>
+		                <tr>
+		                    <td><span class="icon def">Defense</span></td>
+		                    <td class="text-def"><?=$v($stats_def)?></td>
+		                    <?php if ($level_bonus): ?>
+		                        <td class="text-def"><?=$v($stats_def_bonus)?></td>
+	                        <?php endif ?>
+	                    </tr>
+		            </table>
+				</div>
+			</div>
+			
+			<?php if ($ex_skill_tf): ?>
+		        <hr class="invis">
+				        
+		        <div class="row">
+			        <div class="three columns">
+				        <h6>Trans&shy;formation</h6>
+			        </div>
+			        <div class="nine columns">
+				        <?=$v($ex_skill_tf)?>
+			        </div>
+		        </div>
+	        <?php endif ?>
+			
+			<?php if ($ex_skill): ?>
+			    <hr class="invis">
+					    
+			    <div class="row">
+				    <div class="three columns">
+					    <h6>EX Skill</h6>
+				    </div>
+				    <div class="nine columns">
+					    <?=$v($ex_skill)?>
+				    </div>
+			    </div>
+			<?php endif ?>
+		
+		    <?php if ($artes): ?>
+			    <hr>
+			    
+			    <div class="row">
+				    <div class="three columns">
+					    <?php if ($tf_baseartes): ?>
+					        <h6>Base Artes</h6>
+			            <?php else: ?>
+					        <h6>Artes</h6>
+			            <?php endif ?>
+				    </div>
+				    <div class="nine columns arterows">
+					    <?php if ($tf_baseartes): ?>
+				            <?php foreach($tf_baseartes as $arte): ?>
+					            <?php $v->insert('unit_single_arte', $arte) ?>
+				            <?php endforeach ?>
+				    </div>
+			    </div>
+			    
+			    <hr class="invis">
+					    
+			    <div class="row">
+				    <div class="three columns">
+					    <h6><?=$v($tf_label)?></h6>
+				    </div>
+				    <div class="nine columns arterows">
+			            <?php endif ?>
+			            <?php foreach($artes as $arte): ?>
+				            <?php $v->insert('unit_single_arte', $arte) ?>
+			            <?php endforeach ?>
+				    </div>
+			    </div>
+		    <?php endif ?>
+			
+		    <?php if ($ma_name): ?>
+			    <hr>
+					    
+			    <div class="row">
+				    <div class="three columns">
+					    <h6>Mystic Arte</h6>
+				    </div>
+				    <div class="nine columns">
+					    <div class="row">
+						    <div class="four columns">
+							    <b><?=$v($ma_name)?></b> <span class="element <?=$v($ma_element)?>" style="display: inline-block; vertical-align: top;"></span><br>
+							    <?=$v($ma_summary)?>
+						    </div>
+						    <div class="eight columns">
+							    <?=$v($ma_description)?><br>
+				                <?php if ($ma_coopdiff): ?>
+					                <b>In Co-op Battle:</b> <?=$v($ma_coopdiff)?><br>
+				                <?php endif ?>
+				                <?php if ($ma_bond): ?>
+					                <b class="title" title="Bond Potential">BP:</b> <?=$v($ma_bond)?><br>
+				                <?php endif ?>
+							    <b>OL Charge:</b> <?=$v($ma_charge)?> (avg. <?=$v($ma_chargeturns["avg"])?> turn<?=$v($ma_chargeturns["avg_plural"])?>) <span onClick="toggleCard(this.parentElement)" class="icon toggle"></span><br>
+							    <div style="background-color:white; padding:2px 5px;" class="openInfo">
+								    <img src="/asteria/image_stat_charge/<?=$v($id)?>" style="width: 100%">
+								    <span class="small">* assuming matched frame every turn</span>
+							    </div>
+						    </div>
+					    </div>
+				    </div>
+			    </div>
+			    
+			    <?php if ($ma_ex_summary): ?>
+			        <hr class="invis">
+					        
+			        <div class="row">
+				        <div class="three columns">
+					        <h6>EX Mystic Arte</h6>
+				        </div>
+				        <div class="nine columns">
+					        <div class="row">
+						        <div class="four columns">
+							        <?=$v($ma_ex_summary)?>
+						        </div>
+						        <div class="eight columns">
+							        <?=$v($ma_ex_description)?><br>
+					                <?php if ($ma_ex_coopdiff): ?>
+						                <b>In Co-op Battle:</b> <?=$v($ma_ex_coopdiff)?><br>
+					                <?php endif ?>
+					                <?php if ($ma_ex_bond): ?>
+							            <b class="title" title="Bond Potential">BP:</b> <?=$v($ma_ex_bond)?><br>
+					                <?php endif ?>
+							        <b>OL Charge:</b> <?=$v($ma_charge + $ma_ex_charge)?> (<?=$v($ma_charge)?> + <?=$v($ma_ex_charge)?>, avg. <?=$v($ma_ex_chargeturns["avg"])?> turn<?=$v($ma_ex_chargeturns["avg_plural"])?>) <span onClick="toggleCard(this.parentElement)" class="icon toggle"></span><br>
+							        <div style="background-color:white; padding:2px 5px;" class="openInfo">
+								        <img src="/asteria/image_stat_charge/<?=$v($id)?>EX" style="width: 100%">
+								        <span class="small">* assuming matched frame every turn</span>
+							        </div>
+						        </div>
+					        </div>
+				        </div>
+			        </div>
+			    <?php endif ?>
+			<?php endif ?>
+			
+			<hr>
+			
+			<div class="row">
+				<div class="three columns">
+					<h6>Co-op Type</h6>
+				</div>
+				<div class="nine columns">
+				    <?php if ($coop_type_short == "atk"): ?>
+				        <span class="bold text-atk">Attack</span> (small boost to Max HP, Physical ATK and DEF)
+				    <?php elseif ($coop_type_short == "def"): ?>
+				        <span class="bold text-def"><?=$v($coop_type)?></span> (big boost to DEF, boost to Max HP)
+				    <?php elseif ($coop_type_short == "matk"): ?>
+				        <span class="bold text-matk">Magic</span> (big boost to Magical ATK)
+			        <?php endif ?>
+				</div>
+			</div>
+			
+			<hr class="invis">
+			
+			<div class="row">
+				<div class="three columns">
+					<h6>Co-op Stats</h6>
+				</div>
+				<div class="nine columns">
+					<table class="fliptable five">
+					    <tr>
+					        <td width="90%"><span class="icon hp">Max&nbsp;HP</span></td>
+					        <td width="5%"><span class="text-hp"><?=$v($coop_hp + $coop_bonus_hp)?></span></td>
+					        <td width="5%"><span class="text-<?=$v($coop_type_short)?> small"><?php if ($coop_bonus_hp>0) { echo "(+&nbsp;".$v($coop_bonus_hp).")"; } else { echo "&nbsp;"; } ?></span></td>
+				        </tr>
+					    <tr>
+					        <td><span class="icon atk">Physical&nbsp;ATK</span></td>
+					        <td><span class="text-atk"><?=$v($coop_patk + $coop_bonus_patk)?></span></td>
+					        <td><span class="text-<?=$v($coop_type_short)?> small"><?php if ($coop_bonus_patk>0) { echo "(+&nbsp;".$v($coop_bonus_patk).")"; } else { echo "&nbsp;"; } ?></span></td>
+				        </tr>
+					    <tr>
+					        <td><span class="icon atk">Magical&nbsp;ATK</span></td>
+					        <td><span class="text-atk"><?=$v($coop_matk + $coop_bonus_matk)?></span></td>
+					        <td><span class="text-<?=$v($coop_type_short)?> small"><?php if ($coop_bonus_matk>0) { echo "(+&nbsp;".$v($coop_bonus_matk).")"; } else { echo "&nbsp;"; } ?></span></td>
+				        </tr>
+					    <tr>
+					        <td><span class="icon def">Physical&nbsp;DEF</span></td>
+					        <td><span class="text-def"><?=$v($coop_pdef + $coop_bonus_pdef)?></span></td>
+					        <td><span class="text-<?=$v($coop_type_short)?> small"><?php if ($coop_bonus_pdef>0) { echo "(+&nbsp;".$v($coop_bonus_pdef).")"; } else { echo "&nbsp;"; } ?></span></td>
+				        </tr>
+					    <tr>
+					        <td><span class="icon def">Magical&nbsp;DEF</span></td>
+					        <td><span class="text-def"><?=$v($coop_mdef + $coop_bonus_mdef)?></span></td>
+					        <td><span class="text-<?=$v($coop_type_short)?> small"><?php if ($coop_bonus_mdef>0) { echo "(+&nbsp;".$v($coop_bonus_mdef).")"; } else { echo "&nbsp;"; } ?></span></td>
+				        </tr>
+					</table>
+				</div>
+			</div>
+			
+			<hr class="invis">
+					
+			<div class="row">
+				<div class="three columns">
+					<h6>Co-op Skill</h6>
+				</div>
+				<div class="nine columns">
+					<div class="row">
+						<div class="four columns">
+							<b><?=str_replace(" + ", "<br>+ ", $v($coop_name))?></b> <span class="element <?=$v($coop_element)?>" style="display: inline-block; vertical-align: top;"></span>
+						</div>
+						<div class="eight columns">
+							<?=$v($coop_description)?>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+		    <?php if ($souls): ?>
+			    <hr>
+					    
+			    <div class="row" style="padding-bottom: 0.5em">
+				    <div class="three columns">
+			            <?php if (count($souls) > 1): ?>
+				            <h6>Soul&shy;mates</h6>
+			            <?php else: ?>
+				            <h6>Soul&shy;mate</h6>
+			            <?php endif ?>
+				    </div>
+				    <div class="nine columns">
+				        <table class="fliptable three split-when-unflipped">
+			                <?php foreach($souls as $soul): ?>
+				                <tr>
+				                    <td class="soulline" width="70%"><a href="/asteria/soul/<?=$v($soul["id"])?>"><div class="inlinethumb soul"><img src="/asteria/assets/<?=$v($soul["image"])?>"></div></a><a href="/asteria/soul/<?=$v($soul["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($soul["name"]))?></a></td>
+				                    <td width="30%"><?=$v($soul["effect"])?></td>
+			                    </tr>
+		                    <?php endforeach ?>
+				        </table>
+				    </div>
+			    </div>
+		    <?php endif ?>
+			
+			<hr>
+					
+			<div class="row">
+				<div class="three columns">
+					<h6>Images</h6>
+				</div>
+				<div class="nine columns">
+					<div class="row">
+						<div class="six columns legalese">
+							By downloading any of these images, you agree to not remove or alter the Asteria watermark and copyright notice, and agree to not add any of your own watermarks.
+						</div>
+						<div class="six columns imagelinks">
+							<a href="/asteria/image_detail/<?=$v($id)?>">Unit View Image</a><br>
+							<a href="/asteria/image_full/<?=$v($id)?>">Home Screen Image</a><br>
+							<?php if ($image_preview): ?>
+							    <a href="/asteria/image_original/<?=$v($id)?>">Full Image</a><br>
+						    <?php endif ?>
+							<a id="clean_images_link" class="underline clicky small" onClick="document.getElementById('clean_images').style.display = '';document.getElementById('clean_images_link').style.display = 'none';">Show Clean Images</a><br>
+						</div>
+					</div>
+					<div id="clean_images" style="display: none; margin-top: 1em;" class="row">
+						<div class="six columns legalese">
+							Clean images are provided mainly for transformative or private use. By downloading any of these images, you agree to not post them on social networks or distribute them otherwise unless used in transformative work (as defined by fair use). If you want to share images of units, please use the watermarked images with the Asteria logo.
+						</div>
+						<div class="six columns imagelinks">
+							<a href="/asteria/assets/<?=$v($image_detail)?>">Unit View Image (transparent)</a><br>
+							<a href="/asteria/assets/<?=$v($image_mypage)?>">Home Screen Image (transparent)</a><br>
+							<?php if ($image_preview): ?>
+							    <a href="/asteria/assets/<?=$v($image_preview)?>">Full Image (transparent)</a><br>
+						    <?php endif ?>
+							<a href="/asteria/assets/<?=$v($image_background)?>">Background Image</a><br>
+				            <?php if ($ma_name): ?>
+							    <a href="/asteria/assets/<?=$v($ma_image_cutin)?>">Mystic Arte Cut In</a>
+						    <?php endif ?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

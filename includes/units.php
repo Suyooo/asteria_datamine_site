@@ -137,7 +137,7 @@ function get_arte_string_short($type, $value, $hits, $target) {
 	else if ($type==8)		return "DEF Buff " . $value . "%" . get_target_string_short($target);
 	else if ($type==9)		return "ATK Debuff " . $value . "%" . get_target_string_short($target);
 	else if ($type==10)		return "DEF Debuff " . $value . "%" . get_target_string_short($target);
-	else if ($type==13)		return "Time Stop (" . $value . "% gauge)";
+	else if ($type==13)		return "Time Stop" . ($value > 0 ? ", keep gauge" : "");
 	else if ($type==14)		return "Status Cure + Heal " . $value . "%" . get_target_string_short($target);
 	else if ($type==19)		return "Dispel ATK Debuffs " . get_target_string_short($target);
 	else if ($type==20)		return "Dispel DEF Debuffs " . get_target_string_short($target);
@@ -295,16 +295,16 @@ function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $va
 	else if ($type==17)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP, " . get_ex_skill_value_string($value_type, $value2) . " ATK, " . get_ex_skill_value_string($value_type, $value3) . " DEF";
 	else if ($type==18)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " ATK, lose " . get_ex_skill_value_string($value_type, $value2) . " DEF";
 	else if ($type==33)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " OL";
-	else if ($type==51)		return "Frame Attack +" . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==52)		return "Frame Defense +" . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==53)		return "Frame Heal +" . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==54)		return "Frame OL Charge +" . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==55)		return "Frame Attack +" . get_ex_skill_value_string(1, $value1) . " and Defense +" . get_ex_skill_value_string(1, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==56)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . " and Attack +" . get_ex_skill_value_string(1, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==57)		return "Frame Attack +" . get_ex_skill_value_string(1, $value1) . " and OL Charge +" . get_ex_skill_value_string(2, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==58)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . " and Defense +" . get_ex_skill_value_string(1, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==59)		return "Frame Defense +" . get_ex_skill_value_string(1, $value1) . " and OL Charge +" . get_ex_skill_value_string(2, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==60)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . " and OL Charge +" . get_ex_skill_value_string(2, $value2) . " for " . get_ex_skill_cond_string_short($cond_type, $element);
+	else if ($type==51)		return "Frame ATK +" . get_ex_skill_value_string($value_type, $value1);
+	else if ($type==52)		return "Frame DEF +" . get_ex_skill_value_string($value_type, $value1);
+	else if ($type==53)		return "Frame Heal +" . get_ex_skill_value_string($value_type, $value1);
+	else if ($type==54)		return "Frame OL +" . get_ex_skill_value_string($value_type, $value1);
+	else if ($type==55)		return "Frame ATK +" . get_ex_skill_value_string(1, $value1) . ", DEF +" . get_ex_skill_value_string(1, $value2);
+	else if ($type==56)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . ", ATK +" . get_ex_skill_value_string(1, $value2);
+	else if ($type==57)		return "Frame ATK +" . get_ex_skill_value_string(1, $value1) . ", OL +" . get_ex_skill_value_string(2, $value2);
+	else if ($type==58)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . ", DEF +" . get_ex_skill_value_string(1, $value2);
+	else if ($type==59)		return "Frame DEF +" . get_ex_skill_value_string(1, $value1) . ", OL +" . get_ex_skill_value_string(2, $value2);
+	else if ($type==60)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . ", OL +" . get_ex_skill_value_string(2, $value2);
 	else if ($type==81)		return get_ex_skill_cond_string_short($cond_type, $element) . " heal " . get_ex_skill_value_string(2, $value1) . " HP";
 	else if ($type==83)		return "Revive one " . get_ex_skill_cond_string_short($cond_type, $element);
 	else				throw new Exception($type . " is not a known EX skill type");
@@ -327,14 +327,14 @@ function get_ex_skill_cond_string($cond_type, $element, $capitalize = false) {
 }
 
 function get_ex_skill_cond_string_short($cond_type, $element) {
-	if ($cond_type==10)		return get_element_string($element) . " Units";
-	else if ($cond_type==21)	return get_element_string($element) . " Units in matching frames";
-	else if ($cond_type==31)	return get_element_string($element) . " Units at critical health";
-	else if ($cond_type==32)	return get_element_string($element) . " Units at full health";
-	else if ($cond_type==33)	return "Transformation: ";
-	else if ($cond_type==35)	return "KO\\'d " . get_element_string($element) . " Unit";
+	if ($cond_type==10)		return "all";
+	else if ($cond_type==21)	return "matching frames";
+	else if ($cond_type==31)	return "crit health";
+	else if ($cond_type==32)	return "full health";
+	else if ($cond_type==33)	return "Transformation:";
+	else if ($cond_type==35)	return "KO\\'d Unit";
 	else if ($cond_type==41)	return "Every turn,";
-	else if ($cond_type==51)	return "Damaged " . get_element_string($element) . " Units";
+	else if ($cond_type==51)	return "Damaged Units";
 	else if ($cond_type==61)	return "For each enemy,";
 	else				throw new Exception($cond_type . " is not a known EX skill condition type");
 }
@@ -583,22 +583,26 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 	} else if ($unit_row["unit_ex_type"] == 4) {
 		$awaken_info = "Awakening Partner";
 		$awaken_id_offset = 0;
-		$awaken_link_label = "View Schedule and Partners ▶";
+		$awaken_link_label = "View Partners ▶";
 	}
 	
 	$charname_en = get_char_en_short_name($unit_row["unit_id"] / 10000);
+	$charname_jp = get_char_jp_short_name($unit_row["unit_id"] / 10000);
 	$unitname_en = $charname_en . get_usub_en($unit_row["unit_subtitle_id"]);
+	$unitname_jp = $charname_jp . get_usub_jp($unit_row["unit_subtitle_id"]);
 	$ret = [
 		'id'				=> $unit_row["unit_id"],
 		'name'				=> $unitname_en,
-		'name_short'			=> $charname_en,
+		'name_jp'			=> $unitname_jp,
+        'name_short'		=> $charname_en,
+        'name_short_jp'		=> $charname_jp,
 		'game'				=> get_source_en_name($unit_row["unit_game_id"]),
 		'rarity'			=> $unit_row["unit_rarity"] . (($unit_row["unit_ex_type"] == 0) ? "" : " " . (($unit_row["unit_ex_type"] == 1) ? "evo" : "awk")),
 		'element'			=> get_element_string($unit_row["unit_element"], false),
-		'awaken_info'			=> $awaken_info,
-		'awaken_star_type'		=> ($unit_row["unit_ex_type"] == 1) ? "evolve" : "awaken",
-		'awaken_related_id'		=> $unit_row["unit_id"] + $awaken_id_offset,
-		'awaken_link_label'		=> $awaken_link_label,
+		'awaken_info'		=> $awaken_info,
+		'awaken_star_type'	=> ($unit_row["unit_ex_type"] == 1) ? "evolve" : "awaken",
+		'awaken_related_id'	=> $unit_row["unit_id"] + $awaken_id_offset,
+		'awaken_link_label'	=> $awaken_link_label,
 		
 		'has_bonus'         => $unit_row["unit_has_bonus_level"] == 1,
 		'level'				=> $unit_row["unit_max_level"],
@@ -628,7 +632,6 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 		'partner_info'			=> $partner_info,
 		
 		// properties used only by certain pages, setting them here to avoid warnings
-		'force_open'			=> false,
 		'patch_change'			=> false
 		];
 	
@@ -681,6 +684,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 		$ret["copyinfo"] .= " | " . get_ex_skill_string_short($ex_skill_tf_row["ex_type_effect"], $ex_skill_tf_row["ex_type_condition"], $ex_skill_tf_row["ex_type_values"], $unit_row["unit_element"], $ex_skill_tf_row["ex_value1"], $ex_skill_tf_row["ex_value2"], $ex_skill_tf_row["ex_value3"]);
 	} else $ret["ex_skill_tf"] = NULL;
 	
+	$ret["copyinfo"] .= "\\nArtes: ";
 	if ($basearte_rows) {
 		$artes = [];
 		$i = 1;
@@ -711,9 +715,9 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 				'voice'			=> $arte_row['arte_voice'],
 				'num'			=> $i
 			];
-			$ret["copyinfo"] .= "\\nArte " . $i . ": " . get_arte_string_short($arte_row["arte_type"], $arte_row["arte_value"], $arte_row["arte_hits"], $arte_row["arte_target"]);
-			if (isset($bond_row)) $ret["copyinfo"] .= " (Bond Potential: " . get_bond_potential_string_short($bond_row["bpot_type"], $arte_row["arte_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
-			$ret["copyinfo"] .= " | Chance: " . $arte_row['arte_chance'] . "%";
+			if ($i > 1) $ret["copyinfo"] .= " | ";
+			$ret["copyinfo"] .= get_arte_string_short($arte_row["arte_type"], $arte_row["arte_value"], $arte_row["arte_hits"], $arte_row["arte_target"]);
+			if (isset($bond_row)) $ret["copyinfo"] .= " (BP: " . get_bond_potential_string_short($bond_row["bpot_type"], $arte_row["arte_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
 			$i++;
 		}
 		$ret['tf_baseartes'] = $artes;
@@ -723,6 +727,8 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 		$maxOlPerTurnBaseArtes += 14;
 		$stdOlPerTurnBaseArtes = sqrt(100 * $stdOlPerTurnBaseArtes - $avgOlPerTurnBaseArtes * $avgOlPerTurnBaseArtes) / 100 + $stdOlPerTurnFromAttacks;
 		$avgOlPerTurnBaseArtes = $avgOlPerTurnBaseArtes / 100 + $avgOlPerTurnFromAttacks;
+	    
+	    $ret["copyinfo"] .= "\\nTransformed Artes: ";
 	} else $ret['tf_baseartes'] = NULL;
 	
 	if ($arte_rows) {
@@ -755,10 +761,9 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 				'voice'			=> $arte_row['arte_voice'],
 				'num'			=> $i
 			];
-			if ($basearte_rows) $ret["copyinfo"] .= "\\nTransformed Arte " . $i . ": " . get_arte_string_short($arte_row["arte_type"], $arte_row["arte_value"], $arte_row["arte_hits"], $arte_row["arte_target"]);
-			else $ret["copyinfo"] .= "\\nArte " . $i . ": " . get_arte_string_short($arte_row["arte_type"], $arte_row["arte_value"], $arte_row["arte_hits"], $arte_row["arte_target"]);
-			if (isset($bond_row)) $ret["copyinfo"] .= " (Bond Potential: " . get_bond_potential_string_short($bond_row["bpot_type"], $arte_row["arte_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
-			$ret["copyinfo"] .= " | Chance: " . $arte_row['arte_chance'] . "%";
+			if ($i > 1) $ret["copyinfo"] .= " | ";
+			$ret["copyinfo"] .= get_arte_string_short($arte_row["arte_type"], $arte_row["arte_value"], $arte_row["arte_hits"], $arte_row["arte_target"]);
+			if (isset($bond_row)) $ret["copyinfo"] .= " (BP: " . get_bond_potential_string_short($bond_row["bpot_type"], $arte_row["arte_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
 			$i++;
 		}
 		$ret['artes'] = $artes;
@@ -770,8 +775,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 	} else $ret['artes'] = NULL;
 	
 	if ($ma_row) {
-		if ($maex_row) $ret["copyinfo"] .= "\\n" . get_ma_summary_string($ma_row["ma_type"], $maex_row["maex_value"], $maex_row["maex_hits"], $maex_row["maex_target"]) . ": ";
-		else $ret["copyinfo"] .= "\\n" . get_ma_summary_string($ma_row["ma_type"], $ma_row["ma_value"], $ma_row["ma_hits"], $ma_row["ma_target"]) . ": ";
+		$ret["copyinfo"] .= "\\nMA: ";
 		
 		$bond_row = NULL;
 		if (isset($bond_rows[$unit_row['unit_ma_bpot_id']])) $bond_row = $bond_rows[$unit_row['unit_ma_bpot_id']];
@@ -790,7 +794,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 			'ma_image_cutin'		=> $ma_row["ma_image_cutin"]
 		];
 		$ret["copyinfo"] .= get_arte_string_short($ma_row["ma_type"], $ma_row["ma_value"], $ma_row["ma_hits"], $ma_row["ma_target"]);
-		if (isset($bond_row)) $ret["copyinfo"] .= " (Bond Potential: " . get_bond_potential_string_short($bond_row["bpot_type"], $ma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
+		if (isset($bond_row)) $ret["copyinfo"] .= " (BP: " . get_bond_potential_string_short($bond_row["bpot_type"], $ma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
 		
 		if ($maex_row) {
 			$bond_row = NULL;
@@ -806,13 +810,9 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 				'ma_ex_voice_ready'		=> $maex_row["maex_voice_ready"]
 			];
 			$ret['ma_summary_short'] = get_ma_summary_string($ma_row["ma_type"], $maex_row["maex_value"], $maex_row["maex_hits"], $maex_row["maex_target"]);
-			$ret["copyinfo"] .= " | EX MA: " . get_arte_string_short($ma_row["ma_type"], $maex_row["maex_value"], $maex_row["maex_hits"], $maex_row["maex_target"]);
-			if (isset($bond_row)) $ret["copyinfo"] .= " (Bond Potential: " . get_bond_potential_string_short($bond_row["bpot_type"], $ma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
+			$ret["copyinfo"] .= " | MA2: " . get_arte_string_short($ma_row["ma_type"], $maex_row["maex_value"], $maex_row["maex_hits"], $maex_row["maex_target"]);
+			if (isset($bond_row)) $ret["copyinfo"] .= " (BP: " . get_bond_potential_string_short($bond_row["bpot_type"], $ma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
 		} else $ret['ma_ex_summary'] = NULL;
-		
-		$ret["copyinfo"] .= " | Charge: " . $ma_row["ma_charge"];
-		if ($maex_row) $ret["copyinfo"] .= " + " . $maex_row["maex_charge"] . " (avg. " . $ret["ma_ex_chargeturns"]["avg"] . " turns)";
-		else $ret["copyinfo"] .= " (avg. " . $ret["ma_chargeturns"]["avg"] . " turns)";
 	} else $ret['ma_name'] = NULL;
 	
 	
@@ -821,7 +821,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 		$ret['ma_dual_soul_id'] = $unit_row["unit_dualma_soul_id"];
 		$ret['ma_dual_soul_name'] = $dualma_soul["name_short"];
 		$ret['ma_dual_soul_image'] = $dualma_soul["image"];
-		$ret["copyinfo"] .= "\\nDual MA with " . $dualma_soul["name_short"] . " | " . get_ma_summary_string($dualma_row["ma_type"], $dualmaex_row["maex_value"], $dualmaex_row["maex_hits"], $dualmaex_row["maex_target"]) . ": ";
+		$ret["copyinfo"] .= "\\nDual MA: ";
 		
 		$bond_row = NULL;
 		if (isset($bond_rows[$unit_row['unit_dualma_bpot_id']])) $bond_row = $bond_rows[$unit_row['unit_dualma_bpot_id']];
@@ -839,7 +839,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 			'ma_dual_image_cutin'		=> $dualma_row["ma_image_cutin"]
 		];
 		$ret["copyinfo"] .= get_arte_string_short($dualma_row["ma_type"], $dualma_row["ma_value"], $dualma_row["ma_hits"], $dualma_row["ma_target"]);
-		if (isset($bond_row)) $ret["copyinfo"] .= " (Bond Potential: " . get_bond_potential_string_short($bond_row["bpot_type"], $dualma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
+		if (isset($bond_row)) $ret["copyinfo"] .= " (BP: " . get_bond_potential_string_short($bond_row["bpot_type"], $dualma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
 		
 		$bond_row = NULL;
 		if (isset($bond_rows[$unit_row['unit_dualmaex_bpot_id']])) $bond_row = $bond_rows[$unit_row['unit_dualmaex_bpot_id']];
@@ -853,14 +853,11 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 			'ma_dual_ex_voice_use'		=> $dualmaex_row["maex_voice_use"],
 			'ma_dual_ex_voice_ready'	=> $dualmaex_row["maex_voice_ready"]
 		];
-		$ret["copyinfo"] .= " | EX MA: " . get_arte_string_short($dualma_row["ma_type"], $dualmaex_row["maex_value"], $dualmaex_row["maex_hits"], $dualmaex_row["maex_target"]);
-		if (isset($bond_row)) $ret["copyinfo"] .= " (Bond Potential: " . get_bond_potential_string_short($bond_row["bpot_type"], $dualma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
+		$ret["copyinfo"] .= " | MA2: " . get_arte_string_short($dualma_row["ma_type"], $dualmaex_row["maex_value"], $dualmaex_row["maex_hits"], $dualmaex_row["maex_target"]);
+		if (isset($bond_row)) $ret["copyinfo"] .= " (BP: " . get_bond_potential_string_short($bond_row["bpot_type"], $dualma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
 		
 		$ret['ma_summary_short'] = "Dual " . get_ma_summary_string($dualma_row["ma_type"], $dualmaex_row["maex_value"], $dualmaex_row["maex_hits"], $dualmaex_row["maex_target"]);
-		$ret["copyinfo"] .= " | Charge: " . $dualma_row["ma_charge"] . " + " . $dualmaex_row["maex_charge"] . " (avg. " . $ret["ma_dual_ex_chargeturns"]["avg"] . " turns)";
 	} else $ret['ma_dual_name'] = NULL;
-	
-	$ret["copyinfo"] .= "\\nCoop: " . get_coop_type_string($unit_row["unit_coop_type"], $unit_row["unit_coop_pdef"], $unit_row["unit_coop_mdef"]) . ", " . get_coop_skill_name_string($coop_skill_row["coop_type"], $coop_skill_row["coop_element"], $coop_skill_row["coop_icon_variation"], $coop_skill_row["coop_variant_type"], $coop_skill_row["coop_rarity"], $coop_skill_row["coop_duration"]);
 	
 	$ret['souls'] = $souls;
 	

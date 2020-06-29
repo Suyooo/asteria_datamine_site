@@ -1,9 +1,13 @@
 <?php
 	if (isset($titleoverride)):
-		$v->layout('layout', ['title' => $titleoverride]);
+	    if (isset($descoverride)):
+	        $v->layout('layout', ['title' => $titleoverride, 'description' => $descoverride]);
+	    else:
+    		$v->layout('layout', ['title' => $titleoverride]);
+		endif;
 	else:
 		$v->layout('layout', ['title' => 'Units']);
-	endif
+	endif;
 ?>
 
 <div class="container<?php if ($showfilters): ?> wide<?php endif ?>">

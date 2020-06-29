@@ -5,11 +5,11 @@ $getEx = (substr($params[UNIT_ID], -2) == "EX");
 $getDual = (substr($params[UNIT_ID], -3) == "DEX" || substr($params[UNIT_ID], -1) == "D");
 $params[UNIT_ID] = (int) $params[UNIT_ID];
 
-define("WIDTH", 300);
-define("HEIGHT", 140);
-define("BARHEIGHT", 90);
-define("BAROFFSET", 30);
-define("FONT", 4);
+define("WIDTH", 600);
+define("HEIGHT", 280);
+define("BARHEIGHT", 160);
+define("BAROFFSET", 60);
+define("FONT", 5);
 header("Content-type: image/png");
 header("Expires: ".gmdate("D, d M Y H:i:s", time()+2419200)." GMT");
 header("Cache-Control: max-age=2419200");

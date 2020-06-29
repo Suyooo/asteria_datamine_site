@@ -48,10 +48,10 @@
 					document.body.removeChild(textarea);
 					element.classList.add('done');
 					element.innerHTML = "Copied";
-					setTimeout(function() {
+					/*setTimeout(function() {
 						element.classList.remove('done');
 						element.innerHTML = "Copy";
-					}, 3000);
+					}, 3000);*/
 				}
 			} else {
 				prompt("Your browser doesn't support copying automatically... Please copy this text manually!", text);

@@ -16,5 +16,5 @@ if ($unit == NULL) {
 	exit;
 }
 
-echo $templates->render('unit_single', ['unit' => $unit]);
+echo $templates->render('unit_single', $unit);
 ?>

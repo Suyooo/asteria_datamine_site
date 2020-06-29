@@ -75,7 +75,7 @@ for ($i = 0; $i < count($ids); $i++) {
 }
 
 if (count($units) == 0) {
-	echo $templates->render('error', ['error' => 'No units added to the collection yet. Go to the unit list and add some!']);
+	echo $templates->render('error', ['error' => 'No units added to the collection yet. Go to the unit list and add some!', 'titleoverride' => 'Collection']);
 	exit;
 }
 
@@ -98,5 +98,16 @@ while (strlen($binarystring) > 0) {
 }
 $b64url = "https://suyo.be/asteria/collection/s/" . base64url_encode($bytes);
 
-echo $templates->render('unit_list', ['page' => 0, 'has_next_page' => false, 'showfilters' => false, 'units' => $units, 'tophtml' => '<div class="row"><div class="one-half column">' . (($ids == $collection_ids) ? '<a class="icon remove smallbutton" style="margin-top: calc(19px - (1.6em + 3px) / 2);" onClick="clearCollection()">Remove All From My Collection</a>' : '<a class="icon add smallbutton" style="margin-top: calc(19px - (1.6em + 3px) / 2);" onClick="saveCollection()">Replace My Collection With This</a>') . '</div><div class="one-half column" ' . (($ids == $collection_ids) ? 'id="myCollectionShareLink" ' : "") . '>Share ' . (($ids == $collection_ids) ? "My" : "This") . ' Collection: <input type="text" value="' . $b64url . '" readonly></div></div>', 'titleoverride' => 'Collection']);
+$summarystring = "empty collection";
+if (count($units) > 3) {
+    $summarystring = "including " . $units[0]["name"] . ", " . $units[1]["name"] . ", " . $units[2]["name"] . " and more";
+} else if (count($units) == 3) {
+    $summarystring = $units[0]["name"] . ", " . $units[1]["name"] . " and " . $units[2]["name"];
+} else if (count($units) == 2) {
+    $summarystring = $units[0]["name"] . " and " . $units[1]["name"];
+} else if (count($units) == 1) {
+    $summarystring = $units[0]["name"];
+}
+
+echo $templates->render('unit_list', ['page' => 0, 'has_next_page' => false, 'showfilters' => false, 'units' => $units, 'tophtml' => '<div class="row"><div class="one-half column">' . (($ids == $collection_ids) ? '<a class="icon remove smallbutton" style="margin-top: calc(19px - (1.6em + 3px) / 2);" onClick="clearCollection()">Remove All From My Collection</a>' : '<a class="icon add smallbutton" style="margin-top: calc(19px - (1.6em + 3px) / 2);" onClick="saveCollection()">Replace My Collection With This</a>') . '</div><div class="one-half column" ' . (($ids == $collection_ids) ? 'id="myCollectionShareLink" ' : "") . '>Share ' . (($ids == $collection_ids) ? "My" : "This") . ' Collection: <input type="text" value="' . $b64url . '" readonly></div></div>', 'titleoverride' => 'Collection', 'descoverride' => count($units) . ' Unit' . (count($units) != 1 ? "s" : "") . ' (' . $summarystring . ')']);
 ?>

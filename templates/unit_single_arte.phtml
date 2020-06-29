@@ -1,0 +1,13 @@
+<div class="row">
+    <div class="four columns">
+	    <b><?=$v($name)?></b><br>
+	    <span class="small">Chance: <?=$v($chance)?>%</span>
+    </div>
+    <div class="eight columns">
+	    <?=$v($description)?>
+	    <?php if ($bond): ?>
+	        <br>
+	        <b class="title" title="Bond Potential">BP:</b> Increase attack power of all Light party units by 20% (current turn)
+		<?php endif ?>
+    </div>
+</div>

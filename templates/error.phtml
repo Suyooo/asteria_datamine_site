@@ -1,4 +1,10 @@
-<?php $v->layout('layout', ['title' => 'Error']) ?>
+<?php
+	if (isset($titleoverride)):
+		$v->layout('layout', ['title' => $titleoverride]);
+	else:
+		$v->layout('layout', ['title' => 'Error']);
+	endif
+?>
 
 <div class="container">
 	<?=$v($error)?>

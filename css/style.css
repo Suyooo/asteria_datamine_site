@@ -208,13 +208,14 @@ a.smallbutton:hover, a.smallbutton:active, a.smallbutton:focus, a.smallbutton:vi
 
 hr {
 	border-top: 1px solid var(--shade4);
-	margin: 1em 15% 1.5em;
+	margin: 1.5em 15% 1.5em;
 	opacity: 0.3;
 }
 
 hr.invis {
 	border: none;
-	height: 0.3em;
+	height: 1em;
+	margin: 0;
 }
 
 .title {
@@ -807,6 +808,10 @@ iframe.newspost {
 .fliptable.split-when-unflipped td:last-child {
     text-align: right;
 }
+    
+.fliptable.three td:nth-child(2) {
+    margin-top: 0.5em;
+}
 
 @media (min-width: 800px) {
     .fliptable tr {
@@ -831,4 +836,8 @@ iframe.newspost {
         width: 100%;
         text-align: center !important;
     }
+}
+
+.arterows .row:not(first-child) {
+    margin-top: 0.5em;
 }
