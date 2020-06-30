@@ -2,6 +2,15 @@
     <div class="four columns">
 	    <b><?=$v($name)?></b><br>
 	    <span class="small">Chance: <?=$v($chance)?>%</span>
+        <?php if ($voice): ?>
+            <br><div class="voice">
+                <div class="closeInfo" onClick="toggleCard(this.parentElement)">
+                    <img src="/asteria/image/icon_voice.svg" alt="Arte Use" title="Arte Use" class="closeInfo">
+                    <span>Arte Use</span>
+                </div>
+                <audio class="openInfo" controls src="/asteria/assets/<?=$v($voice)?>" preload="none"></audio>
+            </div>
+        <?php endif ?>
     </div>
     <div class="eight columns">
 	    <?=$v($description)?>

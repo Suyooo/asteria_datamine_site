@@ -419,15 +419,27 @@ h6 {
 	margin-bottom: 1em
 }
 
-.voice:not(.open) {
-	float: right;
+.voice {
+    user-select: none;
+    cursor: pointer;
+    display: inline-block;
 }
 
 .voice img {
     height: 1em;
     width: 1em;
-    user-select: none;
-    cursor: pointer;
+    vertical-align: middle;
+}
+
+.voice span {
+	font-size: 70%;
+    vertical-align: middle;
+	color: var(--shade3);
+	font-weight: bold;
+}
+
+.voice audio {
+    width: 100%;
 }
 
 .filter-column {
@@ -810,7 +822,7 @@ iframe.newspost {
 }
     
 .fliptable.three td:nth-child(2) {
-    margin-top: 0.5em;
+    padding-top: 0.7em;
 }
 
 @media (min-width: 800px) {

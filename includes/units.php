@@ -818,9 +818,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 	
 	if ($unit_row["unit_dualma_soul_id"] != 0) {
 		$dualma_soul = get_object_for_soul_id($unit_row["unit_dualma_soul_id"], true);
-		$ret['ma_dual_soul_id'] = $unit_row["unit_dualma_soul_id"];
-		$ret['ma_dual_soul_name'] = $dualma_soul["name_short"];
-		$ret['ma_dual_soul_image'] = $dualma_soul["image"];
+		$ret['ma_dual_soul'] = $dualma_soul;
 		$ret["copyinfo"] .= "\\nDual MA: ";
 		
 		$bond_row = NULL;

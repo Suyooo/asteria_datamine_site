@@ -110,10 +110,10 @@
 		<?php if ($ma_dual_name): ?>
 			<div class="dualmaheader smallstats split left">
 				<h5>Dual Mystic Arte</h5>
-				<a href="/asteria/soul/<?=$v($ma_dual_soul_id)?>"><div class="inlinethumb soul"><img src="/asteria/assets/<?=$v($ma_dual_soul_image)?>"></div></a>
+				<a href="/asteria/soul/<?=$v($ma_dual_soul["id"])?>"><div class="inlinethumb soul"><img src="/asteria/assets/<?=$v($ma_dual_soul["image"])?>"></div></a>
 			</div>
 			<div class="small margins left dualmargin">
-				Required Soul: <a href="/asteria/soul/<?=$v($ma_dual_soul_id)?>"><?=$v($ma_dual_soul_name)?></a>
+				Partner: <a href="/asteria/soul/<?=$v($ma_dual_soul["id"])?>"><?=$v($ma_dual_soul["name"])?></a>
 			</div>
 			<div class="small margins left">
 				<span class="bold"><?=$v($ma_dual_summary)?></span>: <?=$v($ma_dual_description)?><br>

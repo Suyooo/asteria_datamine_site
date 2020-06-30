@@ -130,7 +130,25 @@
 					    <div class="row">
 						    <div class="four columns">
 							    <b><?=$v($ma_name)?></b> <span class="element <?=$v($ma_element)?>" style="display: inline-block; vertical-align: top;"></span><br>
-							    <?=$v($ma_summary)?>
+							    <?=$v($ma_summary)?><br>
+							    <?php if ($ma_voice_ready): ?>
+					                <div class="voice">
+					                    <div class="closeInfo" onClick="toggleCard(this.parentElement)">
+					                        <img src="/asteria/image/icon_voice.svg" alt="MA Ready" title="MA Ready" class="closeInfo">
+					                        <span>MA Ready</span>
+				                        </div>
+						                <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_voice_ready)?>" preload="none"></audio>
+					                </div>
+				                <?php endif ?>
+							    <?php if ($ma_voice_use): ?>
+					                <div class="voice">
+					                    <div class="closeInfo" onClick="toggleCard(this.parentElement)">
+					                        <img src="/asteria/image/icon_voice.svg" alt="MA Use" title="MA Use" class="closeInfo">
+					                        <span>MA Use</span>
+				                        </div>
+						                <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_voice_use)?>" preload="none"></audio>
+					                </div>
+				                <?php endif ?>
 						    </div>
 						    <div class="eight columns">
 							    <?=$v($ma_description)?><br>
@@ -160,7 +178,25 @@
 				        <div class="nine columns">
 					        <div class="row">
 						        <div class="four columns">
-							        <?=$v($ma_ex_summary)?>
+							        <?=$v($ma_ex_summary)?><br>
+							        <?php if ($ma_ex_voice_ready): ?>
+					                    <div class="voice">
+					                        <div class="closeInfo" onClick="toggleCard(this.parentElement)">
+					                            <img src="/asteria/image/icon_voice.svg" alt="EX MA Ready" title="EX MA Ready" class="closeInfo">
+					                            <span>EX MA Ready</span>
+				                            </div>
+						                    <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_ex_voice_ready)?>" preload="none"></audio>
+					                    </div>
+				                    <?php endif ?>
+							        <?php if ($ma_ex_voice_use): ?>
+					                    <div class="voice">
+					                        <div class="closeInfo" onClick="toggleCard(this.parentElement)">
+					                            <img src="/asteria/image/icon_voice.svg" alt="EX MA Use" title="EX MA Use" class="closeInfo">
+					                            <span>EX MA Use</span>
+				                            </div>
+						                    <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_ex_voice_use)?>" preload="none"></audio>
+					                    </div>
+				                    <?php endif ?>
 						        </div>
 						        <div class="eight columns">
 							        <?=$v($ma_ex_description)?><br>
@@ -179,6 +215,123 @@
 					        </div>
 				        </div>
 			        </div>
+			    <?php endif ?>
+			    
+			    <?php if ($ma_dual_name): ?>
+			        <hr>
+					        
+			        <div class="row">
+				        <div class="three columns">
+					        <h6>Dual Mystic Arte Partner</h6>
+				        </div>
+				        <div class="nine columns">
+					        <div class="soulline">
+				                <div class="inlinethumb soul">
+				                    <a href="/asteria/soul/<?=$v($ma_dual_soul["id"])?>">
+				                        <img src="/asteria/assets/<?=$v($ma_dual_soul["image"])?>">
+		                            </a>
+			                    </div>
+			                    <a href="/asteria/soul/<?=$v($ma_dual_soul["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($ma_dual_soul["name"]))?></a> (<?=$v($ma_dual_soul["effect"])?>)
+			                </div>
+				        </div>
+			        </div>
+			        
+			        <hr class="invis">
+					        
+			        <div class="row">
+				        <div class="three columns">
+					        <h6>Dual Mystic Arte</h6>
+				        </div>
+				        <div class="nine columns">
+					        <div class="row">
+						        <div class="four columns">
+							        <b><?=$v($ma_dual_name)?></b> <span class="element <?=$v($ma_dual_element)?>" style="display: inline-block; vertical-align: top;"></span><br>
+							        <?=$v($ma_dual_summary)?><br>
+							        <?php if ($ma_dual_voice_ready): ?>
+					                    <div class="voice">
+					                        <div class="closeInfo" onClick="toggleCard(this.parentElement)">
+					                            <img src="/asteria/image/icon_voice.svg" alt="MA Ready" title="MA Ready" class="closeInfo">
+					                            <span>MA Ready</span>
+				                            </div>
+						                    <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_dual_voice_ready)?>" preload="none"></audio>
+					                    </div>
+				                    <?php endif ?>
+							        <?php if ($ma_dual_voice_use): ?>
+					                    <div class="voice">
+					                        <div class="closeInfo" onClick="toggleCard(this.parentElement)">
+					                            <img src="/asteria/image/icon_voice.svg" alt="MA Use" title="MA Use" class="closeInfo">
+					                            <span>MA Use</span>
+				                            </div>
+						                    <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_dual_voice_use)?>" preload="none"></audio>
+					                    </div>
+				                    <?php endif ?>
+						        </div>
+						        <div class="eight columns">
+							        <?=$v($ma_dual_description)?><br>
+				                    <?php if ($ma_dual_coopdiff): ?>
+					                    <b>In Co-op Battle:</b> <?=$v($ma_dual_coopdiff)?><br>
+				                    <?php endif ?>
+				                    <?php if ($ma_dual_bond): ?>
+					                    <b class="title" title="Bond Potential">BP:</b> <?=$v($ma_dual_bond)?><br>
+				                    <?php endif ?>
+							        <b>OL Charge:</b> <?=$v($ma_dual_charge)?> (avg. <?=$v($ma_dual_chargeturns["avg"])?> turn<?=$v($ma_dual_chargeturns["avg_plural"])?>) <span onClick="toggleCard(this.parentElement)" class="icon toggle"></span><br>
+							        <div style="background-color:white; padding:2px 5px;" class="openInfo">
+								        <img src="/asteria/image_stat_charge/<?=$v($id)?>D" style="width: 100%">
+								        <span class="small">* assuming matched frame every turn</span>
+							        </div>
+						        </div>
+					        </div>
+				        </div>
+			        </div>
+			        
+			        <?php if ($ma_dual_ex_summary): ?>
+			            <hr class="invis">
+					            
+			            <div class="row">
+				            <div class="three columns">
+					            <h6>EX Dual Mystic Arte</h6>
+				            </div>
+				            <div class="nine columns">
+					            <div class="row">
+						            <div class="four columns">
+							            <?=$v($ma_dual_ex_summary)?><br>
+							            <?php if ($ma_dual_ex_voice_ready): ?>
+					                        <div class="voice">
+					                            <div class="closeInfo" onClick="toggleCard(this.parentElement)">
+					                                <img src="/asteria/image/icon_voice.svg" alt="EX MA Ready" title="EX MA Ready" class="closeInfo">
+					                                <span>EX MA Ready</span>
+				                                </div>
+						                        <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_dual_ex_voice_ready)?>" preload="none"></audio>
+					                        </div>
+				                        <?php endif ?>
+							            <?php if ($ma_dual_ex_voice_use): ?>
+					                        <div class="voice">
+					                            <div class="closeInfo" onClick="toggleCard(this.parentElement)">
+					                                <img src="/asteria/image/icon_voice.svg" alt="EX MA Use" title="EX MA Use" class="closeInfo">
+					                                <span>EX MA Use</span>
+				                                </div>
+						                        <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_dual_ex_voice_use)?>" preload="none"></audio>
+					                        </div>
+				                        <?php endif ?>
+						            </div>
+						            <div class="eight columns">
+							            <?=$v($ma_dual_ex_description)?><br>
+					                    <?php if ($ma_dual_ex_coopdiff): ?>
+						                    <b>In Co-op Battle:</b> <?=$v($ma_dual_ex_coopdiff)?><br>
+					                    <?php endif ?>
+					                    <?php if ($ma_dual_ex_bond): ?>
+							                <b class="title" title="Bond Potential">BP:</b> <?=$v($ma_dual_ex_bond)?><br>
+					                    <?php endif ?>
+							            <b>OL Charge:</b> <?=$v($ma_dual_charge + $ma_dual_ex_charge)?> (<?=$v($ma_dual_charge)?> + <?=$v($ma_dual_ex_charge)?>, avg. <?=$v($ma_dual_ex_chargeturns["avg"])?> turn<?=$v($ma_dual_ex_chargeturns["avg_plural"])?>) <span onClick="toggleCard(this.parentElement)" class="icon toggle"></span><br>
+							            <div style="background-color:white; padding:2px 5px;" class="openInfo">
+								            <img src="/asteria/image_stat_charge/<?=$v($id)?>DEX" style="width: 100%">
+								            <span class="small">* assuming matched frame every turn</span>
+							            </div>
+						            </div>
+					            </div>
+				            </div>
+			            </div>
+			        <?php endif ?>
 			    <?php endif ?>
 			<?php endif ?>
 			
@@ -269,8 +422,17 @@
 				        <table class="fliptable three split-when-unflipped">
 			                <?php foreach($souls as $soul): ?>
 				                <tr>
-				                    <td class="soulline" width="70%"><a href="/asteria/soul/<?=$v($soul["id"])?>"><div class="inlinethumb soul"><img src="/asteria/assets/<?=$v($soul["image"])?>"></div></a><a href="/asteria/soul/<?=$v($soul["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($soul["name"]))?></a></td>
-				                    <td width="30%"><?=$v($soul["effect"])?></td>
+				                    <td class="soulline" width="70%">
+				                        <div class="inlinethumb soul">
+				                            <a href="/asteria/soul/<?=$v($soul["id"])?>">
+				                                <img src="/asteria/assets/<?=$v($soul["image"])?>">
+				                            </a>
+			                            </div>
+			                            <a href="/asteria/soul/<?=$v($soul["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($soul["name"]))?></a>
+			                        </td>
+				                    <td width="30%">
+				                        <?=$v($soul["effect"])?>
+				                    </td>
 			                    </tr>
 		                    <?php endforeach ?>
 				        </table>
@@ -308,9 +470,9 @@
 							<?php if ($image_preview): ?>
 							    <a href="/asteria/assets/<?=$v($image_preview)?>">Full Image (transparent)</a><br>
 						    <?php endif ?>
-							<a href="/asteria/assets/<?=$v($image_background)?>">Background Image</a><br>
+							<a href="/asteria/assets/<?=$v($image_background)?>">Background Image</a>
 				            <?php if ($ma_name): ?>
-							    <a href="/asteria/assets/<?=$v($ma_image_cutin)?>">Mystic Arte Cut In</a>
+							    <br><a href="/asteria/assets/<?=$v($ma_image_cutin)?>">Mystic Arte Cut In</a>
 						    <?php endif ?>
 						</div>
 					</div>
