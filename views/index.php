@@ -25,5 +25,5 @@ if ($hour >= 1 && $hour < 8) {
 	$endTime = $liveTime + (60 * 60);
 }*/
 
-echo $templates->render('index', ["feature" => $feature_row, "live" => $live, "endTime" => $endTime]);
+echo $templates->render('index', ["feature" => $feature_row]);
 ?>

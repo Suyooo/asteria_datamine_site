@@ -1,4 +1,4 @@
-<?php $v->layout('layout', ['title' => str_replace("&nbsp;"," ",$name) . " • Unit", 'image' => "https://suyo.be/asteria/image_thumb/" . $id, 'description' => str_replace("\\n", "\n", substr($copyinfo, strpos($copyinfo, " | ") + 3))]) ?>
+<?php $v->layout('layout', ['title' => str_replace("&nbsp;"," ",$name) . " • " . $rarity[0] . "★ " . ucfirst($element) . " • Unit", 'image' => "https://suyo.be/asteria/image_thumb/" . $id, 'description' => str_replace("\\n", "\n", substr($copyinfo, strpos($copyinfo, " | ") + 3))]) ?>
 
 <div class="container wide">
 	<div class="row left">
