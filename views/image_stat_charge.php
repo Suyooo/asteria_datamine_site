@@ -44,8 +44,8 @@ $baseartes = array();
 foreach ($unit["artes"] as $arte) {
 	$artes[$arte["olcharge"]] = (isset($artes[$arte["olcharge"]]) ? $artes[$arte["olcharge"]] : 0) + $arte["chance"] / 100;
 }
-if ($unit["artes_transform_base"]) {
-	foreach ($unit["artes_transform_base"] as $arte) {
+if (isset($unit["tf_baseartes"])) {
+	foreach ($unit["tf_baseartes"] as $arte) {
 		$baseartes[$arte["olcharge"]] = (isset($baseartes[$arte["olcharge"]]) ? $baseartes[$arte["olcharge"]] : 0) + $arte["chance"] / 100;
 	}
 }

@@ -30,28 +30,28 @@
 		                <tr class="bold">
 		                    <td width="60%">&nbsp;</td>
 		                    <td width="20%">Level <?=$v($level)?></td>
-		                    <?php if ($level_bonus): ?>
+		                    <?php if (isset($level_bonus)): ?>
 		                        <td width="20%">Level <?=$v($level_bonus)?></td>
 	                        <?php endif ?>
 	                    </tr>
 		                <tr>
 		                    <td><span class="icon hp">Max&nbsp;HP</span></td>
 		                    <td class="text-hp"><?=$v($stats_hp)?></td>
-		                    <?php if ($level_bonus): ?>
+		                    <?php if (isset($level_bonus)): ?>
 		                        <td class="text-hp"><?=$v($stats_hp_bonus)?></td>
 	                        <?php endif ?>
 	                    </tr>
 		                <tr>
 		                    <td><span class="icon atk">Attack</span></td>
 		                    <td class="text-atk"><?=$v($stats_atk)?></td>
-		                    <?php if ($level_bonus): ?>
+		                    <?php if (isset($level_bonus)): ?>
 		                        <td class="text-atk"><?=$v($stats_atk_bonus)?></td>
 	                        <?php endif ?>
 	                    </tr>
 		                <tr>
 		                    <td><span class="icon def">Defense</span></td>
 		                    <td class="text-def"><?=$v($stats_def)?></td>
-		                    <?php if ($level_bonus): ?>
+		                    <?php if (isset($level_bonus)): ?>
 		                        <td class="text-def"><?=$v($stats_def_bonus)?></td>
 	                        <?php endif ?>
 	                    </tr>
