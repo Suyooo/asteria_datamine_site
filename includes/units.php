@@ -386,6 +386,7 @@ function get_bond_potential_string($type, $parent_type, $chance, $value1, $value
 	else if ($type==10)			$ret = "Paralyze " . get_target_string($target) . " for " . get_turn_string($turns, true);
 	else if ($type==12)			$ret = "Deal an additional " . $value1 . "% of break gauge damage";
 	else if ($type==13)			$ret = "Crit chance is increased by " . $value1 . "%";
+	else if ($type==17)			$ret = "Shield damage is increased by " . $value1 . "%";
 	else					throw new Exception($type . " is not a known bond potential type");
 	
 	if ($chance==100)			return $ret;
@@ -407,6 +408,7 @@ function get_bond_potential_string_short($type, $parent_type, $chance, $value1, 
 	else if ($type==10)		$ret = "Paralyze" . get_target_string_short($target);
 	else if ($type==12)		$ret = $value1 . "% break gauge damage" . get_target_string_short($target);
 	else if ($type==13)		$ret = "Crit chance +" . $value1 . "%";
+	else if ($type==17)		$ret = "Shield DMG +" . $value1 . "%";
 	else				throw new Exception($type . " is not a known bond potential type");
 	
 	if ($chance==100)		return $ret;
