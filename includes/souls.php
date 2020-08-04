@@ -89,6 +89,7 @@ function make_soul_object($soul_row, $value_rows, $matching_units) {
 		'limited'				=> $soul_row["soul_limited_logo"] != NULL,
 		
 		'matchtype'				=> $soul_row["soul_match_type"],
+		'matchgame'				=> $soul_row["soul_match_type"] >= 10 ? get_source_en_name($soul_row["soul_match_type"]) : "",
 		'availability'			=> array(),
 		
 		'image'					=> $soul_row["soul_image"],
