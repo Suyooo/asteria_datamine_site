@@ -125,6 +125,7 @@ function get_arte_string($type, $value, $hits, $target) {
 	} else if ($type==14)		return "Heal " . get_target_string($target) . " for " . $value . "% and cure status effects on them";
 	else if ($type==19)		return "Remove all ATK debuffs on " . get_target_string($target);
 	else if ($type==20)		return "Remove all DEF debuffs on " . get_target_string($target);
+	else if ($type==22)		return "Remove seals on " . get_target_string($target);
 	else				throw new Exception($type . " is not a known arte type");
 }
 
@@ -141,6 +142,7 @@ function get_arte_string_short($type, $value, $hits, $target) {
 	else if ($type==14)		return "Status Cure + Heal " . $value . "%" . get_target_string_short($target);
 	else if ($type==19)		return "Dispel ATK Debuffs " . get_target_string_short($target);
 	else if ($type==20)		return "Dispel DEF Debuffs " . get_target_string_short($target);
+	else if ($type==22)		return "Unseal " . get_target_string_short($target);
 	else				throw new Exception($type . " is not a known arte type");
 }
 
@@ -655,7 +657,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 		$ret["level"] -= 20;
 		$ret["stats_hp"] = $ret["stats_hp"] - round($ret["stats_hp"] - ($ret["stats_hp"] * $oldpow) / ($oldpow + $r * 10),-2);
 		$ret["stats_atk"] = $ret["stats_atk"] - round($ret["stats_atk"] - ($ret["stats_atk"] * $oldpow) / ($oldpow + $r * 10),-1);
-		$ret["stats_def"] = $ret["stats_def"] - round($ret["stats_def"] - ($ret["stats_def"] * $oldpow) / ($oldpow + $r * 10),-1);
+		$ret["stats_def"] = $ret["stats_def"] - round($ret["stats_def"] - ($ret["sta ts_def"] * $oldpow) / ($oldpow + $r * 10),-1);
 	}
 	
 	$ret["copyinfo"] = (($unit_row["unit_rarity"] > 6) ? "6" : $unit_row["unit_rarity"]) . "★ ";
