@@ -657,7 +657,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 		$ret["level"] -= 20;
 		$ret["stats_hp"] = $ret["stats_hp"] - round($ret["stats_hp"] - ($ret["stats_hp"] * $oldpow) / ($oldpow + $r * 10),-2);
 		$ret["stats_atk"] = $ret["stats_atk"] - round($ret["stats_atk"] - ($ret["stats_atk"] * $oldpow) / ($oldpow + $r * 10),-1);
-		$ret["stats_def"] = $ret["stats_def"] - round($ret["stats_def"] - ($ret["sta ts_def"] * $oldpow) / ($oldpow + $r * 10),-1);
+		$ret["stats_def"] = $ret["stats_def"] - round($ret["stats_def"] - ($ret["stats_def"] * $oldpow) / ($oldpow + $r * 10),-1);
 	}
 	
 	$ret["copyinfo"] = (($unit_row["unit_rarity"] > 6) ? "6" : $unit_row["unit_rarity"]) . "★ ";
