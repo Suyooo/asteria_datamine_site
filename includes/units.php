@@ -272,6 +272,7 @@ function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, 
 	else if ($type==17)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP, " . get_ex_skill_value_string($value_type, $value2) . " Attack power and " . get_ex_skill_value_string($value_type, $value3) . " Defense power";
 	else if ($type==18)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " Attack power, but lose " . get_ex_skill_value_string($value_type, $value2) . " Defense power";
 	else if ($type==33)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " OL charge";
+	else if ($type==34)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " Critical chance";
 	else if ($type==51)		return "The effect of Frame Attack bonuses increases by " . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==52)		return "The effect of Frame Defense bonuses increases by " . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==53)		return "Frame Heal bonuses heal an additional " . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string($cond_type, $element);
@@ -297,6 +298,7 @@ function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $va
 	else if ($type==17)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP, " . get_ex_skill_value_string($value_type, $value2) . " ATK, " . get_ex_skill_value_string($value_type, $value3) . " DEF";
 	else if ($type==18)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " ATK, lose " . get_ex_skill_value_string($value_type, $value2) . " DEF";
 	else if ($type==33)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " OL";
+	else if ($type==34)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " Crit chance";
 	else if ($type==51)		return "Frame ATK +" . get_ex_skill_value_string($value_type, $value1);
 	else if ($type==52)		return "Frame DEF +" . get_ex_skill_value_string($value_type, $value1);
 	else if ($type==53)		return "Frame Heal +" . get_ex_skill_value_string($value_type, $value1);
