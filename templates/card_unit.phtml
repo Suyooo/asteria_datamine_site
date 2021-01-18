@@ -52,14 +52,14 @@
 			<span class="icon atk text-atk"><?=$v($stats_atk)?></span>
 			<span class="icon def text-def"><?=$v($stats_def)?></span>
 		</div>
+		<?php if (isset($level_bonus)): ?>
+		    <div class="center small">
+		        + <?=$v($level_bonus - $level)?> Bonus Levels
+	        </div>
+		<?php endif ?>
 		<div class="center">
 		    Co-op Type: <span class="text-<?=$v($coop_type_short)?>"><?=$v($coop_type)?></span>
 	    </div>
-		<?php if (isset($level_bonus)): ?>
-		    <div class="center">
-		        <?=$v($level_bonus - $level)?> Bonus Levels available
-	        </div>
-		<?php endif ?>
 		
 		<?php if ($ex_skill_tf): ?>
 			<h5>Transformation</h5>
