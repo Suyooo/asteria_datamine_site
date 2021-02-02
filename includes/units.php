@@ -123,9 +123,9 @@ function get_arte_string($type, $value, $hits, $target) {
 		if ($value==0)		return "Delay the enemy attack and stop the turn counter for one turn (hit gauge is reset to 0)";
 		else			return "Delay the enemy attack and stop the turn counter for one turn (" . $value . "% of the hit gauge is carried over)";
 	} else if ($type==14)		return "Heal " . get_target_string($target) . " for " . $value . "% and cure status effects on them";
-	else if ($type==19)		return "Remove all ATK debuffs on " . get_target_string($target);
-	else if ($type==20)		return "Remove all DEF debuffs on " . get_target_string($target);
-	else if ($type==22)		return "Remove seals on " . get_target_string($target);
+	else if ($type==19)		return "Cleanse ATK debuffs on " . get_target_string($target);
+	else if ($type==20)		return "Cleanse DEF debuffs on " . get_target_string($target);
+	else if ($type==22)		return "Remove MA seals on " . get_target_string($target);
 	else				throw new Exception($type . " is not a known arte type");
 }
 
@@ -140,8 +140,8 @@ function get_arte_string_short($type, $value, $hits, $target) {
 	else if ($type==10)		return "DEF Debuff " . $value . "%" . get_target_string_short($target);
 	else if ($type==13)		return "Time Stop" . ($value > 0 ? ", keep gauge" : "");
 	else if ($type==14)		return "Status Cure + Heal " . $value . "%" . get_target_string_short($target);
-	else if ($type==19)		return "Dispel ATK Debuffs " . get_target_string_short($target);
-	else if ($type==20)		return "Dispel DEF Debuffs " . get_target_string_short($target);
+	else if ($type==19)		return "Cleanse ATK Debuffs " . get_target_string_short($target);
+	else if ($type==20)		return "Cleanse DEF Debuffs " . get_target_string_short($target);
 	else if ($type==22)		return "Unseal " . get_target_string_short($target);
 	else				throw new Exception($type . " is not a known arte type");
 }
