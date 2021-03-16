@@ -92,13 +92,15 @@ for ($i = FILTERS; $i < count($params); $i++) {
 		}
 		if (count($joinconds) + count($joincondsbp) > 0) {
 			$joins[] = "JOIN (SELECT artes.arte_id, artes.arte_type, artes.arte_target" . (count($joinconds) > 0 ? ", " . implode(", ", $joinconds) : "") . " FROM artes) AS artes ON artes.arte_id IN (units.unit_arte1_id, units.unit_arte2_id, units.unit_arte3_id, units.unit_tf_basearte1_id, units.unit_tf_basearte2_id, units.unit_tf_basearte3_id)";
-			$joins[] = "JOIN (SELECT bpot_id, bpot_type, bpot_target" . (count($joincondsbp) > 0 ? ", " . implode(", ", $joincondsbp) : "") . " FROM bond_potentials) AS bp ON bp.bpot_id IN (units.unit_arte1_bpot_id, units.unit_arte2_bpot_id, units.unit_arte3_bpot_id, units.unit_tf_basearte1_bpot_id, units.unit_tf_basearte2_bpot_id, units.unit_tf_basearte3_bpot_id, units.unit_ma_bpot_id, units.unit_maex_bpot_id)";
+			$joins[] = "JOIN (SELECT bpot_id, bpot_type, bpot_target" . (count($joincondsbp) > 0 ? ", " . implode(", ", $joincondsbp) : "") . " FROM bond_potentials) AS bp ON bp.bpot_id IN (units.unit_arte1_bpot_id, units.unit_arte2_bpot_id, units.unit_arte3_bpot_id, units.unit_tf_basearte1_bpot_id, units.unit_tf_basearte2_bpot_id, units.unit_tf_basearte3_bpot_id, units.unit_ma_bpot_id, units.unit_maex_bpot_id, units.unit_dualma_bpot_id, units.unit_dualmaex_bpot_id)";
 			$group = "GROUP BY units.unit_id HAVING " . implode(" AND ", $havingconds);
 		}
 	} else if ($filter[0] == "ma") {
 		if (count($filter) < 2) continue;
 		$joins[] = "LEFT JOIN mysticartes ON units.unit_ma_id = mysticartes.ma_id";
 		$joins[] = "LEFT JOIN mysticartes_ex ON units.unit_maex_id = mysticartes_ex.maex_id";
+		$joins[] = "LEFT JOIN mysticartes ON units.unit_dualmaex_id = mysticartes.maex_id";
+		$joins[] = "LEFT JOIN mysticartes_ex ON units.unit_dualmaex_id = mysticartes_ex.maex_id";
 		for ($j = 1; $j < count($filter); $j++) {
 			switch ($filter[$j]) {
 				case "pct_damage": $filters[] = "mysticartes.ma_type IN (5,6)"; break;
