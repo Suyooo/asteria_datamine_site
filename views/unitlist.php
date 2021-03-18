@@ -99,19 +99,19 @@ for ($i = FILTERS; $i < count($params); $i++) {
 		if (count($filter) < 2) continue;
 		$joins[] = "LEFT JOIN mysticartes ON units.unit_ma_id = mysticartes.ma_id";
 		$joins[] = "LEFT JOIN mysticartes_ex ON units.unit_maex_id = mysticartes_ex.maex_id";
-		$joins[] = "LEFT JOIN mysticartes ON units.unit_dualmaex_id = mysticartes.maex_id";
-		$joins[] = "LEFT JOIN mysticartes_ex ON units.unit_dualmaex_id = mysticartes_ex.maex_id";
+		$joins[] = "LEFT JOIN mysticartes mysticartes_dual ON units.unit_dualmaex_id = mysticartes_dual.ma_id";
+		$joins[] = "LEFT JOIN mysticartes_ex mysticartes_ex_dual ON units.unit_dualmaex_id = mysticartes_ex_dual.maex_id";
 		for ($j = 1; $j < count($filter); $j++) {
 			switch ($filter[$j]) {
-				case "pct_damage": $filters[] = "mysticartes.ma_type IN (5,6)"; break;
-				case "fix_damage": $filters[] = "mysticartes.ma_type = 6"; break;
-				case "aoe_damage": $filters[] = "mysticartes.ma_type IN (5,6) AND 11 IN (mysticartes.ma_target, mysticartes_ex.maex_target)"; break;
-				case "heal": $filters[] = "mysticartes.ma_type = 2"; break;
-				case "finish": $filters[] = "mysticartes.ma_type = 5 AND (mysticartes.ma_value >= 500 OR mysticartes_ex.maex_value >= 500)"; break;
-				case "time_stop": $filters[] = "mysticartes.ma_type = 13"; break;
-				case "mixed": $filters[] = "(mysticartes.ma_type = 5 AND ((mysticartes.ma_hits < 40 AND mysticartes.ma_value < 500) OR (mysticartes.ma_hits >= 40 AND mysticartes.ma_value >= 500) OR (mysticartes_ex.maex_hits < 40 AND mysticartes_ex.maex_value < 500) OR (mysticartes_ex.maex_hits >= 40 AND mysticartes_ex.maex_value >= 500)))"; break;
-				case "quick_charge": $filters[] = "(mysticartes.ma_charge <= 20 OR mysticartes_ex.maex_charge <= 20)"; break;
-				case "hit": $filters[] = "(mysticartes.ma_hits >= 40 OR mysticartes_ex.maex_hits >= 40)"; break;
+				case "pct_damage": $filters[] = "(mysticartes.ma_type IN (5,6) OR mysticartes_dual.ma_type IN (5,6))"; break;
+				case "fix_damage": $filters[] = "(mysticartes.ma_type = 6 OR mysticartes_dual.ma_type = 6)"; break;
+				case "aoe_damage": $filters[] = "((mysticartes.ma_type IN (5,6) AND 11 IN (mysticartes.ma_target, mysticartes_ex.maex_target)) OR (mysticartes_dual.ma_type IN (5,6) AND 11 IN (mysticartes_dual.ma_target, mysticartes_ex_dual.maex_target)))"; break;
+				case "heal": $filters[] = "(mysticartes.ma_type = 2 OR mysticartes_dual.ma_type = 2)"; break;
+				case "finish": $filters[] = "((mysticartes.ma_type = 5 AND (mysticartes.ma_value >= 500 OR mysticartes_ex.maex_value >= 500)) OR (mysticartes_dual.ma_type = 5 AND (mysticartes_dual.ma_value >= 500 OR mysticartes_ex_dual.maex_value >= 500)))"; break;
+				case "time_stop": $filters[] = "(mysticartes.ma_type = 13 OR mysticartes_dual.ma_type = 13)"; break;
+				case "mixed": $filters[] = "((mysticartes.ma_type = 5 AND ((mysticartes.ma_hits < 40 AND mysticartes.ma_value < 500) OR (mysticartes.ma_hits >= 40 AND mysticartes.ma_value >= 500) OR (mysticartes_ex.maex_hits < 40 AND mysticartes_ex.maex_value < 500) OR (mysticartes_ex.maex_hits >= 40 AND mysticartes_ex.maex_value >= 500))) OR (mysticartes_dual.ma_type = 5 AND ((mysticartes_dual.ma_hits < 40 AND mysticartes_dual.ma_value < 500) OR (mysticartes_dual.ma_hits >= 40 AND mysticartes_dual.ma_value >= 500) OR (mysticartes_ex_dual.maex_hits < 40 AND mysticartes_ex_dual.maex_value < 500) OR (mysticartes_ex_dual.maex_hits >= 40 AND mysticartes_ex_dual.maex_value >= 500))))"; break;
+				case "quick_charge": $filters[] = "((mysticartes.ma_charge <= 20 OR mysticartes_ex.maex_charge <= 20) OR (mysticartes_dual.ma_charge <= 20 OR mysticartes_ex_dual.maex_charge <= 20))"; break;
+				case "hit": $filters[] = "((mysticartes.ma_hits >= 40 OR mysticartes_ex.maex_hits >= 40) OR (mysticartes_dual.ma_hits >= 40 OR mysticartes_ex_dual.maex_hits >= 40))"; break;
 			}
 		}
 	} else if ($filter[0] == "cooptype") {
