@@ -322,6 +322,7 @@ function get_ex_skill_cond_string($cond_type, $element, $capitalize = false) {
 	else if ($cond_type==33)	$ret = "while the first OL bar is filled, change arte set and";
 	else if ($cond_type==35)	$ret = "when a " . get_element_string($element) . " unit is KO'd";
 	else if ($cond_type==41)	$ret = "every turn, all " . get_element_string($element) . " units";
+	else if ($cond_type==44)	$ret = "all " . get_element_string($element) . " units at full health";
 	else if ($cond_type==51)	$ret = "at the end of every turn, all " . get_element_string($element) . " units that were damaged in this turn";
 	else if ($cond_type==61)	$ret = "for each enemy alive, all " . get_element_string($element) . " units";
 	else				throw new Exception($cond_type . " is not a known EX skill condition type");
@@ -338,6 +339,7 @@ function get_ex_skill_cond_string_short($cond_type, $element) {
 	else if ($cond_type==33)	return "Transformation:";
 	else if ($cond_type==35)	return "KO\\'d Unit";
 	else if ($cond_type==41)	return "Every turn,";
+	else if ($cond_type==44)	return "full health";
 	else if ($cond_type==51)	return "Damaged Units";
 	else if ($cond_type==61)	return "For each enemy,";
 	else				throw new Exception($cond_type . " is not a known EX skill condition type");
@@ -391,6 +393,7 @@ function get_bond_potential_string($type, $parent_type, $chance, $value1, $value
 	else if ($type==12)			$ret = "Deal an additional " . $value1 . "% of break gauge damage";
 	else if ($type==13)			$ret = "Crit chance is increased by " . $value1 . "%";
 	else if ($type==14)			$ret = get_arte_string(19, 0, 0, $target);
+	else if ($type==15)			$ret = get_arte_string(20, 0, 0, $target);
 	else if ($type==17)			$ret = "Shield damage is increased by " . $value1 . "%";
 	else					throw new Exception($type . " is not a known bond potential type");
 	
@@ -414,6 +417,7 @@ function get_bond_potential_string_short($type, $parent_type, $chance, $value1, 
 	else if ($type==12)		$ret = $value1 . "% break gauge damage" . get_target_string_short($target);
 	else if ($type==13)		$ret = "Crit chance +" . $value1 . "%";
         else if ($type==14)             $ret = get_arte_string_short(19, 0, 0, $target);
+        else if ($type==15)             $ret = get_arte_string_short(20, 0, 0, $target);
 	else if ($type==17)		$ret = "Shield DMG +" . $value1 . "%";
 	else				throw new Exception($type . " is not a known bond potential type");
 	
