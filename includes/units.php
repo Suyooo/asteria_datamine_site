@@ -604,6 +604,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 	$unitname_jp = $charname_jp . get_usub_jp($unit_row["unit_subtitle_id"]);
 	$ret = [
 		'id'				=> $unit_row["unit_id"],
+		'ingame_id'			=> $unit_row["unit_ingame_id"],
 		'name'				=> $unitname_en,
 		'name_jp'			=> $unitname_jp,
         'name_short'		=> $charname_en,
