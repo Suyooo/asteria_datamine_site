@@ -125,6 +125,7 @@ function get_arte_string($type, $value, $hits, $target) {
 	} else if ($type==14)		return "Heal " . get_target_string($target) . " for " . $value . "% and cure status effects on them";
 	else if ($type==19)		return "Cleanse ATK debuffs on " . get_target_string($target);
 	else if ($type==20)		return "Cleanse DEF debuffs on " . get_target_string($target);
+	else if ($type==21)		return "Cleanse ATK and DEF debuffs on " . get_target_string($target);
 	else if ($type==22)		return "Remove MA seals on " . get_target_string($target);
 	else				throw new Exception($type . " is not a known arte type");
 }
@@ -142,6 +143,7 @@ function get_arte_string_short($type, $value, $hits, $target) {
 	else if ($type==14)		return "Status Cure + Heal " . $value . "%" . get_target_string_short($target);
 	else if ($type==19)		return "Cleanse ATK Debuffs " . get_target_string_short($target);
 	else if ($type==20)		return "Cleanse DEF Debuffs " . get_target_string_short($target);
+	else if ($type==21)		return "Cleanse ATK + DEF Debuffs " . get_target_string_short($target);
 	else if ($type==22)		return "Unseal " . get_target_string_short($target);
 	else				throw new Exception($type . " is not a known arte type");
 }
