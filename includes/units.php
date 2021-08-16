@@ -365,10 +365,11 @@ function get_ex_skill_transform_label_string($label) {
 	else if ($label == "【魔族化時】")		return "While transformed";
 	else if ($label == "【第二形態時】")		return "While transformed";
 	else if ($label == "【メルネス化時】")		return "While transformed";
-	else if ($label == "【ガルデニア完全融合時】")	return "While fused with Gardenia:";
-	else if ($label == "【ウェヌス化時】")		return "While in Venus Form:";
-	else if ($label == "【ファイナルフォーム時】")	return "While in Final Form:";
-	else if ($label == "【ラムダ共鳴時】")		return "While in Lambda Form:";
+	else if ($label == "【ガルデニア完全融合時】")	return "While fused with Gardenia";
+	else if ($label == "【ウェヌス化時】")		return "While in Venus Form";
+	else if ($label == "【ファイナルフォーム時】")	return "While in Final Form";
+	else if ($label == "【ラムダ共鳴時】")		return "While in Lambda Form";
+	else if ($label == "【未完成神依時】")		return "While in Experimental Armatus";
 	else						throw new Exception("Unknown transformation type \"" . $label . "\"");
 }
 
