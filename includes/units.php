@@ -370,6 +370,7 @@ function get_ex_skill_transform_label_string($label) {
 	else if ($label == "【ファイナルフォーム時】")	return "While in Final Form";
 	else if ($label == "【ラムダ共鳴時】")		return "While in Lambda Form";
 	else if ($label == "【未完成神依時】")		return "While in Experimental Armatus";
+	else if ($label == "【増霊極使用時】")		return "While using Booster";
 	else						throw new Exception("Unknown transformation type \"" . $label . "\"");
 }
 
