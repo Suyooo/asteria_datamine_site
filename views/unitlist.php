@@ -83,7 +83,7 @@ for ($i = FILTERS; $i < count($params); $i++) {
 				case "atk_cleanse": $joinconds[] = "(artes.arte_type = 19) AS is_atk_cleanse"; $joincondsbp[] = "(bpot_type = 14) AS is_atk_cleanse_bp"; $havingconds[] = "SUM(is_atk_cleanse) + SUM(is_atk_cleanse_bp) > 0"; break;
 				case "def_cleanse": $joinconds[] = "(artes.arte_type = 20) AS is_def_cleanse"; $havingconds[] = "SUM(is_def_cleanse) > 0"; break;
 				case "break_dmg_up": $joincondsbp[] = "(bpot_type = 12) AS is_break_dmg_up"; $havingconds[] = "SUM(is_break_dmg_up) > 0"; break;
-				case "crit_up": $joincondsbp[] = "(bpot_type = 13) AS is_crit_up"; $havingconds[] = "SUM(is_crit_up) > 0"; break;
+				case "crit_up": $joinconds[] = "(artes.arte_type = 23) AS is_crit_up"; $joincondsbp[] = "(bpot_type = 13) AS is_crit_up_bp"; $havingconds[] = "SUM(is_crit_up) + SUM(is_crit_up_bp) > 0"; break;
 				case "shield_dmg_up": $joincondsbp[] = "(bpot_type = 17) AS is_shield_dmg_up"; $havingconds[] = "SUM(is_shield_dmg_up) > 0"; break;
 				case "poison": $joincondsbp[] = "(bpot_type = 9) AS is_poison"; $havingconds[] = "SUM(is_poison) > 0"; break;
 				case "paralyze": $joincondsbp[] = "(bpot_type = 10) AS is_paralyze"; $havingconds[] = "SUM(is_paralyze) > 0"; break;
