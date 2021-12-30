@@ -289,6 +289,7 @@ function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, 
 	else if ($type==60)		return "Frame Heal bonuses heal an additional " . get_ex_skill_value_string(1, $value1) . " and Frame OL bonuses charge an additional " . get_ex_skill_value_string(2, $value2) . " points for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==81)		return get_ex_skill_cond_string($cond_type, $element, true) . " are healed for " . get_ex_skill_value_string(2, $value1) . " HP";
 	else if ($type==83)		return "Once per quest, " . get_ex_skill_cond_string($cond_type, $element, false) . ", revive one unit with " . get_ex_skill_value_string(1, $value1) . " HP";
+	else if ($type==105)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Defense power and gain " . get_ex_skill_value_string(1, $value2) . " Paralysis resistance";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
@@ -315,6 +316,7 @@ function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $va
 	else if ($type==60)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . ", OL +" . get_ex_skill_value_string(2, $value2);
 	else if ($type==81)		return get_ex_skill_cond_string_short($cond_type, $element) . " heal " . get_ex_skill_value_string(2, $value1) . " HP";
 	else if ($type==83)		return "Revive one " . get_ex_skill_cond_string_short($cond_type, $element);
+	else if ($type==105)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " DEF + " . get_ex_skill_value_string(1, $value2) . " Paralysis Res";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
