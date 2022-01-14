@@ -80,8 +80,8 @@ for ($i = FILTERS; $i < count($params); $i++) {
 				case "atk_down_aoe": $joinconds[] = "(artes.arte_type = 9 AND artes.arte_target != 10) AS is_atk_down_aoe"; $joincondsbp[] = "(bpot_type = 6 AND bpot_target != 10) AS is_atk_down_aoe_bp"; $havingconds[] = "SUM(is_atk_down_aoe) + SUM(is_atk_down_aoe_bp) > 0"; break;
 				case "def_up_aoe": $joinconds[] = "(artes.arte_type = 8 AND artes.arte_target != 99) AS is_def_up_aoe"; $joincondsbp[] = "(bpot_type = 5 AND bpot_target != 99) AS is_def_up_aoe_bp"; $havingconds[] = "SUM(is_def_up_aoe) + SUM(is_def_up_aoe_bp) > 0"; break;
 				case "def_down_aoe": $joinconds[] = "(artes.arte_type = 10 AND artes.arte_target != 10) AS is_def_down_aoe"; $joincondsbp[] = "(bpot_type = 7 AND bpot_target != 10) AS is_def_down_aoe_bp"; $havingconds[] = "SUM(is_def_down_aoe) + SUM(is_def_down_aoe_bp) > 0"; break;
-				case "atk_cleanse": $joinconds[] = "(artes.arte_type = 19) AS is_atk_cleanse"; $joincondsbp[] = "(bpot_type = 14) AS is_atk_cleanse_bp"; $havingconds[] = "SUM(is_atk_cleanse) + SUM(is_atk_cleanse_bp) > 0"; break;
-				case "def_cleanse": $joinconds[] = "(artes.arte_type = 20) AS is_def_cleanse"; $havingconds[] = "SUM(is_def_cleanse) > 0"; break;
+				case "atk_cleanse": $joinconds[] = "(artes.arte_type IN (19,21)) AS is_atk_cleanse"; $joincondsbp[] = "(bpot_type = 14) AS is_atk_cleanse_bp"; $havingconds[] = "SUM(is_atk_cleanse) + SUM(is_atk_cleanse_bp) > 0"; break;
+				case "def_cleanse": $joinconds[] = "(artes.arte_type IN (20,21)) AS is_def_cleanse"; $havingconds[] = "SUM(is_def_cleanse) > 0"; break;
 				case "break_dmg_up": $joincondsbp[] = "(bpot_type = 12) AS is_break_dmg_up"; $havingconds[] = "SUM(is_break_dmg_up) > 0"; break;
 				case "crit_up": $joinconds[] = "(artes.arte_type = 23) AS is_crit_up"; $joincondsbp[] = "(bpot_type = 13) AS is_crit_up_bp"; $havingconds[] = "SUM(is_crit_up) + SUM(is_crit_up_bp) > 0"; break;
 				case "shield_dmg_up": $joincondsbp[] = "(bpot_type = 17) AS is_shield_dmg_up"; $havingconds[] = "SUM(is_shield_dmg_up) > 0"; break;
