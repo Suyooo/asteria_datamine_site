@@ -115,7 +115,7 @@ select {
     min-width: 25%;
     background-color: var(--shade4);
     border-radius: 5px;
-    padding: 2px 7px 1px;
+    padding: 4px 7px 0px;
     margin-bottom: 5px;
 	cursor: pointer;
     user-select: none;
@@ -479,6 +479,7 @@ h6 {
     background-repeat: no-repeat;
     width: 1.8em;
     height: 1.5em;
+    margin-top: -.125em;
     user-select: none;
 }
 .icon.hp:before { background-image: url(../image/icon_hp.png); }
@@ -489,10 +490,14 @@ h6 {
 .icon.copy:before { background-image: url(../image/icon_copy.svg); }
 .icon.link:before { background-image: url(../image/icon_link.svg); }
 .icon.done:before { background-image: url(../image/icon_done.svg); }
+.icon.toggle:before { margin-top: -.1em; }
 div:not(.open) > .icon.toggle:before { background-image: url(../image/icon_toggle_more.svg); }
 div.open > .icon.toggle:before { background-image: url(../image/icon_toggle_less.svg); }
 .icon.add:before { background-image: url(../image/icon_add.svg); }
 .icon.remove:before { background-image: url(../image/icon_remove.svg); }
+.smallbutton.icon:before {
+    margin-top: -0.1em;
+}
 
 .text-hp { font-weight: bold; color: darkorange; }
 .text-atk { font-weight: bold; color: red; }
