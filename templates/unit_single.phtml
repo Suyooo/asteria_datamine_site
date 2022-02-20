@@ -140,7 +140,7 @@
 				    <div class="nine columns">
 					    <div class="row">
 						    <div class="four columns">
-							    <b><?=$v($ma_name)?></b> <span class="element <?=$v($ma_element)?>" style="display: inline-block; vertical-align: top;"></span><br>
+							    <b><?=$v($ma_name)?></b> <span class="element <?=$v($ma_element)?>" style="display: inline-block; vertical-align: top; margin-top: -.15em;"></span><br>
 							    <?=$v($ma_summary)?><br>
 							    <?php if ($ma_voice_ready): ?>
 					                <div class="voice">
@@ -256,7 +256,7 @@
 				        <div class="nine columns">
 					        <div class="row">
 						        <div class="four columns">
-							        <b><?=$v($ma_dual_name)?></b> <span class="element <?=$v($ma_dual_element)?>" style="display: inline-block; vertical-align: top;"></span><br>
+							        <b><?=$v($ma_dual_name)?></b> <span class="element <?=$v($ma_dual_element)?>" style="display: inline-block; vertical-align: top; margin-top: -.15em;"></span><br>
 							        <?=$v($ma_dual_summary)?><br>
 							        <?php if ($ma_dual_voice_ready): ?>
 					                    <div class="voice">
@@ -409,7 +409,7 @@
 				<div class="nine columns">
 					<div class="row">
 						<div class="four columns">
-							<b><?=str_replace(" + ", "<br>+ ", $v($coop_name))?></b> <span class="element <?=$v($coop_element)?>" style="display: inline-block; vertical-align: top;"></span>
+							<b><?=str_replace(" + ", "<br>+ ", $v($coop_name))?></b> <span class="element <?=$v($coop_element)?>" style="display: inline-block; vertical-align: top; margin-top: -.15em;"></span>
 						</div>
 						<div class="eight columns">
 							<?=$v($coop_description)?>
@@ -448,6 +448,37 @@
 		                    <?php endforeach ?>
 				        </table>
 				    </div>
+			    </div>
+		    <?php endif ?>
+		    
+		    <?php if (count($partner_info["partners"]) > 0): ?>
+			    <hr>
+					    
+			    <div class="row" style="line-height: 3.5em;">
+				    <div class="three columns">
+			            <?php if (count($partner_info["partners"]) > 1): ?>
+				            <h6>Awakening Partners</h6>
+			            <?php else: ?>
+				            <h6>Awakening Partner</h6>
+			            <?php endif ?>
+			        </div>
+	                <?php foreach($partner_info["partners"] as $partner): ?>
+		            <?php if (count($partner_info["partners"]) > 1): ?>
+				        <div class="two columns">
+		            <?php else: ?>
+				        <div class="nine columns">
+		            <?php endif ?>
+                        <div class="inlinethumb">
+                            <a href="/asteria/unit/<?=$v($partner["id"])?>">
+                                <img src="/asteria/image_thumb/<?=$v($partner["id"])?>">
+                            </a>
+                        </div>
+                        <a href="/asteria/unit/<?=$v($partner["id"])?>"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($partner["name"]))?></a>
+                        <span>
+						    <div class="element inline <?=$v($partner["element"])?>" style="vertical-align: middle;"></div>
+					    </span>
+				    </div>
+                    <?php endforeach ?>
 			    </div>
 		    <?php endif ?>
 			
