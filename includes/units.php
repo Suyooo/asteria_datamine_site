@@ -573,33 +573,38 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 	$awaken_id_offset = NULL;
 	$awaken_link_label = NULL;
 	if ($unit_row["unit_ex_type"] == 1) {
+		$awaken_id_offset = 1;
 		if ($unit_row["unit_rarity"] == 5) {
 			$awaken_info = "Evolvable";
-			$awaken_id_offset = 1;
 			$awaken_link_label = "See Evolved Unit ▶";
 		} else if ($unit_row["unit_rarity"] == 6) {
 			$awaken_info = "Evolved";
-			$awaken_id_offset = -1;
+			$awaken_id_offset = -$awaken_id_offset;
 			$awaken_link_label = "◀ See Base Unit";
 		}
 	} else if ($unit_row["unit_ex_type"] == 2) {
+		$awaken_id_offset = 10;
 		if ($unit_row["unit_rarity"] == 5) {
 			$awaken_info = "Awakenable";
-			$awaken_id_offset = 10;
 			$awaken_link_label = "See Awakened Unit ▶";
 		} else if ($unit_row["unit_rarity"] == 6) {
 			$awaken_info = "Awakened";
-			$awaken_id_offset = -10;
+			$awaken_id_offset = -$awaken_id_offset;
 			$awaken_link_label = "◀ See Base Unit";
 		}
 	} else if ($unit_row["unit_ex_type"] == 3) {
+		if ($unit_row["unit_game_id"] == 35) {
+		    // The TOZX units have seperate character IDs for unawakened/awakened for some reason
+		    $awaken_id_offset = 10000;
+	    } else {
+		    $awaken_id_offset = 10;
+	    }
 		if ($unit_row["unit_rarity"] == 5) {
 			$awaken_info = "(Bond) Awakenable";
-			$awaken_id_offset = 10;
 			$awaken_link_label = "See Awakened Unit ▶";
 		} else if ($unit_row["unit_rarity"] == 6) {
 			$awaken_info = "Bond Awakenable";
-			$awaken_id_offset = -10;
+			$awaken_id_offset = -$awaken_id_offset;
 			$awaken_link_label = "◀ See Base Unit";
 		}
 	} else if ($unit_row["unit_ex_type"] == 4) {
