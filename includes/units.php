@@ -291,6 +291,7 @@ function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, 
 	else if ($type==83)		return "Once per quest, " . get_ex_skill_cond_string($cond_type, $element, false) . ", revive one unit with " . get_ex_skill_value_string(1, $value1) . " HP";
 	else if ($type==101)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Attack power and gain " . get_ex_skill_value_string(1, $value2) . " chance to resist Poison";
 	else if ($type==105)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Defense power and gain " . get_ex_skill_value_string(1, $value2) . " chance to resist Paralysis";
+	else if ($type==107)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Attack power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Stun";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
@@ -319,6 +320,7 @@ function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $va
 	else if ($type==83)		return "Revive one " . get_ex_skill_cond_string_short($cond_type, $element);
 	else if ($type==101)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " ATK + " . get_ex_skill_value_string(1, $value2) . " Poison Res";
 	else if ($type==105)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " DEF + " . get_ex_skill_value_string(1, $value2) . " Paralysis Res";
+	else if ($type==107)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " ATK, " . get_ex_skill_value_string(1, $value2) . " Stun Res";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
@@ -331,6 +333,7 @@ function get_ex_skill_cond_string($cond_type, $element, $capitalize = false) {
 	else if ($cond_type==35)	$ret = "when a " . get_element_string($element) . " unit is KO'd";
 	else if ($cond_type==41)	$ret = "every turn, all " . get_element_string($element) . " units";
 	else if ($cond_type==44)	$ret = "all " . get_element_string($element) . " units at full health";
+	else if ($cond_type==45)	$ret = "at the start of the battle, all " . get_element_string($element) . " units";
 	else if ($cond_type==51)	$ret = "at the end of every turn, all " . get_element_string($element) . " units that were damaged in this turn";
 	else if ($cond_type==61)	$ret = "for each enemy alive, all " . get_element_string($element) . " units";
 	else				throw new Exception($cond_type . " is not a known EX skill condition type");
@@ -348,6 +351,7 @@ function get_ex_skill_cond_string_short($cond_type, $element) {
 	else if ($cond_type==35)	return "KO\\'d Unit";
 	else if ($cond_type==41)	return "Every turn,";
 	else if ($cond_type==44)	return "full health";
+	else if ($cond_type==45)	return "At the start,";
 	else if ($cond_type==51)	return "Damaged Units";
 	else if ($cond_type==61)	return "For each enemy,";
 	else				throw new Exception($cond_type . " is not a known EX skill condition type");
@@ -405,6 +409,7 @@ function get_bond_potential_string($type, $parent_type, $chance, $value1, $value
 	else if ($type==14)			$ret = get_arte_string(19, 0, 0, $target);
 	else if ($type==15)			$ret = get_arte_string(20, 0, 0, $target);
 	else if ($type==17)			$ret = "Shield damage is increased by " . $value1 . "%";
+	else if ($type==19)		    $ret = get_arte_string(22, 0, 0, $target);
 	else					throw new Exception($type . " is not a known bond potential type");
 	
 	if ($chance==100)			return $ret;
@@ -426,9 +431,10 @@ function get_bond_potential_string_short($type, $parent_type, $chance, $value1, 
 	else if ($type==10)		$ret = "Paralyze" . get_target_string_short($target);
 	else if ($type==12)		$ret = $value1 . "% break gauge damage" . get_target_string_short($target);
 	else if ($type==13)		$ret = "Crit chance +" . $value1 . "%";
-        else if ($type==14)             $ret = get_arte_string_short(19, 0, 0, $target);
-        else if ($type==15)             $ret = get_arte_string_short(20, 0, 0, $target);
+    else if ($type==14)     $ret = get_arte_string_short(19, 0, 0, $target);
+    else if ($type==15)     $ret = get_arte_string_short(20, 0, 0, $target);
 	else if ($type==17)		$ret = "Shield DMG +" . $value1 . "%";
+	else if ($type==19)		$ret = get_arte_string_short(22, 0, 0, $target);
 	else				throw new Exception($type . " is not a known bond potential type");
 	
 	if ($chance==100)		return $ret;
