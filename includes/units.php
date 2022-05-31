@@ -410,6 +410,8 @@ function get_bond_potential_string($type, $parent_type, $chance, $value1, $value
 	else if ($type==15)			$ret = get_arte_string(20, 0, 0, $target);
 	else if ($type==17)			$ret = "Shield damage is increased by " . $value1 . "%";
 	else if ($type==19)		    $ret = get_arte_string(22, 0, 0, $target);
+	else if ($type==20)			$ret = "Increase OL of " . get_target_string($target) . " by " . $value1;
+	else if ($type==22)			$ret = "Increase Critical damage of " . get_target_string($target) . " by " . $value1 . "% for " . get_turn_string($turns,true);
 	else					throw new Exception($type . " is not a known bond potential type");
 	
 	if ($chance==100)			return $ret;
@@ -435,6 +437,8 @@ function get_bond_potential_string_short($type, $parent_type, $chance, $value1, 
     else if ($type==15)     $ret = get_arte_string_short(20, 0, 0, $target);
 	else if ($type==17)		$ret = "Shield DMG +" . $value1 . "%";
 	else if ($type==19)		$ret = get_arte_string_short(22, 0, 0, $target);
+	else if ($type==20)		$ret = "+" . $value1 . " OL " . get_target_string_short($target);
+	else if ($type==22)		$ret = "Crit Damage +" . $value1 . "% " . get_target_string_short($target);
 	else				throw new Exception($type . " is not a known bond potential type");
 	
 	if ($chance==100)		return $ret;
