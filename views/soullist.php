@@ -26,7 +26,7 @@ for ($i = FILTERS; $i < count($params); $i++) {
 		$filters[] = "souls.soul_ingame_id = " . ((int) $filter[1]);
 	} else if ($filter[0] == "source") {
 		if (count($filter) != 2) continue;
-		$filters[] = "souls.soul_id LIKE \"" . ((int) $filter[1]) . "%\"";
+		$filters[] = "souls.soul_game_id = " . ((int) $filter[1]);
 	} else if ($filter[0] == "char") {
 		if (count($filter) != 2) continue;
 		$ids = explode(",",$filter[1]);

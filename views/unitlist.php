@@ -40,17 +40,7 @@ for ($i = FILTERS; $i < count($params); $i++) {
 		$filters[] = "units.unit_element = " . ((int) $filter[1]);
 	} else if ($filter[0] == "source") {
 		if (count($filter) != 2) continue;
-		$ids = explode(",",$filter[1]);
-		if (count($ids) == 1) {
-			if (((int) $filter[1]) >= 100) {
-				$filters[] = "unit_id LIKE \"" . ((int) $filter[1]) . "%\"";
-			} else {
-				$filters[] = "units.unit_game_id = " . ((int) $filter[1]);
-			}
-		} else {
-			$idlist = implode(",", array_map('intval', $ids));
-			$filters[] = "(units.unit_id / 100000) IN (" . $idlist . ")";
-		}
+		$filters[] = "units.unit_game_id = " . ((int) $filter[1]);
 	} else if ($filter[0] == "char") {
 		if (count($filter) != 2) continue;
 		$ids = explode(",",$filter[1]);

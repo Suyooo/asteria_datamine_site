@@ -81,8 +81,8 @@ function make_soul_object($soul_row, $value_rows, $matching_units) {
 		'id'					=> $soul_row["soul_id"],
 		'name'					=> $soulname_en,
 		'name_short'			=> $charname_en,
-		'game'					=> get_source_en_name(floor($soul_row["soul_id"] / 10000)),
-		'game_id'				=> floor($soul_row["soul_id"] / 10000),
+		'game'					=> get_source_en_name($soul_row["soul_game_id"]),
+		'game_id'				=> $soul_row["soul_game_id"],
 		
 		'effect'				=> get_soul_effect_string_short($soul_row["soul_type"]),
 		'longeffect'			=> get_soul_effect_string($soul_row["soul_type"]),
