@@ -292,6 +292,7 @@ function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, 
 	else if ($type==101)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Attack power and gain " . get_ex_skill_value_string(1, $value2) . " chance to resist Poison";
 	else if ($type==105)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Defense power and gain " . get_ex_skill_value_string(1, $value2) . " chance to resist Paralysis";
 	else if ($type==107)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Attack power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Stun";
+	else if ($type==110)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Attack power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Seal";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
@@ -321,6 +322,7 @@ function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $va
 	else if ($type==101)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " ATK + " . get_ex_skill_value_string(1, $value2) . " Poison Res";
 	else if ($type==105)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " DEF + " . get_ex_skill_value_string(1, $value2) . " Paralysis Res";
 	else if ($type==107)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " ATK, " . get_ex_skill_value_string(1, $value2) . " Stun Res";
+	else if ($type==110)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " ATK, " . get_ex_skill_value_string(1, $value2) . " Seal Res";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
