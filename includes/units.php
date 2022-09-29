@@ -207,6 +207,7 @@ function get_coop_skill_name_string($type, $element, $image_variation, $variant,
 		else				$ret = implode(" ", array_filter([get_coop_skill_modifier_string($image_variation, 1), "Double Guard"], "filter_empty_strings"));
 	} else if ($type==19)	$ret = implode(" ", array_filter([get_coop_skill_modifier_string($image_variation, 1), "Heal"], "filter_empty_strings"));
 	else if ($type==22)		$ret = "Poison Guard";
+	else if ($type==27)		$ret = "Unison Magical Attack Boost";
 	else if ($type==50)		$ret = "Protect";
 	else				throw new Exception($type . " is not a known coop skill type");
 	
@@ -251,6 +252,7 @@ function get_coop_skill_desc_string($type, $element, $value, $duration, $variant
 		else			$ret = "Reduce damage taken by your party from the boss' next " . $duration . " attacks by " . $value . "%";
 	} else if ($type==19)		$ret = "Heal your party for " . $value . "%";
 	else if ($type==22)		$ret = "Guard your party against Poison status effects for " . $duration . " seconds";
+	else if ($type==27)		$ret = "Increase all participating party's magical attack power by " . $value . "% for " . $duration . " seconds. If another Unison Magical Attack Boost is currently active, increase it's power by 5% instead.";
 	else if ($type==50) {
 		if ($duration==1)	$ret = "Cover " . $value . " party slots in the target range behind yours for the boss' next attack";
 		else			$ret = "Cover " . $value . " party slots in the target range behind yours for the boss' next " . $duration . " attacks";
@@ -267,16 +269,17 @@ function get_coop_skill_desc_string($type, $element, $value, $duration, $variant
 }
 
 function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, $value2, $value3) {
-	if ($type==11)			return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " Attack power";
-	else if ($type==12)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " Defense power";
-	else if ($type==13)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP";
-	else if ($type==14)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " Attack power and " . get_ex_skill_value_string($value_type, $value2) . " Defense power";
-	else if ($type==15)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP and " . get_ex_skill_value_string($value_type, $value2) . " Attack power";
-	else if ($type==16)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP and " . get_ex_skill_value_string($value_type, $value2) . " Defense power";
-	else if ($type==17)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP, " . get_ex_skill_value_string($value_type, $value2) . " Attack power and " . get_ex_skill_value_string($value_type, $value3) . " Defense power";
-	else if ($type==18)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " Attack power, but lose " . get_ex_skill_value_string($value_type, $value2) . " Defense power";
-	else if ($type==33)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " OL charge";
-	else if ($type==34)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string($value_type, $value1) . " Critical chance";
+    $GAIN = $cond_type == 71 ? " gains " : " gain ";
+	if ($type==11)			return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " Attack power";
+	else if ($type==12)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " Defense power";
+	else if ($type==13)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " max HP";
+	else if ($type==14)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " Attack power and " . get_ex_skill_value_string($value_type, $value2) . " Defense power";
+	else if ($type==15)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " max HP and " . get_ex_skill_value_string($value_type, $value2) . " Attack power";
+	else if ($type==16)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " max HP and " . get_ex_skill_value_string($value_type, $value2) . " Defense power";
+	else if ($type==17)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " max HP, " . get_ex_skill_value_string($value_type, $value2) . " Attack power and " . get_ex_skill_value_string($value_type, $value3) . " Defense power";
+	else if ($type==18)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " Attack power, but lose " . get_ex_skill_value_string($value_type, $value2) . " Defense power";
+	else if ($type==33)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " OL charge";
+	else if ($type==34)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " Critical chance";
 	else if ($type==51)		return "The effect of Frame Attack bonuses increases by " . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==52)		return "The effect of Frame Defense bonuses increases by " . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==53)		return "Frame Heal bonuses heal an additional " . get_ex_skill_value_string($value_type, $value1) . " for " . get_ex_skill_cond_string($cond_type, $element);
@@ -289,24 +292,25 @@ function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, 
 	else if ($type==60)		return "Frame Heal bonuses heal an additional " . get_ex_skill_value_string(1, $value1) . " and Frame OL bonuses charge an additional " . get_ex_skill_value_string(2, $value2) . " points for " . get_ex_skill_cond_string($cond_type, $element);
 	else if ($type==81)		return get_ex_skill_cond_string($cond_type, $element, true) . " are healed for " . get_ex_skill_value_string(2, $value1) . " HP";
 	else if ($type==83)		return "Once per quest, " . get_ex_skill_cond_string($cond_type, $element, false) . ", revive one unit with " . get_ex_skill_value_string(1, $value1) . " HP";
-	else if ($type==101)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Attack power and gain " . get_ex_skill_value_string(1, $value2) . " chance to resist Poison";
-	else if ($type==105)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Defense power and gain " . get_ex_skill_value_string(1, $value2) . " chance to resist Paralysis";
-	else if ($type==107)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Attack power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Stun";
-	else if ($type==110)		return get_ex_skill_cond_string($cond_type, $element, true) . " gain " . get_ex_skill_value_string(2, $value1) . " Attack power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Seal";
+	else if ($type==101)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string(2, $value1) . " Attack power and gain " . get_ex_skill_value_string(1, $value2) . " chance to resist Poison";
+	else if ($type==105)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string(2, $value1) . " Defense power and gain " . get_ex_skill_value_string(1, $value2) . " chance to resist Paralysis";
+	else if ($type==107)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string(2, $value1) . " Attack power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Stun";
+	else if ($type==110)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string(2, $value1) . " Attack power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Seal";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
 function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $value1, $value2, $value3) {
-	if ($type==11)			return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " ATK";
-	else if ($type==12)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " DEF";
-	else if ($type==13)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP";
-	else if ($type==14)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " ATK, " . get_ex_skill_value_string($value_type, $value2) . " DEF";
-	else if ($type==15)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP and " . get_ex_skill_value_string($value_type, $value2) . " ATK";
-	else if ($type==16)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP and " . get_ex_skill_value_string($value_type, $value2) . " DEF";
-	else if ($type==17)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " max HP, " . get_ex_skill_value_string($value_type, $value2) . " ATK, " . get_ex_skill_value_string($value_type, $value3) . " DEF";
-	else if ($type==18)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " ATK, lose " . get_ex_skill_value_string($value_type, $value2) . " DEF";
-	else if ($type==33)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " OL";
-	else if ($type==34)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string($value_type, $value1) . " Crit chance";
+    $GAIN = $cond_type == 71 ? " gains " : " gain ";
+	if ($type==11)			return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " ATK";
+	else if ($type==12)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " DEF";
+	else if ($type==13)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " max HP";
+	else if ($type==14)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " ATK, " . get_ex_skill_value_string($value_type, $value2) . " DEF";
+	else if ($type==15)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " max HP and " . get_ex_skill_value_string($value_type, $value2) . " ATK";
+	else if ($type==16)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " max HP and " . get_ex_skill_value_string($value_type, $value2) . " DEF";
+	else if ($type==17)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " max HP, " . get_ex_skill_value_string($value_type, $value2) . " ATK, " . get_ex_skill_value_string($value_type, $value3) . " DEF";
+	else if ($type==18)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " ATK, lose " . get_ex_skill_value_string($value_type, $value2) . " DEF";
+	else if ($type==33)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " OL";
+	else if ($type==34)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string($value_type, $value1) . " Crit chance";
 	else if ($type==51)		return "Frame ATK +" . get_ex_skill_value_string($value_type, $value1);
 	else if ($type==52)		return "Frame DEF +" . get_ex_skill_value_string($value_type, $value1);
 	else if ($type==53)		return "Frame Heal +" . get_ex_skill_value_string($value_type, $value1);
@@ -319,10 +323,10 @@ function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $va
 	else if ($type==60)		return "Frame Heal +" . get_ex_skill_value_string(1, $value1) . ", OL +" . get_ex_skill_value_string(2, $value2);
 	else if ($type==81)		return get_ex_skill_cond_string_short($cond_type, $element) . " heal " . get_ex_skill_value_string(2, $value1) . " HP";
 	else if ($type==83)		return "Revive one " . get_ex_skill_cond_string_short($cond_type, $element);
-	else if ($type==101)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " ATK + " . get_ex_skill_value_string(1, $value2) . " Poison Res";
-	else if ($type==105)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " DEF + " . get_ex_skill_value_string(1, $value2) . " Paralysis Res";
-	else if ($type==107)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " ATK, " . get_ex_skill_value_string(1, $value2) . " Stun Res";
-	else if ($type==110)		return get_ex_skill_cond_string_short($cond_type, $element) . " gain " . get_ex_skill_value_string(2, $value1) . " ATK, " . get_ex_skill_value_string(1, $value2) . " Seal Res";
+	else if ($type==101)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string(2, $value1) . " ATK + " . get_ex_skill_value_string(1, $value2) . " Poison Res";
+	else if ($type==105)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string(2, $value1) . " DEF + " . get_ex_skill_value_string(1, $value2) . " Paralysis Res";
+	else if ($type==107)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string(2, $value1) . " ATK, " . get_ex_skill_value_string(1, $value2) . " Stun Res";
+	else if ($type==110)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string(2, $value1) . " ATK, " . get_ex_skill_value_string(1, $value2) . " Seal Res";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
@@ -338,6 +342,7 @@ function get_ex_skill_cond_string($cond_type, $element, $capitalize = false) {
 	else if ($cond_type==45)	$ret = "at the start of the battle, all " . get_element_string($element) . " units";
 	else if ($cond_type==51)	$ret = "at the end of every turn, all " . get_element_string($element) . " units that were damaged in this turn";
 	else if ($cond_type==61)	$ret = "for each enemy alive, all " . get_element_string($element) . " units";
+	else if ($cond_type==71)	$ret = "for each " . get_element_string($element) . " unit in your party, this unit";
 	else				throw new Exception($cond_type . " is not a known EX skill condition type");
 	
 	if ($capitalize==true)		return ucfirst($ret);
@@ -356,6 +361,7 @@ function get_ex_skill_cond_string_short($cond_type, $element) {
 	else if ($cond_type==45)	return "At the start,";
 	else if ($cond_type==51)	return "Damaged Units";
 	else if ($cond_type==61)	return "For each enemy,";
+	else if ($cond_type==71)	return "For each same element unit,";
 	else				throw new Exception($cond_type . " is not a known EX skill condition type");
 }
 
