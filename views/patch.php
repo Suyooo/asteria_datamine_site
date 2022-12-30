@@ -6,6 +6,7 @@ require_once('../includes/database.php');
 require_once('../includes/units.php'); 
 
 if (!isset($params[PATCH_ID]) || (int) $params[PATCH_ID] <= 0) {
+    http_response_code(404);
 	echo $templates->render('error', ['error' => 'No patch ID specified.']);
 	exit;
 }
@@ -15,6 +16,7 @@ $query->execute([':id' => ((int) $params[PATCH_ID])]);
 $patch_row = $query->fetch(\PDO::FETCH_ASSOC);
 
 if ($patch_row == NULL) {
+    http_response_code(404);
 	echo $templates->render('error', ['error' => 'Invalid patch ID.']);
 	exit;
 }

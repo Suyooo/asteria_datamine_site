@@ -7,6 +7,7 @@ require_once('../includes/database.php');
 require_once('../includes/news.php');
 
 if (!isset($params[NEWS_ID]) || (int) $params[NEWS_ID] <= 0) {
+    http_response_code(404);
 	echo $templates->render('error', ['error' => 'No news ID specified.']);
 	exit;
 }
@@ -17,6 +18,7 @@ $news_row = $query->fetch(\PDO::FETCH_ASSOC);
 $all_versions = array();
 
 if ($news_row == NULL) {
+    http_response_code(404);
 	echo $templates->render('error', ['error' => 'Invalid news ID.']);
 	exit;
 }

@@ -5,6 +5,7 @@ require_once('../includes/general.php');
 require_once('../includes/units.php'); 
 
 if (!isset($params[UNIT_ID]) || (int) $params[UNIT_ID] <= 0) {
+    http_response_code(404);
 	echo $templates->render('error', ['error' => 'No unit ID specified.']);
 	exit;
 }
@@ -12,6 +13,7 @@ if (!isset($params[UNIT_ID]) || (int) $params[UNIT_ID] <= 0) {
 $unit = get_object_for_unit_id($params[UNIT_ID]);
 
 if ($unit == NULL) {
+    http_response_code(404);
 	echo $templates->render('error', ['error' => 'Invalid unit ID.']);
 	exit;
 }

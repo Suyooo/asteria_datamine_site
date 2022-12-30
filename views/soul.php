@@ -5,6 +5,7 @@ require_once('../includes/general.php');
 require_once('../includes/souls.php'); 
 
 if (!isset($params[SOUL_ID]) || (int) $params[SOUL_ID] <= 0) {
+    http_response_code(404);
 	echo $templates->render('error', ['error' => 'No soul ID specified.']);
 	exit;
 }
@@ -12,6 +13,7 @@ if (!isset($params[SOUL_ID]) || (int) $params[SOUL_ID] <= 0) {
 $soul = get_object_for_soul_id($params[SOUL_ID]);
 
 if ($soul == NULL) {
+    http_response_code(404);
 	echo $templates->render('error', ['error' => 'Invalid soul ID.']);
 	exit;
 }

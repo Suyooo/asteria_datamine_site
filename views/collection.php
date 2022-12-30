@@ -2,7 +2,6 @@
 $params = array_slice(explode('/', getenv('REQUEST_URI')), 3);
 require_once('../includes/general.php');
 require_once('../includes/database.php'); 
-
 require_once('../includes/units.php');
 
 function base64url_encode($data) { 
