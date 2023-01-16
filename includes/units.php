@@ -253,8 +253,8 @@ function get_coop_skill_desc_string($type, $element, $value, $duration, $variant
 		else			$ret = "Reduce damage taken by your party from the boss' next " . $duration . " attacks by " . $value . "%";
 	} else if ($type==19)		$ret = "Heal your party for " . $value . "%";
 	else if ($type==22)		$ret = "Guard your party against Poison status effects for " . $duration . " seconds";
-	else if ($type==25)		$ret = "Increase all participating party's physical attack power by " . $value . "% for " . $duration . " seconds. If another Unison Physical Attack Boost is currently active, increase it's power by 5% instead.";
-	else if ($type==27)		$ret = "Increase all participating party's magical attack power by " . $value . "% for " . $duration . " seconds. If another Unison Magical Attack Boost is currently active, increase it's power by 5% instead.";
+	else if ($type==25)		$ret = "Increase all participating party's physical attack power by " . $value . "% for " . $duration . " seconds. If another Unison Physical Attack Boost is currently active, increase its power by 5% instead.";
+	else if ($type==27)		$ret = "Increase all participating party's magical attack power by " . $value . "% for " . $duration . " seconds. If another Unison Magical Attack Boost is currently active, increase its power by 5% instead.";
 	else if ($type==50) {
 		if ($duration==1)	$ret = "Cover " . $value . " party slots in the target range behind yours for the boss' next attack";
 		else			$ret = "Cover " . $value . " party slots in the target range behind yours for the boss' next " . $duration . " attacks";
