@@ -229,6 +229,7 @@ function get_coop_skill_modifier_string($image_variation, $cat) {
 		if ($image_variation==1)	return "Fast";
 		else if ($image_variation==2)	return "";
 		else if ($image_variation==3)	return "High";
+		else if ($image_variation==5)	return "Ultra";
 		else 				throw new Exception($image_variation . " is not a known coop skill image variation");
 	} else if ($cat==2) {				# boost skills
 		if ($image_variation==1)	return "Long";
@@ -238,7 +239,7 @@ function get_coop_skill_modifier_string($image_variation, $cat) {
 	} else 					throw new Exception("No idea what to do with type " . $cat);
 }
 
-function get_coop_skill_desc_string($type, $element, $value, $duration, $variant, $variant_v1, $variant_v2) {
+function get_coop_skill_desc_string($type, $element, $value, $duration, $variant, $variant_v1, $variant_v2, $image_variation) {
 	if ($type==1)			$ret = $value . "% of physical " . get_element_string($element) . " damage";
 	else if ($type==5)		$ret = $value . "% of magical " . get_element_string($element) . " damage";
 	else if ($type==7)		$ret = "Increase your party's physical attack power by " . $value . "% for " . $duration . " seconds";
@@ -260,14 +261,17 @@ function get_coop_skill_desc_string($type, $element, $value, $duration, $variant
 		else			$ret = "Cover " . $value . " party slots in the target range behind yours for the boss' next " . $duration . " attacks";
 	} else				throw new Exception($type . " is not a known coop skill type");
 	
-	if ($variant==0)		return $ret;
-	else if ($variant==1)		return $ret . ", and increase the Attack chain by an additional " . $variant_v1 . " points";
-	else if ($variant==2)		return $ret . ", and heal your party for a fraction of the damage dealt";
-	else if ($variant==3)		return $ret . ", sacrificing " . $variant_v1 . "% of your party's HP";
-	else if ($variant==4)		return $ret . ", plus a " . $variant_v1 . "% chance to heal your party by " . $variant_v2 . "%";
-	else if ($variant==5)		return $ret . ", and deal additional damage based on the amount of other players' parties currently KO'd";
-	else if ($variant==6)		return $ret . ", and deal additional damage if your party is at critical health (30% HP or less)";
-	else				throw new Exception($variant + " is not a known coop skill variant");
+	if ($variant==1)		    $ret .= ", and increase the Attack chain by an additional " . $variant_v1 . " points";
+	else if ($variant==2)		$ret .= ", and heal your party for a fraction of the damage dealt";
+	else if ($variant==3)		$ret .= ", sacrificing " . $variant_v1 . "% of your party's HP";
+	else if ($variant==4)		$ret .= ", plus a " . $variant_v1 . "% chance to heal your party by " . $variant_v2 . "%";
+	else if ($variant==5)		$ret .= ", and deal additional damage based on the amount of other players' parties currently KO'd";
+	else if ($variant==6)		$ret .= ", and deal additional damage if your party is at critical health (30% HP or less)";
+	else if ($variant!=0)       throw new Exception($variant + " is not a known coop skill variant");
+	
+	if ($image_variation==5)    $ret .= ". Can only be used once per Co‑op Battle";
+	
+	return $ret;
 }
 
 function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, $value2, $value3) {
@@ -723,7 +727,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 	$ret += [
 		'coop_name'		=> get_coop_skill_name_string($coop_skill_row["coop_type"], $coop_skill_row["coop_element"], $coop_skill_row["coop_icon_variation"], $coop_skill_row["coop_variant_type"], $coop_skill_row["coop_rarity"], $coop_skill_row["coop_duration"]),
 		'coop_element'	=> get_element_string($coop_skill_row["coop_element"], false),
-		'coop_description'=> get_coop_skill_desc_string($coop_skill_row["coop_type"], $coop_skill_row["coop_element"], $coop_skill_row["coop_value"], $coop_skill_row["coop_duration"], $coop_skill_row["coop_variant_type"], $coop_skill_row["coop_variant_value1"], $coop_skill_row["coop_variant_value2"])
+		'coop_description'=> get_coop_skill_desc_string($coop_skill_row["coop_type"], $coop_skill_row["coop_element"], $coop_skill_row["coop_value"], $coop_skill_row["coop_duration"], $coop_skill_row["coop_variant_type"], $coop_skill_row["coop_variant_value1"], $coop_skill_row["coop_variant_value2"], $coop_skill_row["coop_icon_variation"])
 	];
 	
 	if ($ex_skill_row) {

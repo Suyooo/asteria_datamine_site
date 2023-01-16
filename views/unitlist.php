@@ -77,7 +77,7 @@ for ($i = FILTERS; $i < count($params); $i++) {
 				case "shield_dmg_up": $joincondsbp[] = "(bpot_type = 17) AS is_shield_dmg_up"; $havingconds[] = "IFNULL(SUM(is_shield_dmg_up),0) > 0"; break;
 				case "poison": $joincondsbp[] = "(bpot_type = 9) AS is_poison"; $havingconds[] = "IFNULL(SUM(is_poison),0) > 0"; break;
 				case "paralyze": $joincondsbp[] = "(bpot_type = 10) AS is_paralyze"; $havingconds[] = "IFNULL(SUM(is_paralyze),0) > 0"; break;
-				case "unseal": $joinconds[] = "(artes.arte_type = 22) AS is_unseal"; $havingconds[] = "IFNULL(SUM(is_unseal),0) > 0"; break;
+				case "unseal": $joinconds[] = "(artes.arte_type = 22) AS is_unseal"; $joincondsbp[] = "(bpot_type = 19) AS is_unseal_bp"; $havingconds[] = "IFNULL(SUM(is_unseal),0) + IFNULL(SUM(is_unseal_bp),0) > 0"; break;
 			}
 		}
 		if (count($joinconds) + count($joincondsbp) > 0) {
