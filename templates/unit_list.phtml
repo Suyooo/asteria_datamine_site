@@ -82,45 +82,84 @@
 			<select name="char">
 				<?php $v->insert('filters_character') ?>
 			</select>
-			Arte Types
+			Utility Effects
 			<div class="row">
 				<div class="one-half column">
-					<label><input type="checkbox" name="arte" value="fix_damage" /> Fixed Damage</label>
-					<label><input type="checkbox" name="arte" value="heal" /> Heal Self</label>
-					<label><input type="checkbox" name="arte" value="status" /> Status Recover Self</label>
-					<label><input type="checkbox" name="arte" value="atk_up" /> ATK Buff Self</label>
-					<label><input type="checkbox" name="arte" value="def_up" /> DEF Buff Self</label>
-					<label><input type="checkbox" name="arte" value="atk_down" /> ATK Debuff Single</label>
-					<label><input type="checkbox" name="arte" value="def_down" /> DEF Debuff Single</label>
-					<label><input type="checkbox" name="arte" value="break_dmg_up" /> Gauge Damage Up</label>
-					<label><input type="checkbox" name="arte" value="crit_up" /> Crit Chance Up</label>
-					<label><input type="checkbox" name="arte" value="atk_cleanse" /> ATK Cleanse</label>
+					<label><input type="checkbox" name="arte" value="heal" /> Heal</label>
+				</div>
+				<div class="one-half column">
+					<label><input type="checkbox" name="arte" value="status_cleanse" /> Status Cleanse</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="one-half column">
+					<label><input type="checkbox" name="arte" value="def_up" /> DEF Buff</label>
+					<label><input type="checkbox" name="arte" value="def_down" /> DEF Debuff</label>
 					<label><input type="checkbox" name="arte" value="def_cleanse" /> DEF Cleanse</label>
 				</div>
 				<div class="one-half column">
-					<label><input type="checkbox" name="arte" value="aoe_damage" /> AOE Damage</label>
-					<label><input type="checkbox" name="arte" value="heal_aoe" /> AOE Heal</label>
-					<label><input type="checkbox" name="arte" value="status_aoe" /> AOE Status Recover</label>
-					<label><input type="checkbox" name="arte" value="atk_up_aoe" /> AOE ATK Buff</label>
-					<label><input type="checkbox" name="arte" value="def_up_aoe" /> AOE DEF Buff</label>
-					<label><input type="checkbox" name="arte" value="atk_down_aoe" /> AOE ATK Debuff</label>
-					<label><input type="checkbox" name="arte" value="def_down_aoe" /> AOE DEF Debuff</label>
+					<label><input type="checkbox" name="arte" value="atk_up" /> ATK Buff</label>
+					<label><input type="checkbox" name="arte" value="atk_down" /> ATK Debuff</label>
+					<label><input type="checkbox" name="arte" value="atk_cleanse" /> ATK Cleanse</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="one-half column">
+					<label><input type="checkbox" name="arte" value="break_dmg_up" /> Gauge Damage Up</label>
+					<label><input type="checkbox" name="arte" value="crit_up" /> Crit Chance Up</label>
 					<label><input type="checkbox" name="arte" value="shield_dmg_up" /> Shield Damage Up</label>
+				</div>
+				<div class="one-half column">
 					<label><input type="checkbox" name="arte" value="poison" /> Poison</label>
 					<label><input type="checkbox" name="arte" value="paralyze" /> Paralyze</label>
 					<label><input type="checkbox" name="arte" value="unseal" /> Unseal</label>
 				</div>
 			</div>
+			Search Utility Effect on
+			<div class="row">
+				<div class="one-third column">
+				    <label><input type="radio" name="utility" value="" selected /> Arte or MA</label>
+				</div>
+				<div class="one-third column">
+				    <label><input type="radio" name="utility" value="arte" /> Arte only</label>
+				</div>
+				<div class="one-third column">
+				    <label><input type="radio" name="utility" value="ma" /> MA only</label>
+				</div>
+			</div>
+			Arte Types
+			<div class="row">
+				<div class="one-half column">
+					<label><input type="checkbox" name="arte" value="pct_damage" /> Damage</label>
+				</div>
+				<div class="one-half column">
+					<label><input type="checkbox" name="arte" value="aoe_damage" /> AOE Damage</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="one-half column">
+					<label><input type="checkbox" name="arte" value="fix_damage" /> Fixed Damage</label>
+				</div>
+				<div class="one-half column">
+					<label><input type="checkbox" name="arte" value="heal_arte" /> Heal</label>
+				</div>
+			</div>
 			MA Type
 			<div class="row">
 				<div class="one-half column">
+					<label><input type="checkbox" name="ma" value="fix_damage" /> Fixed Damage</label>
+				</div>
+				<div class="one-half column">
 					<label><input type="checkbox" name="ma" value="aoe_damage" /> AOE Damage</label>
+				</div>
+			</div>
+			<div class="row">
+				<div class="one-half column">
 					<label><input type="checkbox" name="ma" value="finish" /> Finish</label>
 					<label><input type="checkbox" name="ma" value="mixed" /> Mixed</label>
 					<label><input type="checkbox" name="ma" value="hit" /> Hit</label>
 				</div>
 				<div class="one-half column">
-					<label><input type="checkbox" name="ma" value="fix_damage" /> Fixed Damage</label>
 					<label><input type="checkbox" name="ma" value="heal" /> Heal</label>
 					<label><input type="checkbox" name="ma" value="time_stop" /> Time Stop</label>
 					<label><input type="checkbox" name="ma" value="quick_charge" /> Quick Charge</label>
@@ -149,6 +188,8 @@
 				<option value="22">Poison Guard</option>
 				<option value="50">Protect</option>
 				<option value="5">Shot</option>
+				<option value="27">Unison Magical Attack Boost</option>
+				<option value="25">Unison Physical Attack Boost</option>
 			</select>
 			Co-op Skill Variant
 			<select name="coopvariant">
@@ -199,10 +240,10 @@
 				<option value="3">Attack Power</option>
 				<option value="4">Defense Power</option>
 				<option value="5">Support Stats</option>
-				<option value="6">Co-op: Physical Attack Power</option>
-				<option value="7">Co-op: Magical Attack Power</option>
-				<option value="8">Co-op: Physical Defense Power</option>
-				<option value="9">Co-op: Magical Defense Power</option>
+				<option value="6">Co-op Physical Attack Power</option>
+				<option value="7">Co-op Magical Attack Power</option>
+				<option value="8">Co-op Physical Defense Power</option>
+				<option value="9">Co-op Magical Defense Power</option>
 			</select>
 			Other
 			<div class="row">
@@ -211,7 +252,7 @@
 					<label><input type="checkbox" name="voiced" value="1" /> Is Voiced</label>
 				</div>
 				<div class="one-half column">
-					<a class="button" href="#" onClick="submitFilter()">Filter</a>
+					<button class="button" href="#" onClick="submitFilter()">Filter</button>
 				</div>
 			</div>
 		</div>
@@ -225,7 +266,6 @@ function handleCurrentFilterSelections() {
 	window.location.pathname.split("/").slice(4).map(function(v) {
 			filters[v.split(":")[0]] = v.split(":").slice(1);
 		});
-	console.log(filters);
 	if (filters["id"]) {
 		document.getElementsByName("ingameid")[0].value = filters["id"][0];
 	}
@@ -233,6 +273,7 @@ function handleCurrentFilterSelections() {
 	selectOptionForSelect("element", filters["element"]);
 	selectOptionForSelect("source", filters["source"]);
 	selectOptionForSelect("char", filters["char"]);
+	selectOptionForCheckboxes("utility", filters["utility"] || "");
 	selectOptionForCheckboxes("arte", filters["arte"]);
 	selectOptionForCheckboxes("ma", filters["ma"]);
 	selectOptionForSelect("cooptype", filters["cooptype"]);
@@ -271,6 +312,7 @@ function submitFilter() {
 	makeFilterForSelect(filters, "element");
 	makeFilterForSelect(filters, "source");
 	makeFilterForSelect(filters, "char");
+	makeFilterForCheckboxes(filters, "utility");
 	makeFilterForCheckboxes(filters, "arte");
 	makeFilterForCheckboxes(filters, "ma");
 	makeFilterForSelect(filters, "cooptype");
@@ -294,7 +336,7 @@ function makeFilterForCheckboxes(filters, name) {
 	var checked = [];
 	var boxes = document.getElementsByName(name);
 	for (var i = 0; i < boxes.length; i++) {
-		if (boxes[i].checked) checked.push(boxes[i].value);
+		if (boxes[i].checked && boxes[i].value !== "") checked.push(boxes[i].value);
 	}
 	if (checked.length > 0) filters.push(name + ":" + checked.join(":"))
 }

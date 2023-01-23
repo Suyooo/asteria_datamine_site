@@ -17,6 +17,9 @@ $filters = [];
 $filterparams = [];
 $group = "";
 $sort = "";
+$utility_target = null;
+$bpot_cols = "units.unit_arte1_bpot_id, units.unit_arte2_bpot_id, units.unit_arte3_bpot_id, units.unit_tf_basearte1_bpot_id, units.unit_tf_basearte2_bpot_id, units.unit_tf_basearte3_bpot_id, units.unit_ma_bpot_id, units.unit_maex_bpot_id, units.unit_dualma_bpot_id, units.unit_dualmaex_bpot_id";
+
 for ($i = FILTERS; $i < count($params); $i++) {
 	$filter = explode(":", $params[$i]);
 	if ($filter == "0") continue;
@@ -49,40 +52,150 @@ for ($i = FILTERS; $i < count($params); $i++) {
 			$idlist = implode(",", array_map('intval', $ids));
 			$filters[] = "(units.unit_id / 10000) IN (" . $idlist . ")";
 		}
-	} else if ($filter[0] == "arte") {
+	} else if ($filter[0] == "utility") {
+	    $utility_target = $filter[1];
+	    if ($filter[1] == "arte") {
+    	    $bpot_cols = "units.unit_arte1_bpot_id, units.unit_arte2_bpot_id, units.unit_arte3_bpot_id, units.unit_tf_basearte1_bpot_id, units.unit_tf_basearte2_bpot_id, units.unit_tf_basearte3_bpot_id";
+	    } else if ($filter[1] == "ma") {
+	        $bpot_cols = "units.unit_ma_bpot_id, units.unit_maex_bpot_id, units.unit_dualma_bpot_id, units.unit_dualmaex_bpot_id";
+	    }
+    } else if ($filter[0] == "arte") {
 		if (count($filter) < 2) continue;
 		$joinconds = [];
 		$joincondsbp = [];
 		for ($j = 1; $j < count($filter); $j++) {
 			switch ($filter[$j]) {
-				case "pct_damage": $joinconds[] = "(artes.arte_type = 5) AS is_pct_damage"; $havingconds[] = "IFNULL(SUM(is_pct_damage),0) > 0"; break;
-				case "fix_damage": $joinconds[] = "(artes.arte_type = 6) AS is_fix_damage"; $havingconds[] = "IFNULL(SUM(is_fix_damage),0) > 0"; break;
-				case "aoe_damage": $joinconds[] = "(artes.arte_type IN (5,6) AND artes.arte_target = 11) AS is_aoe_damage"; $havingconds[] = "IFNULL(SUM(is_aoe_damage),0) > 0"; break;
-				case "heal": $joinconds[] = "(artes.arte_type IN (2,14) AND artes.arte_target = 99) AS is_heal"; $joincondsbp[] = "(bpot_type = 3 AND bpot_target = 99) AS is_heal_bp"; $havingconds[] = "IFNULL(SUM(is_heal),0) + IFNULL(SUM(is_heal_bp),0) > 0"; break;
-				case "status": $joinconds[] = "(artes.arte_type IN (3,14) AND artes.arte_target = 99) AS is_status"; $joincondsbp[] = "(bpot_type = 8 AND bpot_target = 99) AS is_status_bp"; $havingconds[] = "IFNULL(SUM(is_status),0) + IFNULL(SUM(is_status_bp),0) > 0"; break;
-				case "atk_up": $joinconds[] = "(artes.arte_type = 7 AND artes.arte_target = 99) AS is_atk_up"; $joincondsbp[] = "(bpot_type = 4 AND bpot_target = 99) AS is_atk_up_bp"; $havingconds[] = "IFNULL(SUM(is_atk_up),0) + IFNULL(SUM(is_atk_up_bp),0) > 0"; break;
-				case "atk_down": $joinconds[] = "(artes.arte_type = 9 AND artes.arte_target = 10) AS is_atk_down"; $joincondsbp[] = "(bpot_type = 6 AND bpot_target = 10) AS is_atk_down_bp"; $havingconds[] = "IFNULL(SUM(is_atk_down),0) + IFNULL(SUM(is_atk_down_bp),0) > 0"; break;
-				case "def_up": $joinconds[] = "(artes.arte_type = 8 AND artes.arte_target = 99) AS is_def_up"; $joincondsbp[] = "(bpot_type = 5 AND bpot_target = 99) AS is_def_up_bp"; $havingconds[] = "IFNULL(SUM(is_def_up),0) + IFNULL(SUM(is_def_up_bp),0) > 0"; break;
-				case "def_down": $joinconds[] = "(artes.arte_type = 10 AND artes.arte_target = 10) AS is_def_down"; $joincondsbp[] = "(bpot_type = 7 AND bpot_target = 10) AS is_def_down_bp"; $havingconds[] = "IFNULL(SUM(is_def_down),0) + IFNULL(SUM(is_def_down_bp),0) > 0"; break;
-				case "heal_aoe": $joinconds[] = "(artes.arte_type IN (2,14) AND artes.arte_target != 99) AS is_heal_aoe"; $joincondsbp[] = "(bpot_type = 3 AND bpot_target != 99) AS is_heal_aoe_bp"; $havingconds[] = "IFNULL(SUM(is_heal_aoe),0) + IFNULL(SUM(is_heal_aoe_bp),0) > 0"; break;
-				case "status_aoe": $joinconds[] = "(artes.arte_type IN (3,14) AND artes.arte_target != 99) AS is_status_aoe"; $joincondsbp[] = "(bpot_type = 8 AND bpot_target != 99) AS is_status_aoe_bp"; $havingconds[] = "IFNULL(SUM(is_status_aoe),0) + IFNULL(SUM(is_status_aoe_bp),0) > 0"; break;
-				case "atk_up_aoe": $joinconds[] = "(artes.arte_type = 7 AND artes.arte_target != 99) AS is_atk_up_aoe"; $joincondsbp[] = "(bpot_type = 4 AND bpot_target != 99) AS is_atk_up_aoe_bp"; $havingconds[] = "IFNULL(SUM(is_atk_up_aoe),0) + IFNULL(SUM(is_atk_up_aoe_bp),0) > 0"; break;
-				case "atk_down_aoe": $joinconds[] = "(artes.arte_type = 9 AND artes.arte_target != 10) AS is_atk_down_aoe"; $joincondsbp[] = "(bpot_type = 6 AND bpot_target != 10) AS is_atk_down_aoe_bp"; $havingconds[] = "IFNULL(SUM(is_atk_down_aoe),0) + IFNULL(SUM(is_atk_down_aoe_bp),0) > 0"; break;
-				case "def_up_aoe": $joinconds[] = "(artes.arte_type = 8 AND artes.arte_target != 99) AS is_def_up_aoe"; $joincondsbp[] = "(bpot_type = 5 AND bpot_target != 99) AS is_def_up_aoe_bp"; $havingconds[] = "IFNULL(SUM(is_def_up_aoe),0) + IFNULL(SUM(is_def_up_aoe_bp),0) > 0"; break;
-				case "def_down_aoe": $joinconds[] = "(artes.arte_type = 10 AND artes.arte_target != 10) AS is_def_down_aoe"; $joincondsbp[] = "(bpot_type = 7 AND bpot_target != 10) AS is_def_down_aoe_bp"; $havingconds[] = "IFNULL(SUM(is_def_down_aoe),0) + IFNULL(SUM(is_def_down_aoe_bp),0) > 0"; break;
-				case "atk_cleanse": $joinconds[] = "(artes.arte_type IN (19,21)) AS is_atk_cleanse"; $joincondsbp[] = "(bpot_type = 14) AS is_atk_cleanse_bp"; $havingconds[] = "IFNULL(SUM(is_atk_cleanse),0) + IFNULL(SUM(is_atk_cleanse_bp),0) > 0"; break;
-				case "def_cleanse": $joinconds[] = "(artes.arte_type IN (20,21)) AS is_def_cleanse"; $joincondsbp[] = "(bpot_type = 15) AS is_def_cleanse_bp"; $havingconds[] = "IFNULL(SUM(is_def_cleanse),0) + IFNULL(SUM(is_def_cleanse_bp),0) > 0"; break;
-				case "break_dmg_up": $joincondsbp[] = "(bpot_type = 12) AS is_break_dmg_up"; $havingconds[] = "IFNULL(SUM(is_break_dmg_up),0) > 0"; break;
-				case "crit_up": $joinconds[] = "(artes.arte_type = 23) AS is_crit_up"; $joincondsbp[] = "(bpot_type = 13) AS is_crit_up_bp"; $havingconds[] = "IFNULL(SUM(is_crit_up),0) + IFNULL(SUM(is_crit_up_bp),0) > 0"; break;
-				case "shield_dmg_up": $joincondsbp[] = "(bpot_type = 17) AS is_shield_dmg_up"; $havingconds[] = "IFNULL(SUM(is_shield_dmg_up),0) > 0"; break;
-				case "poison": $joincondsbp[] = "(bpot_type = 9) AS is_poison"; $havingconds[] = "IFNULL(SUM(is_poison),0) > 0"; break;
-				case "paralyze": $joincondsbp[] = "(bpot_type = 10) AS is_paralyze"; $havingconds[] = "IFNULL(SUM(is_paralyze),0) > 0"; break;
-				case "unseal": $joinconds[] = "(artes.arte_type = 22) AS is_unseal"; $joincondsbp[] = "(bpot_type = 19) AS is_unseal_bp"; $havingconds[] = "IFNULL(SUM(is_unseal),0) + IFNULL(SUM(is_unseal_bp),0) > 0"; break;
+			    // Arte Types
+				case "pct_damage": 
+				    $joinconds[] = "(artes.arte_type = 5) AS is_pct_damage";
+				    $havingconds[] = "IFNULL(SUM(is_pct_damage),0) > 0";
+				    break;
+				case "fix_damage": 
+				    $joinconds[] = "(artes.arte_type = 6) AS is_fix_damage";
+				    $havingconds[] = "IFNULL(SUM(is_fix_damage),0) > 0";
+				    break;
+				case "aoe_damage":
+				    $joinconds[] = "(artes.arte_type IN (5,6) AND artes.arte_target = 11) AS is_aoe_damage";
+				    $havingconds[] = "IFNULL(SUM(is_aoe_damage),0) > 0";
+				    break;
+				case "heal_arte":
+				    $joinconds[] = "(artes.arte_type IN (2,14)) AS is_heal";
+				    $joincondsbp[] = "(bpot_type = 3) AS is_heal_bp";
+				    $havingconds[] = "IFNULL(SUM(is_heal),0) + IFNULL(SUM(is_heal_bp),0) > 0";
+				    break;
+				
+				// Utility Effects
+				case "heal":
+				    $joincondsbp[] = "(bpot_type = 3) AS is_heal_bp";
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type IN (2,14)) AS is_heal";
+    				    $havingconds[] = "IFNULL(SUM(is_heal),0) + IFNULL(SUM(is_heal_bp),0) > 0";
+			        } else {
+				        $havingconds[] = "IFNULL(SUM(is_heal_bp),0) > 0";
+				    }
+				    break;
+				case "status_cleanse":
+				    $joincondsbp[] = "(bpot_type = 8) AS is_status_bp";
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type IN (3,14)) AS is_status";
+    				    $havingconds[] = "IFNULL(SUM(is_status),0) + IFNULL(SUM(is_status_bp),0) > 0";
+				    } else {
+    				    $havingconds[] = "IFNULL(SUM(is_status_bp),0) > 0";
+				    }
+				    break;
+				case "atk_up":
+				    $joincondsbp[] = "(bpot_type = 4) AS is_atk_up_bp";
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type = 7) AS is_atk_up";
+    				    $havingconds[] = "IFNULL(SUM(is_atk_up),0) + IFNULL(SUM(is_atk_up_bp),0) > 0";
+				    } else {
+    				    $havingconds[] = "IFNULL(SUM(is_atk_up_bp),0) > 0";
+				    }
+				    break;
+				case "atk_down":
+				    $joincondsbp[] = "(bpot_type = 6) AS is_atk_down_bp"; 
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type = 9) AS is_atk_down";
+				        $havingconds[] = "IFNULL(SUM(is_atk_down),0) + IFNULL(SUM(is_atk_down_bp),0) > 0";
+			        } else {
+				        $havingconds[] = "IFNULL(SUM(is_atk_down_bp),0) > 0";
+		            }
+				    break;
+				case "atk_cleanse":
+				    $joincondsbp[] = "(bpot_type = 14) AS is_atk_cleanse_bp";
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type IN (19,21)) AS is_atk_cleanse";
+				        $havingconds[] = "IFNULL(SUM(is_atk_cleanse),0) + IFNULL(SUM(is_atk_cleanse_bp),0) > 0";
+			        } else {
+				        $havingconds[] = "IFNULL(SUM(is_atk_cleanse_bp),0) > 0";
+			        }
+				    break;
+				case "def_up":
+				    $joincondsbp[] = "(bpot_type = 5) AS is_def_up_bp";
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type = 8) AS is_def_up";
+				        $havingconds[] = "IFNULL(SUM(is_def_up),0) + IFNULL(SUM(is_def_up_bp),0) > 0";
+			        } else {
+				        $havingconds[] = "IFNULL(SUM(is_def_up_bp),0) > 0";
+			        }
+				    break;
+				case "def_down":
+				    $joincondsbp[] = "(bpot_type = 7) AS is_def_down_bp";
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type = 10) AS is_def_down";
+				        $havingconds[] = "IFNULL(SUM(is_def_down),0) + IFNULL(SUM(is_def_down_bp),0) > 0";
+			        } else {
+				        $havingconds[] = "IFNULL(SUM(is_def_down_bp),0) > 0";
+			        }
+				    break;
+				case "def_cleanse":
+				    $joincondsbp[] = "(bpot_type = 15) AS is_def_cleanse_bp";
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type IN (20,21)) AS is_def_cleanse";
+				        $havingconds[] = "IFNULL(SUM(is_def_cleanse),0) + IFNULL(SUM(is_def_cleanse_bp),0) > 0";
+			        } else {
+				        $havingconds[] = "IFNULL(SUM(is_def_cleanse_bp),0) > 0";
+			        }
+				    break;
+				case "poison":
+				    $joincondsbp[] = "(bpot_type = 9) AS is_poison";
+				    $havingconds[] = "IFNULL(SUM(is_poison),0) > 0";
+				    break;
+				case "paralyze":
+				    $joincondsbp[] = "(bpot_type = 10) AS is_paralyze";
+				    $havingconds[] = "IFNULL(SUM(is_paralyze),0) > 0";
+				    break;
+				case "unseal":
+				    $joincondsbp[] = "(bpot_type = 19) AS is_unseal_bp";
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type = 22) AS is_unseal";
+				        $havingconds[] = "IFNULL(SUM(is_unseal),0) + IFNULL(SUM(is_unseal_bp),0) > 0";
+			        } else {
+				        $havingconds[] = "IFNULL(SUM(is_unseal_bp),0) > 0";
+			        }
+				    break;
+				case "break_dmg_up":
+				    $joincondsbp[] = "(bpot_type = 12) AS is_break_dmg_up";
+				    $havingconds[] = "IFNULL(SUM(is_break_dmg_up),0) > 0";
+				    break;
+				case "crit_up":
+				    $joincondsbp[] = "(bpot_type = 13) AS is_crit_up_bp";
+				    if ($utility_target != "ma") {
+				        $joinconds[] = "(artes.arte_type = 23) AS is_crit_up";
+				        $havingconds[] = "IFNULL(SUM(is_crit_up),0) + IFNULL(SUM(is_crit_up_bp),0) > 0";
+			        } else {
+				        $havingconds[] = "IFNULL(SUM(is_crit_up_bp),0) > 0";
+		            }
+				    break;
+				case "shield_dmg_up":
+				    $joincondsbp[] = "(bpot_type = 17) AS is_shield_dmg_up";
+				    $havingconds[] = "IFNULL(SUM(is_shield_dmg_up),0) > 0";
+				    break;
 			}
 		}
 		if (count($joinconds) + count($joincondsbp) > 0) {
 			$joins[] = "LEFT JOIN (SELECT artes.arte_id, artes.arte_type, artes.arte_target" . (count($joinconds) > 0 ? ", " . implode(", ", $joinconds) : "") . " FROM artes) AS artes ON artes.arte_id IN (units.unit_arte1_id, units.unit_arte2_id, units.unit_arte3_id, units.unit_tf_basearte1_id, units.unit_tf_basearte2_id, units.unit_tf_basearte3_id)";
-			$joins[] = "LEFT JOIN (SELECT bpot_id, bpot_type, bpot_target" . (count($joincondsbp) > 0 ? ", " . implode(", ", $joincondsbp) : "") . " FROM bond_potentials) AS bp ON bp.bpot_id IN (units.unit_arte1_bpot_id, units.unit_arte2_bpot_id, units.unit_arte3_bpot_id, units.unit_tf_basearte1_bpot_id, units.unit_tf_basearte2_bpot_id, units.unit_tf_basearte3_bpot_id, units.unit_ma_bpot_id, units.unit_maex_bpot_id, units.unit_dualma_bpot_id, units.unit_dualmaex_bpot_id)";
+			$joins[] = "LEFT JOIN (SELECT bpot_id, bpot_type, bpot_target" . (count($joincondsbp) > 0 ? ", " . implode(", ", $joincondsbp) : "") . " FROM bond_potentials) AS bp ON bp.bpot_id IN (".$bpot_cols.")";
 			$group = "GROUP BY units.unit_id HAVING " . implode(" AND ", $havingconds);
 		}
 	} else if ($filter[0] == "ma") {
