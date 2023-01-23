@@ -122,7 +122,7 @@ for ($i = FILTERS; $i < count($params); $i++) {
 		            }
 				    break;
 				case "atk_cleanse":
-				    $joincondsbp[] = "(bpot_type = 14) AS is_atk_cleanse_bp";
+				    $joincondsbp[] = "(bpot_type IN (14,16)) AS is_atk_cleanse_bp";
 				    if ($utility_target != "ma") {
 				        $joinconds[] = "(artes.arte_type IN (19,21)) AS is_atk_cleanse";
 				        $havingconds[] = "IFNULL(SUM(is_atk_cleanse),0) + IFNULL(SUM(is_atk_cleanse_bp),0) > 0";
@@ -149,7 +149,7 @@ for ($i = FILTERS; $i < count($params); $i++) {
 			        }
 				    break;
 				case "def_cleanse":
-				    $joincondsbp[] = "(bpot_type = 15) AS is_def_cleanse_bp";
+				    $joincondsbp[] = "(bpot_type IN (15,16)) AS is_def_cleanse_bp";
 				    if ($utility_target != "ma") {
 				        $joinconds[] = "(artes.arte_type IN (20,21)) AS is_def_cleanse";
 				        $havingconds[] = "IFNULL(SUM(is_def_cleanse),0) + IFNULL(SUM(is_def_cleanse_bp),0) > 0";
