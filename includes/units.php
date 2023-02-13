@@ -303,6 +303,7 @@ function get_ex_skill_string($type, $cond_type, $value_type, $element, $value1, 
 	else if ($type==107)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string(2, $value1) . " Attack power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Stun";
 	else if ($type==109)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string(2, $value1) . " max HP and " . get_ex_skill_value_string(1, $value2) . " chance to resist Stun";
 	else if ($type==110)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string(2, $value1) . " Attack power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Seal";
+	else if ($type==111)		return get_ex_skill_cond_string($cond_type, $element, true) . $GAIN . get_ex_skill_value_string(2, $value1) . " Defense power and " . get_ex_skill_value_string(1, $value2) . " chance to resist Seal";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
@@ -335,6 +336,7 @@ function get_ex_skill_string_short($type, $cond_type, $value_type, $element, $va
 	else if ($type==107)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string(2, $value1) . " ATK, " . get_ex_skill_value_string(1, $value2) . " Stun Res";
 	else if ($type==109)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string(2, $value1) . " HP, " . get_ex_skill_value_string(1, $value2) . " Stun Res";
 	else if ($type==110)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string(2, $value1) . " ATK, " . get_ex_skill_value_string(1, $value2) . " Seal Res";
+	else if ($type==111)		return get_ex_skill_cond_string_short($cond_type, $element) . $GAIN . get_ex_skill_value_string(2, $value1) . " DEF, " . get_ex_skill_value_string(1, $value2) . " Seal Res";
 	else				throw new Exception($type . " is not a known EX skill type");
 }
 
