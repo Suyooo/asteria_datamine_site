@@ -1,12 +1,11 @@
 <?php
-$params = array_slice(explode('/', getenv('REQUEST_URI')), 3);
 require_once('../includes/general.php');
-require_once('../includes/units.php');
+//require_once('../includes/units.php');
 
-$query = get_db_connection()->prepare("SELECT * FROM index_page_features WHERE idxf_id = 0");
+/*$query = get_db_connection()->prepare("SELECT * FROM index_page_features WHERE idxf_id = 0");
 $query->execute();
 $feature_row = $query->fetch(\PDO::FETCH_ASSOC);
-$feature_row["idxf_thumb_units"] = explode(",", $feature_row["idxf_thumb_units"]);
+$feature_row["idxf_thumb_units"] = explode(",", $feature_row["idxf_thumb_units"]);*/
 
 /*$date = new DateTime("now", new DateTimeZone("Japan"));
 $hour = (int) $date->format('H');
@@ -25,5 +24,5 @@ if ($hour >= 1 && $hour < 8) {
 	$endTime = $liveTime + (60 * 60);
 }*/
 
-echo $templates->render('index', ["feature" => $feature_row]);
+echo $templates->render('index', []);
 ?>

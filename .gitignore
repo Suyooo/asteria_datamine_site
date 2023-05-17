@@ -1,3 +1,6 @@
 assets
 cache
 includes/database.db
+ccbi/cocos_builder
+ccbi/image
+ccbi/sound

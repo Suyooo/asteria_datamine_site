@@ -106,7 +106,7 @@ select {
 	width: 80%;
 	text-align: center;
 }
-.tablerows th:first-child,td:first-child {
+.tablerows th:first-child, .tablerows td:first-child {
 	width: 20%;
 }
 
