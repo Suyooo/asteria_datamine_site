@@ -1,26 +1,7 @@
 <?php $v->layout('layout', ['title' => 'Index']) ?>
-<div class="container" style="padding-top: 0.66em">
-	<div class="index-featured" style="width:100%;overflow:hidden;position: relative;">
-		<div style="background: url('/asteria/assets/<?=$v($feature["idxf_bg_image"])?>');background-size: cover;background-position-y: <?=$v($feature["idxf_bg_image_pos"])?>%;background-repeat: no-repeat;filter: blur(5px);height: 100%;width: 100%;position: absolute;z-index: -2;"></div>
-		<div class="row" style="
-			height: 15em;
-			">
-			<div class="one-half column" style="background-color: rgba(221,221,221,0.75);height: 100%;display: flex;flex-direction: column;flex-wrap: nowrap;justify-content: center;align-content: flex-start;align-items: center;font-weight: bold;padding: 2em;">
-				<span>Current Gacha</span>
-				<a href="/asteria/patch/<?=$v($feature["idxf_patch_id"])?>" style="color: black; text-decoration: none;"><span style="font-size:200%;line-height: 1.2em;"><?=$v($feature["idxf_title"])?></span></a>
-				<div>
-					<a href="/asteria/patch/<?=$v($feature["idxf_patch_id"])?>" style="text-decoration: none;">
-						<?php foreach($feature["idxf_thumb_units"] as $sub): ?>
-							<img src="/asteria/image_thumb/<?=$v($sub)?>" style="width:3em">
-						<?php endforeach ?>
-					</a>
-				</div>
-				<a href="/asteria/patch/<?=$v($feature["idxf_patch_id"])?>" style="color: black;">View All Units &gt;&gt;</a>
-			</div>
-			<div class="one-half column" style="height: 100%;position: relative;">
-				<a href="/asteria/patch/<?=$v($feature["idxf_patch_id"])?>" style="text-decoration: none;"><img src="/asteria/assets/<?=$v($feature["idxf_unit_image"])?>" style="position: absolute;height: 220%;top: <?=$v($feature["idxf_unit_image_pos"])?>%;left: 50%;transform: translate(-50%, -50%);z-index: -1;"></a>
-				<img src="/asteria/image/watermark_small.png" style="position:absolute;right:2px;bottom:2px; max-width: 100%; max-height: 10px">
-			</div>
-		</div>
-	</div>
+<div class="container" style="padding-top: 4em">
+	<b>Tales of Asteria has ended service on May 18th, 2023.</b><br>
+	The Asteria Database will remain online for the foreseeable future.<br><br>
+	<small>Thank you, Asteria team, for your work and the memories!</small><br><br>
+	<img src="/asteria/image/otsu.png">
 </div>
