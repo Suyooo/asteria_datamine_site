@@ -208,6 +208,13 @@
 						                    <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_ex_voice_use)?>" preload="none"></audio>
 					                    </div>
 				                    <?php endif ?>
+							        <?php if ($ma_ex_cutin_ccbi): ?>
+					                    <div class="voice">
+					                        <a href="/asteria/ccbi/?id=<?= $ma_ex_cutin_ccbi ?>" target="_blank" class="smallbutton">
+					                            ▶ View in CCBI Player
+					                        </a>
+					                    </div>
+				                    <?php endif ?>
 						        </div>
 						        <div class="eight columns">
 							        <?=$v($ma_ex_description)?><br>
@@ -322,6 +329,13 @@
 					                                <span>EX MA Use</span>
 				                                </div>
 						                        <audio class="openInfo" controls src="/asteria/assets/<?=$v($ma_dual_ex_voice_use)?>" preload="none"></audio>
+					                        </div>
+				                        <?php endif ?>
+							            <?php if ($ma_dual_ex_cutin_ccbi): ?>
+					                        <div class="voice">
+					                            <a href="/asteria/ccbi/?id=<?= $ma_dual_ex_cutin_ccbi ?>" target="_blank" class="smallbutton">
+					                                ▶ View in CCBI Player
+					                            </a>
 					                        </div>
 				                        <?php endif ?>
 						            </div>

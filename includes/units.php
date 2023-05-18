@@ -351,8 +351,8 @@ function get_ex_skill_cond_string($cond_type, $element, $capitalize = false) {
 	else if ($cond_type==44)	$ret = "all " . get_element_string($element) . " units at full health";
 	else if ($cond_type==45)	$ret = "at the start of the battle, all " . get_element_string($element) . " units";
 	else if ($cond_type==51)	$ret = "at the end of every turn, all " . get_element_string($element) . " units that were damaged in this turn";
-	else if ($cond_type==61)	$ret = "for each enemy alive, all " . get_element_string($element) . " units";
-	else if ($cond_type==71)	$ret = "for each " . get_element_string($element) . " unit in your party, this unit";
+	else if ($cond_type==61)	$ret = "for every enemy alive, all " . get_element_string($element) . " units";
+	else if ($cond_type==71)	$ret = "for every " . get_element_string($element) . " unit in your party, this unit";
 	else				throw new Exception($cond_type . " is not a known EX skill condition type");
 	
 	if ($capitalize==true)		return ucfirst($ret);
@@ -370,8 +370,8 @@ function get_ex_skill_cond_string_short($cond_type, $element) {
 	else if ($cond_type==44)	return "full health";
 	else if ($cond_type==45)	return "At the start,";
 	else if ($cond_type==51)	return "Damaged Units";
-	else if ($cond_type==61)	return "For each enemy,";
-	else if ($cond_type==71)	return "For each same element unit,";
+	else if ($cond_type==61)	return "For every enemy,";
+	else if ($cond_type==71)	return "For every same element unit,";
 	else				throw new Exception($cond_type . " is not a known EX skill condition type");
 }
 
@@ -867,7 +867,8 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 				'ma_ex_charge'			=> $maex_row["maex_charge"],
 				'ma_ex_chargeturns'		=> isset($basearte_rows) ? make_chargeturns_object($maex_row["maex_charge"], $avgOlPerTurn, $stdOlPerTurn, $minOlPerTurn, $maxOlPerTurn, $ma_row["ma_charge"], $avgOlPerTurnBaseArtes, $stdOlPerTurnBaseArtes, $minOlPerTurnBaseArtes, $maxOlPerTurnBaseArtes) : make_chargeturns_object($ma_row["ma_charge"] + $maex_row["maex_charge"], $avgOlPerTurn, $stdOlPerTurn, $minOlPerTurn, $maxOlPerTurn),
 				'ma_ex_voice_use'		=> $maex_row["maex_voice_use"],
-				'ma_ex_voice_ready'		=> $maex_row["maex_voice_ready"]
+				'ma_ex_voice_ready'		=> $maex_row["maex_voice_ready"],
+				'ma_ex_cutin_ccbi'		=> $maex_row["maex_cutin_ccbi"]
 			];
 			$ret['ma_summary_short'] = get_ma_summary_string($ma_row["ma_type"], $maex_row["maex_value"], $maex_row["maex_hits"], $maex_row["maex_target"]);
 			$ret["copyinfo"] .= " | MA2: " . get_arte_string_short($ma_row["ma_type"], $maex_row["maex_value"], $maex_row["maex_hits"], $maex_row["maex_target"]);
@@ -909,7 +910,8 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 			'ma_dual_ex_charge'			=> $dualmaex_row["maex_charge"],
 			'ma_dual_ex_chargeturns'	=> isset($basearte_rows) ? make_chargeturns_object($dualmaex_row["maex_charge"], $avgOlPerTurn, $stdOlPerTurn, $minOlPerTurn, $maxOlPerTurn, $dualma_row["ma_charge"], $avgOlPerTurnBaseArtes, $stdOlPerTurnBaseArtes, $minOlPerTurnBaseArtes, $maxOlPerTurnBaseArtes) : make_chargeturns_object($dualma_row["ma_charge"] + $dualmaex_row["maex_charge"], $avgOlPerTurn, $stdOlPerTurn, $minOlPerTurn, $maxOlPerTurn),
 			'ma_dual_ex_voice_use'		=> $dualmaex_row["maex_voice_use"],
-			'ma_dual_ex_voice_ready'	=> $dualmaex_row["maex_voice_ready"]
+			'ma_dual_ex_voice_ready'	=> $dualmaex_row["maex_voice_ready"],
+			'ma_dual_ex_cutin_ccbi'		=> $dualmaex_row["maex_cutin_ccbi"]
 		];
 		$ret["copyinfo"] .= " | MA2: " . get_arte_string_short($dualma_row["ma_type"], $dualmaex_row["maex_value"], $dualmaex_row["maex_hits"], $dualmaex_row["maex_target"]);
 		if (isset($bond_row)) $ret["copyinfo"] .= " (BP: " . get_bond_potential_string_short($bond_row["bpot_type"], $dualma_row["ma_type"], $bond_row["bpot_chance"], $bond_row["bpot_value1"], $bond_row["bpot_value2"], $bond_row["bpot_value3"], $bond_row["bpot_turns"], $bond_row["bpot_target"]) . ")";
