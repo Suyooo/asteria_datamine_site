@@ -39,7 +39,7 @@ function create() {
 	let rootgroup = game.add.group(undefined, "ROOT");
 	rootgroup.ignorePivotForPos = false;
 	rootgroup.nodeSize = new Phaser.Point(640,1136);
-	if (viewname.startsWith("my")){
+	if (viewname.startsWith("my") || (viewname.startsWith("hm") && viewname !== "hm800")){
 	    rootgroup.x = 320;
 	    rootgroup.y = 480;
 	} else {
