@@ -24,7 +24,13 @@
 			</tr>
 		<?php endforeach ?>
 	</table>
-	<?php if ($category==1): ?>
+	<?php if ($page==26 && $category==1): ?>
 	<small>Campaign News from before December 13, 2018 are not available in the archive.</small>
 	<?php endif ?>
+	<div class="pagination center">
+	    Pages<br>
+	    <?php for ($i = 0; $i < ($category==1 ? 27 : ($category==2 ? 9 : 5)); $i++): ?>
+	        <a class="smallbutton"<?= $i == $page ? " style=\"background-color: var(--shade1);\"" : "" ?> href="/asteria/newslist/<?= $category ?>/<?= $i+1 ?>"><?= $i+1 ?></a>
+	    <?php endfor ?>
+	</div>
 </div>
