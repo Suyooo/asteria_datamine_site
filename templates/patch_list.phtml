@@ -13,4 +13,9 @@
 			</tr>
 		<?php endforeach ?>
 	</table>
+	<div class="pagination center">
+	    <?php for ($i = 0; $i < 12; $i++): ?>
+	        <a class="smallbutton"<?= $i == $page ? " style=\"background-color: var(--shade1);\"" : "" ?> href="/asteria/patchlist/<?= $i+1 ?>"><?= $i+1 ?></a>
+	    <?php endfor ?>
+	</div>
 </div>
