@@ -731,7 +731,8 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 	$ret += [
 		'coop_name'		=> get_coop_skill_name_string($coop_skill_row["coop_type"], $coop_skill_row["coop_element"], $coop_skill_row["coop_icon_variation"], $coop_skill_row["coop_variant_type"], $coop_skill_row["coop_rarity"], $coop_skill_row["coop_duration"]),
 		'coop_element'	=> get_element_string($coop_skill_row["coop_element"], false),
-		'coop_description'=> get_coop_skill_desc_string($coop_skill_row["coop_type"], $coop_skill_row["coop_element"], $coop_skill_row["coop_value"], $coop_skill_row["coop_duration"], $coop_skill_row["coop_variant_type"], $coop_skill_row["coop_variant_value1"], $coop_skill_row["coop_variant_value2"], $coop_skill_row["coop_icon_variation"])
+		'coop_description'=> get_coop_skill_desc_string($coop_skill_row["coop_type"], $coop_skill_row["coop_element"], $coop_skill_row["coop_value"], $coop_skill_row["coop_duration"], $coop_skill_row["coop_variant_type"], $coop_skill_row["coop_variant_value1"], $coop_skill_row["coop_variant_value2"], $coop_skill_row["coop_icon_variation"]),
+		'coop_cooldown'	=> $coop_skill_row["coop_cooldown"]
 	];
 	
 	if ($ex_skill_row) {
