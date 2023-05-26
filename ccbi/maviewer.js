@@ -181,31 +181,34 @@ function createNode(node, parent) {
 
 function handleProp(group, prop) {
 	if (prop.name === "position") {
-		if (prop.value[2] == 0) {
-			group.x = prop.value[0] - (group.parent.ignorePivotForPos ? group.parent.pivot.x : 0);
-			group.y = group.parent.nodeSize.y - prop.value[1] - (group.parent.ignorePivotForPos ? group.parent.pivot.y : 0);
-		} else {
-			console.log("Unimplemented position type " + prop.value[2]);
+	    group.posType = prop.value[2];
+	    if (group.posType == 0) {
+		    group.x = prop.value[0] - (group.ignorePivotForPos ? group.pivot.x : 0);
+		    group.y = group.parent.nodeSize.y - prop.value[1] - (group.ignorePivotForPos ? group.pivot.y : 0);
+	    } else {
+			console.log("Unimplemented position type " + group.posType);
 			console.log(prop);
-		}
+	    }
 	} else if (prop.name === "contentSize") {
-		if (prop.value[2] == 0) {
+	    group.sizeType = prop.value[2];
+		if (group.sizeType == 0) {
 			group.nodeSize = new Phaser.Point(prop.value[0],prop.value[1]);
-		} else if (prop.value[2] == 1) {
+		} else if (group.sizeType == 1) {
 			group.nodeSize = new Phaser.Point(group.parent.nodeSize.x*prop.value[0]/100.0,group.parent.nodeSize.y*prop.value[1]/100.0);
 		} else {
-			console.log("Unimplemented size type " + prop.value[2]);
+			console.log("Unimplemented size type " + group.sizeType);
 			console.log(prop);
 		}
 	} else if (prop.name === "anchorPoint") {
 		group.pivot.x = prop.value[0];
 		group.pivot.y = prop.value[1];
 	} else if (prop.name === "scale") {
-		if (prop.value[2] == 0 || prop.value[2] == 1) {
+	    group.scaleType = prop.value[2];
+		if (group.scaleType == 0 || group.scaleType == 1) {
 			group.scale.x = prop.value[0];
 			group.scale.y = prop.value[1];
 		} else {
-			console.log("Unimplemented scale type " + prop.value[2]);
+			console.log("Unimplemented scale type " + group.scaleType);
 			console.log(prop);
 		}
 	} else if (prop.name === "skew") {
@@ -268,11 +271,21 @@ function handleAnimProp(group, prop) {
 	}
 	
 	if (prop.name === "position") {
-		group.x = val[0] - (group.ignorePivotForPos ? group.pivot.x : 0);
-		group.y = group.parent.nodeSize.y - val[1] - (group.ignorePivotForPos ? group.pivot.y : 0);
+	    if (group.posType == 0) {
+		    group.x = val[0] - (group.ignorePivotForPos ? group.pivot.x : 0);
+		    group.y = group.parent.nodeSize.y - val[1] - (group.ignorePivotForPos ? group.pivot.y : 0);
+	    } else {
+			console.log("Unimplemented position type " + group.posType);
+			console.log(prop);
+	    }
 	} else if (prop.name === "scale") {
-		group.scale.x = val[0];
-		group.scale.y = val[1];
+		if (group.scaleType == 0 || group.scaleType == 1) {
+		    group.scale.x = val[0];
+		    group.scale.y = val[1];
+		} else {
+			console.log("Unimplemented scale type " + group.scaleType);
+			console.log(prop);
+		}
 	} else if (prop.name === "visible") {
 		group.visible = val;
 	} else if (prop.name === "rotation") {
