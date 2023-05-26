@@ -8,7 +8,7 @@ require_once('../includes/news.php');
 
 $page = count($params) > 0 ? max(((int)$params[PAGE])-1, 0) : 0;
 
-$patchlist = array();
+$newslist = array();
 $query = get_db_connection()->prepare('SELECT news_page_id, news_title, news_date_from FROM news INNER JOIN ( SELECT news_page_id AS max_pid, MAX(news_version) AS max_ver FROM news GROUP BY news_page_id ) ON news_page_id = max_pid AND news_version = max_ver WHERE news_category = :category ORDER BY news_date_from DESC, news_id ASC LIMIT :page, 100');
 if (count($params) > 0) {
 	$cat = (int) $params[CATEGORY_ID];

@@ -1,0 +1,61 @@
+<?php $v->layout('layout', ['title' => 'Voices • ' . $char_name]) ?>
+<style>
+    h5, h6 {
+        text-align: left;
+    }
+    
+    h5 {
+        margin-top: 2em;
+    }
+
+    .voicerow {
+        padding: 0.5em 0.5em 0.2em 0.5em;
+        width: 100%;
+    }
+    
+    .voicerow audio {
+        width: 100%;
+    }
+
+    .voicerow:nth-child(odd) {
+        background-color: #ddd;
+    }
+    
+    .voicerow:nth-child(even) {
+        background-color: #eee;
+    }
+</style>
+<div class="container">
+    <?php foreach ($partners as $partner): ?>
+        <?php
+            if ($partner === NULL) {
+                $abbrv = NULL;
+            } else {
+                echo "<h5>With ".$partner["name"]."</h5>";
+                $abbrv = $partner["abbrv"];
+            }
+        ?>
+	    <div class="row">
+            <?php foreach ($voicelist[$abbrv] as $i=>$list): ?>
+                <?php if (count($list) > 0): ?>
+	                <div class="four columns">
+	                    <h6>
+	                        <?php if ($i == 0): ?>
+	                            Home Screen
+	                        <?php elseif ($i == 1): ?>
+	                            Scenario
+	                        <?php else: ?>
+	                            In Battle
+	                        <?php endif ?>
+	                    </h6>
+                        <?php foreach ($list as $voice): ?>
+                            <div class="voicerow">
+	                            <audio controls src="/asteria/assets/sound/voice/<?= $voice ?>" preload="none"></audio>
+	                        </div>
+                        <?php endforeach ?>
+                    </div>
+                <?php endif ?>
+            <?php endforeach ?>
+        </div>
+    <?php endforeach ?>
+</div>

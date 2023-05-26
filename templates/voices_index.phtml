@@ -1,0 +1,1045 @@
+<?php $v->layout('layout', ['title' => 'Voices']) ?>
+<style>
+    .row {
+        padding: 1em 0.5em;
+        text-align: left;
+    }
+
+    .row:nth-child(even) {
+        background-color: #ddd;
+    }
+    
+    .row:nth-child(odd) {
+        background-color: #eee;
+    }
+    
+    .inlinethumb img {
+        top: -1.5em;
+    }
+    
+    .inlinethumb.soul {
+        top: -1.5em;
+    }
+    
+    .three.columns {
+        display: flex;
+        align-items: center;
+        height: 2em;
+    }
+    
+    .three.columns a {
+        flex: 1 1 0;
+        display: block;
+        line-height: 1em;
+    }
+</style>
+<div class="container">
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/10010010"></div>
+	        <a href="/asteria/voices/kur">Cress</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/10020010"></div>
+	        <a href="/asteria/voices/min">Mint</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/10030010"></div>
+	        <a href="/asteria/voices/che">Chester</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/10040010"></div>
+	        <a href="/asteria/voices/kla">Claus</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/10050010"></div>
+	        <a href="/asteria/voices/arc">Arche</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/10060010"></div>
+	        <a href="/asteria/voices/suz">Suzu</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/10070010"></div>
+	        <a href="/asteria/voices/dha">Dhaos</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/11010010"></div>
+	        <a href="/asteria/voices/stn">Stahn</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/11020010"></div>
+	        <a href="/asteria/voices/rte">Rutee</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/11030010"></div>
+	        <a href="/asteria/voices/lio">Leon</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/11040010"></div>
+	        <a href="/asteria/voices/phi">Philia</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/11050010"></div>
+	        <a href="/asteria/voices/wdw">Woodrow</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/11060010"></div>
+	        <a href="/asteria/voices/mry">Mary</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/11100010"></div>
+	        <a href="/asteria/voices/lil">Lilith</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/11200010"></div>
+	        <a href="/asteria/voices/mic">Miktran</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/11260010"></div>
+	        <a href="/asteria/voices/rtk">Rutee</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/12010010"></div>
+	        <a href="/asteria/voices/rid">Reid</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/12020010"></div>
+	        <a href="/asteria/voices/far">Farah</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/12030010"></div>
+	        <a href="/asteria/voices/kee">Keele</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/12040010"></div>
+	        <a href="/asteria/voices/mer">Meredy</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/12050010"></div>
+	        <a href="/asteria/voices/fog">Fog</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/12060010"></div>
+	        <a href="/asteria/voices/cht">Chat</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/12110010"></div>
+	        <a href="/asteria/voices/szl">Shizel</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/13010010"></div>
+	        <a href="/asteria/voices/kyl">Kyle</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/13020010"></div>
+	        <a href="/asteria/voices/rea">Reala</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/13030010"></div>
+	        <a href="/asteria/voices/lon">Loni</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/13040010"></div>
+	        <a href="/asteria/voices/jds">Judas</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/13050010"></div>
+	        <a href="/asteria/voices/nnl">Nanaly</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/13060010"></div>
+	        <a href="/asteria/voices/hld">Harold</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/13070010"></div>
+	        <a href="/asteria/voices/brb">Barbatos</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/13090020"></div>
+	        <a href="/asteria/voices/frt">Fortuna</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/13100010"></div>
+	        <a href="/asteria/voices/lim">Rimul</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14010010"></div>
+	        <a href="/asteria/voices/llo">Lloyd</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14020010"></div>
+	        <a href="/asteria/voices/col">Colette</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14030010"></div>
+	        <a href="/asteria/voices/gen">Genis</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14040010"></div>
+	        <a href="/asteria/voices/rfl">Raine</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14050010"></div>
+	        <a href="/asteria/voices/kra">Kratos</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14060010"></div>
+	        <a href="/asteria/voices/zer">Zelos</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14070010"></div>
+	        <a href="/asteria/voices/shi">Sheena</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14080010"></div>
+	        <a href="/asteria/voices/pre">Presea</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14110010"></div>
+	        <a href="/asteria/voices/mts">Mithos</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14130010"></div>
+	        <a href="/asteria/voices/ewn">Yuan</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/14140020"></div>
+	        <a href="/asteria/voices/ygg">Yggdrasil</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/15010010"></div>
+	        <a href="/asteria/voices/vei">Veigue</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/15030010"></div>
+	        <a href="/asteria/voices/mao">Mao</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/15060010"></div>
+	        <a href="/asteria/voices/tyt">Tytree</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/15070010"></div>
+	        <a href="/asteria/voices/hil">Hilda</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/15210010"></div>
+	        <a href="/asteria/voices/mlh">Milhaust</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/16010010"></div>
+	        <a href="/asteria/voices/snl">Senel</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/16020010"></div>
+	        <a href="/asteria/voices/shr">Shirley</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/16040010"></div>
+	        <a href="/asteria/voices/chl">Chloe</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/16050010"></div>
+	        <a href="/asteria/voices/nma">Norma</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/16070010"></div>
+	        <a href="/asteria/voices/jay">Jay</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/16080010"></div>
+	        <a href="/asteria/voices/glu">Grune</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/16320010"></div>
+	        <a href="/asteria/voices/swz">Schwartz</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/16380010"></div>
+	        <a href="/asteria/voices/kgl">Grune</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17020010"></div>
+	        <a href="/asteria/voices/tea">Tear</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17030010"></div>
+	        <a href="/asteria/voices/jad">Jade</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17040010"></div>
+	        <a href="/asteria/voices/ani">Anise</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17050010"></div>
+	        <a href="/asteria/voices/guy">Guy</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17060010"></div>
+	        <a href="/asteria/voices/nat">Natalia</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17090010"></div>
+	        <a href="/asteria/voices/van">Van</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17100010"></div>
+	        <a href="/asteria/voices/asc">Asch</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17140010"></div>
+	        <a href="/asteria/voices/art">Arietta</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17150010"></div>
+	        <a href="/asteria/voices/syn">Sync</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/17230010"></div>
+	        <a href="/asteria/voices/luk">Luke</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/18010010"></div>
+	        <a href="/asteria/voices/cai">Caius</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/18020010"></div>
+	        <a href="/asteria/voices/rub">Rubia</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/19010020"></div>
+	        <a href="/asteria/voices/psk">P. Kanonno</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/20010010"></div>
+	        <a href="/asteria/voices/ruc">Ruca</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/20020010"></div>
+	        <a href="/asteria/voices/iri">Illia</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/20030010"></div>
+	        <a href="/asteria/voices/spd">Spada</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/20040010"></div>
+	        <a href="/asteria/voices/rcl">Ricardo</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/20050010"></div>
+	        <a href="/asteria/voices/anj">Ange</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/20110010"></div>
+	        <a href="/asteria/voices/kon">Kongwai</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/20140010"></div>
+	        <a href="/asteria/voices/hst">Hasta</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/20150020"></div>
+	        <a href="/asteria/voices/mat">Mathias</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/21010010"></div>
+	        <a href="/asteria/voices/emi">Emil</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/21020010"></div>
+	        <a href="/asteria/voices/mrt">Marta</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/21030010"></div>
+	        <a href="/asteria/voices/rtr">Richter</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/21040010"></div>
+	        <a href="/asteria/voices/ali">Alice</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22010010"></div>
+	        <a href="/asteria/voices/yur">Yuri</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22020010"></div>
+	        <a href="/asteria/voices/est">Estelle</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22030010"></div>
+	        <a href="/asteria/voices/fla">Flynn</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22040010"></div>
+	        <a href="/asteria/voices/rap">Repede</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22050020"></div>
+	        <a href="/asteria/voices/crl">Karol</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22060010"></div>
+	        <a href="/asteria/voices/rit">Rita</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22070010"></div>
+	        <a href="/asteria/voices/rav">Raven</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22080010"></div>
+	        <a href="/asteria/voices/jdh">Judith</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22090010"></div>
+	        <a href="/asteria/voices/pti">Patty</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22100010"></div>
+	        <a href="/asteria/voices/duk">Duke</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/22150010"></div>
+	        <a href="/asteria/voices/swn">Schwann</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/23010010"></div>
+	        <a href="/asteria/voices/shg">Shing</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/23020010"></div>
+	        <a href="/asteria/voices/koh">Kohaku</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/23030010"></div>
+	        <a href="/asteria/voices/his">Hisui</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/23120010"></div>
+	        <a href="/asteria/voices/crd">Creed</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/23180010"></div>
+	        <a href="/asteria/voices/ais">Silver</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/24010010"></div>
+	        <a href="/asteria/voices/eah">Kanonno E.</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/24090020"></div>
+	        <a href="/asteria/voices/bea">Kanonno E. [Ruin Bringer]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25010010"></div>
+	        <a href="/asteria/voices/asb">Asbel</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25020010"></div>
+	        <a href="/asteria/voices/sof">Sophie</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25030010"></div>
+	        <a href="/asteria/voices/hub">Hubert</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25040010"></div>
+	        <a href="/asteria/voices/chr">Cheria</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25050010"></div>
+	        <a href="/asteria/voices/ric">Richard</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25060010"></div>
+	        <a href="/asteria/voices/mlc">Malik</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25070010"></div>
+	        <a href="/asteria/voices/pas">Pascal</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25090010"></div>
+	        <a href="/asteria/voices/eml">Emeraude</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25170010"></div>
+	        <a href="/asteria/voices/rmd">Lambda</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/25500010"></div>
+	        <a href="/asteria/voices/fas">Asbel [f Arc]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/26040010"></div>
+	        <a href="/asteria/voices/lnd">Rody</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/27010030"></div>
+	        <a href="/asteria/voices/grs">Kanonno G.</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/27020020"></div>
+	        <a href="/asteria/voices/raz">Lazaris</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/28010020"></div>
+	        <a href="/asteria/voices/jud">Jude</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/28020010"></div>
+	        <a href="/asteria/voices/mil">Milla</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/28030030"></div>
+	        <a href="/asteria/voices/alv">Alvin</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/28040030"></div>
+	        <a href="/asteria/voices/lei">Leia</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/28050030"></div>
+	        <a href="/asteria/voices/eli">Elize</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/28060020"></div>
+	        <a href="/asteria/voices/ren">Rowen</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb soul"><img src="/asteria/assets/image/soul/detail/detail_soul_tip_2807002.png"></div>
+	        <a href="/asteria/voices/tip">Teepo</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/28080020"></div>
+	        <a href="/asteria/voices/gai">Gaius</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/28110010"></div>
+	        <a href="/asteria/voices/wgl">Wingul</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/28170030"></div>
+	        <a href="/asteria/voices/mus">Muzét</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31010010"></div>
+	        <a href="/asteria/voices/lud">Ludger</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31020010"></div>
+	        <a href="/asteria/voices/ell">Elle</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31030010"></div>
+	        <a href="/asteria/voices/jul">Julius</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31060030"></div>
+	        <a href="/asteria/voices/bzl">Bisley</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31070010"></div>
+	        <a href="/asteria/voices/vic">Victor</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31130010"></div>
+	        <a href="/asteria/voices/mll">Milla [Fractured]</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31140010"></div>
+	        <a href="/asteria/voices/ifj">Jude</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31160010"></div>
+	        <a href="/asteria/voices/ifi">Leia</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31170010"></div>
+	        <a href="/asteria/voices/ife">Elize</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31190010"></div>
+	        <a href="/asteria/voices/ifu">Muzét</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/31200010"></div>
+	        <a href="/asteria/voices/ifg">Gaius</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33010010"></div>
+	        <a href="/asteria/voices/sor">Sorey</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33020010"></div>
+	        <a href="/asteria/voices/als">Alisha</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33030010"></div>
+	        <a href="/asteria/voices/mik">Mikleo</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33040010"></div>
+	        <a href="/asteria/voices/edn">Edna</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33060010"></div>
+	        <a href="/asteria/voices/dez">Dezel</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33070010"></div>
+	        <a href="/asteria/voices/zav">Zaveid</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33080010"></div>
+	        <a href="/asteria/voices/ros">Rose</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33140020"></div>
+	        <a href="/asteria/voices/sim">Symonne</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33170020"></div>
+	        <a href="/asteria/voices/hel">Heldalf</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/33210010"></div>
+	        <a href="/asteria/voices/las">Lailah</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34010010"></div>
+	        <a href="/asteria/voices/vec">Velvet</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34020010"></div>
+	        <a href="/asteria/voices/lap">Laphicet</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34030010"></div>
+	        <a href="/asteria/voices/rok">Rokurou</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34040010"></div>
+	        <a href="/asteria/voices/mag">Magilou</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34050010"></div>
+	        <a href="/asteria/voices/eiz">Eizen</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34060010"></div>
+	        <a href="/asteria/voices/ele">Eleanor</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34080010"></div>
+	        <a href="/asteria/voices/sil">Seres</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34100010"></div>
+	        <a href="/asteria/voices/bza">Zaveid</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34110020"></div>
+	        <a href="/asteria/voices/ter">Teresa</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34120010"></div>
+	        <a href="/asteria/voices/cte">Teresa [Therionized]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34130010"></div>
+	        <a href="/asteria/voices/osc">Oscar</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34150010"></div>
+	        <a href="/asteria/voices/sig">Shigure</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34160010"></div>
+	        <a href="/asteria/voices/mec">Melchior</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34190010"></div>
+	        <a href="/asteria/voices/kan">Innominat</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/34200010"></div>
+	        <a href="/asteria/voices/atc">Artorius</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/37020010"></div>
+	        <a href="/asteria/voices/alp">Alphen</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/37030010"></div>
+	        <a href="/asteria/voices/son">Shionne</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/37040010"></div>
+	        <a href="/asteria/voices/rin">Rinwell</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/37060010"></div>
+	        <a href="/asteria/voices/law">Law</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/37070010"></div>
+	        <a href="/asteria/voices/kis">Kisara</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/37080010"></div>
+	        <a href="/asteria/voices/doh">Dohalim</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/37090020"></div>
+	        <a href="/asteria/voices/vho">Vholran</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/38010010"></div>
+	        <a href="/asteria/voices/lal">Allen</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/38020010"></div>
+	        <a href="/asteria/voices/lsa">Sara</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/38030010"></div>
+	        <a href="/asteria/voices/lze">Zephyr</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/38040010"></div>
+	        <a href="/asteria/voices/lka">Kana</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/38050010"></div>
+	        <a href="/asteria/voices/lri">Lippy</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/39010010"></div>
+	        <a href="/asteria/voices/ckh">Kanata</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/39020010"></div>
+	        <a href="/asteria/voices/cmi">Misella</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/39030010"></div>
+	        <a href="/asteria/voices/cvi">Vicious</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/39040010"></div>
+	        <a href="/asteria/voices/caa">Aegis</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/39050010"></div>
+	        <a href="/asteria/voices/cya">Yuna</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90000020"></div>
+	        <a href="/asteria/voices/ole">Orie</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90020030"></div>
+	        <a href="/asteria/voices/all">Lloyd [Fang]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90030020"></div>
+	        <a href="/asteria/voices/ayu">Yuri [Claw]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90040030"></div>
+	        <a href="/asteria/voices/ami">Milla [Roar]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90080010"></div>
+	        <a href="/asteria/voices/wtl">Tirug [Purified]</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90090030"></div>
+	        <a href="/asteria/voices/aas">Asbel [Dark Puppet]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90100030"></div>
+	        <a href="/asteria/voices/aed">Edna [Dark Puppet]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90110020"></div>
+	        <a href="/asteria/voices/imi">Mikleo [Fractured Dimension]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90120010"></div>
+	        <a href="/asteria/voices/ime">Meredy [Fractured Dimension]</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90130010"></div>
+	        <a href="/asteria/voices/ias">Asch [Fractured Dimension]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90140030"></div>
+	        <a href="/asteria/voices/iso">Sorey [Lord of Calamity]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90150020"></div>
+	        <a href="/asteria/voices/ike">Keele [Mad Scientist Seeking Glory]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90160030"></div>
+	        <a href="/asteria/voices/ilu">Luke [Carrying The Burden]</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/90180020"></div>
+	        <a href="/asteria/voices/ier">Elle ["Fate of the Twin Stars" Arc]</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/95010010"></div>
+	        <a href="/asteria/voices/ska">Kasane</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/95020010"></div>
+	        <a href="/asteria/voices/iko">Kohaku</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/95030010"></div>
+	        <a href="/asteria/voices/iay">Aya</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/95040010"></div>
+	        <a href="/asteria/voices/rna">Nazar</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/95050010"></div>
+	        <a href="/asteria/voices/rba">Bardo</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/95060010"></div>
+	        <a href="/asteria/voices/rmr">Mercuria</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99110010"></div>
+	        <a href="/asteria/voices/gbp">Percival</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99120010"></div>
+	        <a href="/asteria/voices/gbk">Cagliostro</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99130010"></div>
+	        <a href="/asteria/voices/gbf">Ferry</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99200010"></div>
+	        <a href="/asteria/voices/kit">Kitty White</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99500010"></div>
+	        <a href="/asteria/voices/iah">Haruka</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99510010"></div>
+	        <a href="/asteria/voices/ihm">Miki</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99520010"></div>
+	        <a href="/asteria/voices/isu">Uzuki</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99530010"></div>
+	        <a href="/asteria/voices/ijm">Mika</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99540010"></div>
+	        <a href="/asteria/voices/iat">Touma</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99550010"></div>
+	        <a href="/asteria/voices/iis">Shiki</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99560010"></div>
+	        <a href="/asteria/voices/ikm">Mirai</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99570010"></div>
+	        <a href="/asteria/voices/ihs">Serika</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99580010"></div>
+	        <a href="/asteria/voices/ikc">Chihaya</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99590010"></div>
+	        <a href="/asteria/voices/iks">Shika</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99600010"></div>
+	        <a href="/asteria/voices/jik">Siegfried</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99610010"></div>
+	        <a href="/asteria/voices/nar">Narmaya</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99800010"></div>
+	        <a href="/asteria/voices/krm">Curry Meshi</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99820010"></div>
+	        <a href="/asteria/voices/itt">Teru</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99830010"></div>
+	        <a href="/asteria/voices/iak">Hideo</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99840010"></div>
+	        <a href="/asteria/voices/dam">Damuron</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99890010"></div>
+	        <a href="/asteria/voices/cla">Claudia</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99900010"></div>
+	        <a href="/asteria/voices/rik">Ix</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99910010"></div>
+	        <a href="/asteria/voices/rmi">Mileena</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99920010"></div>
+	        <a href="/asteria/voices/rko">Kocis</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99930010"></div>
+	        <a href="/asteria/voices/rka">Karia</a>
+	    </div>
+	</div>
+	<div class="row">
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99940010"></div>
+	        <a href="/asteria/voices/rph">Phantom</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99950020"></div>
+	        <a href="/asteria/voices/rpl">Phillip</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99970010"></div>
+	        <a href="/asteria/voices/rma">Marcus</a>
+	    </div>
+	    <div class="three columns">
+	        <div class="inlinethumb"><img src="/asteria/image_thumb/99980010"></div>
+	        <a href="/asteria/voices/syu">Yuito</a>
+	    </div>
+	</div>
+</div>
