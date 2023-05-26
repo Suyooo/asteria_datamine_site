@@ -14,8 +14,7 @@
         <div style="padding-left: 1em">
 	        <button onClick="play();">Play</button>
 	        <button onClick="stop();">Stop</button>
-	        <button onClick="save();">Save Screenshot</button>
-	        <button onClick="changeCenter();">Change Origin</button><br>
+	        <button onClick="save();">Save Screenshot</button><br>
 	        Jump to Time (in seconds): <input type="number" id="jumptime" value="0"> <button onClick="jump(parseFloat(document.getElementById('jumptime').value));">Jump</button><br><br>
 	        <b>Warning: very loud.</b><br>
 	        This player is not based an original animation system, but is a recreation. That means the animation is presented on a best-effort basis. Several things are unimplemented. Feel free to share screenshots of the funniest errors.<br>

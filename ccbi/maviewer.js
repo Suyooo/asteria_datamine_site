@@ -24,7 +24,6 @@ function preload() {
 	}
 }
 
-let centerOrigin = viewname.startsWith("my") || (viewname.startsWith("hm") && viewname !== "hm800");
 function create() {
 	game.world.removeAll();
 	if (sounds === undefined) {
@@ -40,13 +39,8 @@ function create() {
 	let rootgroup = game.add.group(undefined, "ROOT");
 	rootgroup.ignorePivotForPos = false;
 	rootgroup.nodeSize = new Phaser.Point(640,1136);
-	if (centerOrigin) {
-	    rootgroup.x = 320;
-	    rootgroup.y = 480;
-	} else {
-	    rootgroup.x = 0;
-	    rootgroup.y = 0;
-	}
+    rootgroup.x = 0;
+    rootgroup.y = 0;
 	rootNode = createNode(ccb["rootNode"], rootgroup);
 	//game.add.graphics(0,0).lineStyle(10,0xFF0000).drawRect(0,0,640,1136);
 	if (playing) handleCallbacks(prevtime, time);
@@ -96,11 +90,6 @@ function jump(t) {
 var saveNext=false;
 function save() {
 	saveNext=true;
-}
-
-function changeCenter() {
-    centerOrigin = !centerOrigin;
-    jump(0);
 }
 
 function createNode(node, parent) {
