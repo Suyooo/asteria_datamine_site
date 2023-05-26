@@ -107,6 +107,7 @@ function createNode(node, parent) {
 	let n = game.add.group(parent, node.displayName);
 	n.y = n.parent.nodeSize.y;
 	n.flip = [false, false];
+	n.ignorePivotForPos = false;
 	
 	n.properties = {}
 	for (let i = 0; i < node.properties.length; i++) {
@@ -135,6 +136,7 @@ function createNode(node, parent) {
 		n.nodeSize = parent.nodeSize;
 		n.nodeSize = new Phaser.Point(0,0);
 	}
+	
 	n.pivot.x = n.pivot.x * n.nodeSize.x;
 	n.pivot.y = -(n.pivot.y - 1) * n.nodeSize.y;
 	if (n.ignorePivotForPos) {
@@ -173,7 +175,7 @@ function createNode(node, parent) {
 		if (n.flip[1]) inner.scale.y = -1;
 	}
 	
-	//game.add.graphics(0,0,n).lineStyle(1,0xFFFFFF).drawRect(0,0,n.nodeSize.x-1,n.nodeSize.y-1);
+    //game.add.graphics(0, 0, n).lineStyle(1, 0xFFFFFF).drawRect(0, 0, n.nodeSize.x-1, n.nodeSize.y-1);
 	return n;
 }
 
@@ -217,7 +219,7 @@ function handleProp(group, prop) {
 	} else if (prop.name === "visible") {
 		group.visible = prop.value;
 	} else if (prop.name === "displayFrame") {
-		let s = game.add.sprite(1,1,prop.value[0],prop.value[1],group);
+		let s = game.add.sprite(0,0,prop.value[0],prop.value[1],group);
 		group.nodeSize = new Phaser.Point(s.width, s.height);
 	} else if (prop.name === "rotation") {
 		group.angle = prop.value;
@@ -233,7 +235,7 @@ function handleProp(group, prop) {
 		group.alpha = prop.value/255.0;
 	} else if (prop.name === "color") {
 		group.tint = (Math.round(prop.value[0]) * 256 + Math.round(prop.value[1])) * 256 + Math.round(prop.value[2]);
-	} else if (prop.name === "touchEnabled" || prop.name === "mouseEnabled" || prop.name === "tag" || prop.name === "string" || prop.name === "fontSize" || prop.name === "fontName" || prop.name === "horizontalAlignment" || (prop.name === "verticalAlignment" && prop.value === 0) || (prop.name === "dimensions" && prop.value[0] === 0 && prop.value[1] === 0 && prop.value[2] === 0)) {
+	} else if (prop.name === "touchEnabled" || prop.name === "mouseEnabled" || prop.name === "tag" || prop.name === "string" || prop.name === "fontSize" || prop.name === "fontName" || (prop.name === "horizontalAlignment" && prop.value === 0) || (prop.name === "verticalAlignment" && prop.value === 0) || (prop.name === "dimensions" && prop.value[0] === 0 && prop.value[1] === 0 && prop.value[2] === 0)) {
 		// ignore
 	} else {
 		console.log("Unimplemented prop \"" + prop.name + "\"");
@@ -282,6 +284,13 @@ function handleAnimProp(group, prop) {
 		if (group.tintGraphic) {
 			group.tintGraphic.graphicsData[0].fillColor = group.tint;
 		}
+	} else if (prop.name === "skew") {
+		group.skew.x = val[0] / 720.0 * Phaser.Math.PI2;
+		group.skew.y = val[1] / 720.0 * Phaser.Math.PI2;
+	} else if (prop.name === "displayFrame") {
+    	group.removeAll();
+		let s = game.add.sprite(0,0,val[0],val[1],group);
+		group.nodeSize = new Phaser.Point(s.width, s.height);
 	} else {
 		console.log("Unimplemented animated prop \"" + prop.name + "\"");
 		console.log(prop);
@@ -303,7 +312,7 @@ function ease(a,b,t,type) {
 		return (b - a) / 2 * (t * t * t + 2) + a;
 	} else {
 		console.log("Unimplemented keyframe easing type \"" + type + "\"");
-		return undefined;
+		return a + (b - a) * t;
 	}
 }
 
