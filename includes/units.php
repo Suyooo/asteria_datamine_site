@@ -686,6 +686,7 @@ function make_unit_object($unit_row, $coop_skill_row, $arte_rows, $basearte_rows
 		'image_detail'			=> $unit_row["unit_image_detail"],
 		'image_background'		=> $unit_row["unit_image_background"],
 		'image_mypage'			=> $unit_row["unit_image_mypage"],
+		'ccbi_mypage'			=> $unit_row["unit_ccbi_mypage"],
 		'image_thumb'			=> $unit_row["unit_image_thumbnail"],
 		'image_preview'			=> $unit_row["unit_image_preview"],
 		

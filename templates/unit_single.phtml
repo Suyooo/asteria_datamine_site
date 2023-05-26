@@ -7,7 +7,13 @@
 				<h5 class="center"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($name))?></h5>
 				<h6 class="center"><?=str_replace("&amp;nbsp;", "&nbsp;", $v($name_jp))?></h6>
 				<span style="display: inline-block" class="rarity r<?=$v($rarity)?>"></span> <span style="display: inline-block" class="element <?=$v($element)?>"></span><br>
-				<img style="max-width:100%" src="/asteria/image_full/<?=$v($id)?>"><br><br>
+				<img style="max-width:100%" src="/asteria/image_full/<?=$v($id)?>"><br>
+				<?php if ($ccbi_mypage): ?>
+				    <a href="/asteria/ccbi/?id=<?= $ccbi_mypage ?>" target="_blank" class="smallbutton">
+                        ▶ View Animation in CCBI Player
+                    </a><br>
+				<?php endif ?>
+				<br>
 				<?php if ($awaken_info): ?>
 			        <div class="smallstats artemargins">
 				        <span class="icon star <?=$v($awaken_star_type)?>"><?=$v($awaken_info)?></span>
