@@ -14008,11 +14008,11 @@ PIXI.DisplayObject.prototype = {
 
         // temporary matrix variables
         var a, b, c, d, tx, ty;
-		var rotX = this.rotation + this.skew.x;
-		var rotY = this.rotation + this.skew.y;
+		var rotX = this.rotation * 100 + this.skew.x;
+		var rotY = this.rotation * 100 + this.skew.y;
 
         // so if rotation is between 0 then we can simplify the multiplication process..
-        if (rotY % Phaser.Math.PI2 || rotX % Phaser.Math.PI2)
+        if (this.rotation % Phaser.Math.PI2 || this.skew.x % Phaser.Math.PI2 || this.skew.y % Phaser.Math.PI2)
         {
             // check to see if the rotation is the same as the previous render. This means we only need to use sin and cos when rotation actually changes
             if (rotX !== this._cachedRotX || rotY !== this._cachedRotY)
@@ -14022,11 +14022,11 @@ PIXI.DisplayObject.prototype = {
 				this._cachedRotY = rotY;
 
 				// recalculate expensive ops
-				this._crA = Math.cos(rotY);
-				this._srB = Math.sin(rotY);
+				this._crA = Math.cos(this.rotation);
+				this._srB = Math.sin(this.rotation) - this.skew.y;
 
-				this._srC = Math.sin(-rotX);
-				this._crD = Math.cos(rotX);
+				this._srC = Math.sin(-this.rotation) - this.skew.x;
+				this._crD = Math.cos(this.rotation);
             }
 
             // get the matrix values of the displayobject based on its transform properties..

@@ -25,6 +25,7 @@ function preload() {
 }
 
 function create() {
+    game.sound.volume = 0.5;
 	game.world.removeAll();
 	if (sounds === undefined) {
 		sounds = {};
@@ -45,6 +46,18 @@ function create() {
 	//game.add.graphics(0,0).lineStyle(10,0xFF0000).drawRect(0,0,640,1136);
 	if (playing) handleCallbacks(prevtime, time);
 	prevtime = time;
+	
+	/*let testgroup = game.add.group(undefined, "test");
+	testgroup.x = 100;
+	testgroup.y = 100;
+	game.add.graphics(0,0,testgroup).lineStyle(10,0xFF0000).drawRect(0,0,100,100);
+	game.add.graphics(50,50).lineStyle(2,0xFF0000).drawRect(0,0,100,100);
+	game.world.add(testgroup);
+	
+	//testgroup.pivot.x = 100;
+	//testgroup.pivot.y = 100;
+    testgroup.skew.x = Math.PI / 8;
+	//testgroup.skew.y = Math.PI / 8;*/
 }
 
 var fps = 0;
@@ -127,7 +140,7 @@ function createNode(node, parent) {
 	}
 	
 	n.pivot.x = n.pivot.x * n.nodeSize.x;
-	n.pivot.y = -(n.pivot.y - 1) * n.nodeSize.y;
+	n.pivot.y = (1 - n.pivot.y) * n.nodeSize.y;
 	if (n.ignorePivotForPos) {
 		n.x += n.pivot.x;
 		n.y -= n.pivot.y;
@@ -154,8 +167,8 @@ function createNode(node, parent) {
 		n.setAllChildren("blendMode", n.blendMode, false, false, 0, true);
 	}
 	
-	if (n.flip.x || n.flip.y) {
-		let inner = game.add.group(undefined, "inner");
+	if (n.flip) {
+		let inner = game.add.group(undefined, "innerflip");
 		n.moveAll(inner);
 		n.add(inner);
 		inner.pivot.x = inner.x = inner.width / 2;
@@ -211,8 +224,11 @@ function handleProp(group, prop) {
 	} else if (prop.name === "visible") {
 		group.visible = prop.value;
 	} else if (prop.name === "displayFrame") {
+	    //if (prop.value[1] !== "hm273_35_sk.png") group.alpha=0.1;
 		let s = game.add.sprite(0,0,prop.value[0],prop.value[1],group);
 		group.nodeSize = new Phaser.Point(s.width, s.height);
+		//game.add.graphics(0, 0, group).lineStyle(1, 0xFFFFFF).drawRect(0, 0, s.width, s.height);
+		//game.add.text(0, 0, prop.value[1], {fill: "lime", fontSize: 12}, group);
 	} else if (prop.name === "rotation") {
 		group.angle = prop.value;
 	} else if (prop.name === "blendFunc") {
@@ -287,7 +303,7 @@ function handleAnimProp(group, prop) {
 			group.tintGraphic.graphicsData[0].fillColor = group.tint;
 		}
 	} else if (prop.name === "skew") {
-		group.skew.x = val[0] / 720.0 * Phaser.Math.PI2;
+        group.skew.x = val[0] / 720.0 * Phaser.Math.PI2;
 		group.skew.y = val[1] / 720.0 * Phaser.Math.PI2;
 	} else if (prop.name === "displayFrame") {
     	group.removeAll();
