@@ -46,18 +46,6 @@ function create() {
 	//game.add.graphics(0,0).lineStyle(10,0xFF0000).drawRect(0,0,640,1136);
 	if (playing) handleCallbacks(prevtime, time);
 	prevtime = time;
-	
-	/*let testgroup = game.add.group(undefined, "test");
-	testgroup.x = 100;
-	testgroup.y = 100;
-	game.add.graphics(0,0,testgroup).lineStyle(10,0xFF0000).drawRect(0,0,100,100);
-	game.add.graphics(50,50).lineStyle(2,0xFF0000).drawRect(0,0,100,100);
-	game.world.add(testgroup);
-	
-	//testgroup.pivot.x = 100;
-	//testgroup.pivot.y = 100;
-    testgroup.skew.x = Math.PI / 8;
-	//testgroup.skew.y = Math.PI / 8;*/
 }
 
 var fps = 0;
@@ -108,6 +96,7 @@ function save() {
 function createNode(node, parent) {
 	let n = game.add.group(parent, node.displayName);
 	n.parentGroup = parent;
+	n.nodeData = node;
 	n.y = parent.nodeSize.y;
 	n.flip = [false, false];
 	n.ignorePivotForPos = false;
@@ -168,14 +157,14 @@ function createNode(node, parent) {
 		n.setAllChildren("blendMode", n.blendMode, false, false, 0, true);
 	}
 	
-	if (n.flip) {
-		let inner = game.add.group(undefined, "innerflip");
-		n.moveAll(inner);
-		n.add(inner);
-		inner.pivot.x = inner.x = inner.width / 2;
-		inner.pivot.y = inner.y = inner.height / 2;
-		if (n.flip[0]) inner.scale.x = -1;
-		if (n.flip[1]) inner.scale.y = -1;
+	if (n.flip && (n.flip[0] || n.flip[1])) {
+		n.flipInnerGroup = game.add.group(undefined, "innerflip");
+		n.moveAll(n.flipInnerGroup);
+		n.add(n.flipInnerGroup);
+		n.flipInnerGroup.pivot.x = n.flipInnerGroup.x = n.nodeSize.x / 2;
+		n.flipInnerGroup.pivot.y = n.flipInnerGroup.y = n.nodeSize.y / 2;
+		if (n.flip[0]) n.flipInnerGroup.scale.x = -1;
+		if (n.flip[1]) n.flipInnerGroup.scale.y = -1;
 	}
 	
     //game.add.graphics(0, 0, n).lineStyle(1, 0xFFFFFF).drawRect(0, 0, n.nodeSize.x-1, n.nodeSize.y-1);
