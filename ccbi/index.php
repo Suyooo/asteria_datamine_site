@@ -14,7 +14,8 @@
         <div style="padding-left: 1em">
 	        <button onClick="play();">Play</button>
 	        <button onClick="stop();">Pause</button>
-	        <button onClick="save();">Save Screenshot</button><br>
+	        <input id="loopSetting" type="checkbox" onChange="loopChanged();"> Loop
+	        <button style="margin-left: 2em" onClick="save();">Save Screenshot</button><br>
 	        Jump to Time (in seconds): <input type="number" id="jumptime" value="0"> <button onClick="jump(parseFloat(document.getElementById('jumptime').value));">Jump</button><br><br>
 	        This player is not based on the original engine, it's an attempt at a recreation. That means animations are presented on a best-effort basis. Several things are unimplemented. Feel free to share screenshots of the funniest errors.<br>
 	        Use your browser's zoom function to scale the player window to your screen size.<br>

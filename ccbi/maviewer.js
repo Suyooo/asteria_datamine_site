@@ -49,11 +49,18 @@ function create() {
 var fps = 0;
 var playing = false;
 var end = false;
+var loop = viewname.startsWith("my") || viewname.startsWith("hm");
+if (loop) {
+    window.onload = function () {
+        document.getElementById("loopSetting").checked = true;
+    }
+}
 
 function update() {
 	if (playing) {
-	    if (time < ccb.endTime) {
+	    if (time < ccb.endTime || loop) {
 		    time += game.time.elapsed / 1000;
+		    if (loop && time > ccb.endTime) time -= ccb.endTime;
 		    fps = 0.9 * fps + 0.1 * (1000 / game.time.elapsed);
 		    updateNode(rootNode);
 	        handleCallbacks(prevtime, time);
@@ -95,6 +102,11 @@ function jump(t) {
 var saveNext=false;
 function save() {
 	saveNext=true;
+}
+
+function loopChanged() {
+    loop = document.getElementById("loopSetting").checked;
+    console.log(loop);
 }
 
 function createNode(node, parent) {
