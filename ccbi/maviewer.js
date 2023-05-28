@@ -67,7 +67,7 @@ function update() {
 	if (playing) {
 	    if (time < ccb.endTime || loop) {
 		    time += game.time.elapsed / 1000;
-		    if (loop && time > ccb.endTime) time -= ccb.endTime;
+		    while (loop && time > ccb.endTime) time -= ccb.endTime;
 		    fps = 0.9 * fps + 0.1 * (1000 / game.time.elapsed);
 		    updateNode(rootNode);
 	        handleCallbacks(prevtime, time);
@@ -103,8 +103,10 @@ function play() {
 }
 function jump(t) {
 	prevtime = time = t;
+	end = time < ccb.endTime;
 	playing = false;
-	create();
+	updateNode(rootNode);
+	game.sound.stopAll();
 }
 var saveNext=false;
 function save() {
@@ -375,18 +377,15 @@ function ease(a,b,t,type) {
 
 function handleCallbacks(prev, now) {
 	let i = 0;
-	while (i < ccb.sequences[0].callbackChannel.keyframes.length && ccb.sequences[0].callbackChannel.keyframes[i].time <= time) {
+	while (i < ccb.sequences[0].callbackChannel.keyframes.length && ccb.sequences[0].callbackChannel.keyframes[i].time < prevtime) {
 		i++;
 	}
-	i -= 1;
-	if (i < 0 || i >= ccb.sequences[0].callbackChannel.keyframes.length || prevtime > ccb.sequences[0].callbackChannel.keyframes[i].time) return;
 	
-	initialTime = ccb.sequences[0].callbackChannel.keyframes[i].time;
-	while (i >= 0 && ccb.sequences[0].callbackChannel.keyframes[i].time == initialTime) {
+	while (i < ccb.sequences[0].callbackChannel.keyframes.length && ccb.sequences[0].callbackChannel.keyframes[i].time < time) {
 		let val = ccb.sequences[0].callbackChannel.keyframes[i].value;
 		if (val[0].startsWith("voiceplay") || val[0].startsWith("seplay")) {
 			sounds[val[0]].play();
 		}
-		i--;
+		i++;
 	}
 }
