@@ -13,14 +13,21 @@ function preload() {
 	for (let i = 0; i < ccb.resources.atlas.length; i++) {
 		game.load.atlas(ccb.resources.atlas[i] + ".plist", ccb.resources.atlas[i] + ".png", ccb.resources.atlas[i] + ".json");
 	    document.getElementById("res-atlas").innerHTML += "<br><a href='" + ccb.resources.atlas[i] + ".png'>" + ccb.resources.atlas[i] + "</a>";
+	    document.getElementById("res-atlas").style.display = "";
+	}
+	for (let i = 0; i < ccb.resources.texture.length; i++) {
+	    document.getElementById("res-texture").innerHTML += "<br><a href='" + ccb.resources.texture[i] + "'>" + ccb.resources.texture[i] + "</a>";
+	    document.getElementById("res-texture").style.display = "";
 	}
 	for (let i = 0; i < ccb.resources.sfx.length; i++) {
 		game.load.audio("seplay_" + ccb.resources.sfx[i], "sound/se/battle/" + ccb.resources.sfx[i] + ".ogg");
 	    document.getElementById("res-sounds").innerHTML += "<br><a href='sound/se/battle/" + ccb.resources.sfx[i] + ".ogg'>" + ccb.resources.sfx[i] + "</a>";
+	    document.getElementById("res-sounds").style.display = "";
 	}
 	for (let i = 0; i < ccb.resources.voice.length; i++) {
 		game.load.audio("voiceplay_" + ccb.resources.voice[i].replace("/", "_"), "sound/voice/" + ccb.resources.voice[i] + ".ogg");
 	    document.getElementById("res-voice").innerHTML += "<br><a href='sound/voice/" + ccb.resources.voice[i] + ".ogg'>" + ccb.resources.voice[i] + "</a>";
+	    document.getElementById("res-voice").style.display = "";
 	}
 }
 

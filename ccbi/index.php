@@ -21,9 +21,10 @@
 	        Use your browser's zoom function to scale the player window to your screen size.<br>
 	        <a href="#" onClick="document.getElementById('res').style.display='block'">Show Resource Links</a><br><br>
 	        <div id="res" style="display:none">
-	            <div id="res-atlas"><b>Sprite Atlases</b></div>
-	            <div id="res-sounds"><b>Sound Effects</b></div>
-	            <div id="res-voice"><b>Voice Lines</b></div>
+	            <div id="res-atlas" style="display:none"><b>Sprite Atlases</b></div>
+	            <div id="res-texture" style="display:none"><b>Particle Textures</b> (unimplemented in player)</div>
+	            <div id="res-sounds" style="display:none"><b>Sound Effects</b></div>
+	            <div id="res-voice" style="display:none"><b>Voice Lines</b></div>
 	        </div>
 	    </div>
 	</div>
