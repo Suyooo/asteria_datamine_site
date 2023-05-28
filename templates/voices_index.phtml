@@ -1,15 +1,10 @@
 <?php $v->layout('layout', ['title' => 'Voices']) ?>
 <style>
     .row {
-        padding: 1em 0.5em;
         text-align: left;
     }
 
-    .row:nth-child(even) {
-        background-color: #ddd;
-    }
-    
-    .row:nth-child(odd) {
+    .three.columns:nth-child(odd) {
         background-color: #eee;
     }
     
@@ -24,13 +19,26 @@
     .three.columns {
         display: flex;
         align-items: center;
-        height: 2em;
+        height: 4em;
+        padding: 1em 0.5em;
     }
     
     .three.columns a {
         flex: 1 1 0;
         display: block;
         line-height: 1em;
+    }
+    
+    @media (min-width: 550px) {
+        .row:nth-child(even) {
+            background-color: #ddd;
+        }
+        .row:nth-child(odd) {
+            background-color: #eee;
+        }
+	    .three.columns {
+	        background-color: unset !important;
+        }
     }
 </style>
 <div class="container">
