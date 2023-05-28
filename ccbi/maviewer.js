@@ -25,7 +25,7 @@ function preload() {
 }
 
 function create() {
-    game.sound.volume = 0.5;
+    game.sound.volume = 0.33;
 	game.world.removeAll();
 	if (sounds === undefined) {
 		sounds = {};
@@ -44,8 +44,6 @@ function create() {
     rootgroup.y = 0;
 	rootNode = createNode(ccb["rootNode"], rootgroup);
 	//game.add.graphics(0,0).lineStyle(10,0xFF0000).drawRect(0,0,640,1136);
-	if (playing) handleCallbacks(prevtime, time);
-	prevtime = time;
 }
 
 var fps = 0;
@@ -53,13 +51,17 @@ var playing = false;
 var end = false;
 
 function update() {
-	if (playing && time < ccb.endTime) {
-		time += game.time.elapsed / 1000;
-		fps = 0.9 * fps + 0.1 * (1000 / game.time.elapsed);
-		create();
-	} else {
-	    playing = false;
-	    end = true;
+	if (playing) {
+	    if (time < ccb.endTime) {
+		    time += game.time.elapsed / 1000;
+		    fps = 0.9 * fps + 0.1 * (1000 / game.time.elapsed);
+		    updateNode(rootNode);
+	        handleCallbacks(prevtime, time);
+	        prevtime = time;
+	    } else {
+	        playing = false;
+	        end = true;
+        }
     }
 }
 
@@ -77,11 +79,13 @@ function render() {
 
 function stop() {
 	playing = false;
+	game.sound.pauseAll();
 }
 function play() {
     if (end) jump(0);
 	playing = true;
     end = false;
+	game.sound.resumeAll();
 }
 function jump(t) {
 	prevtime = time = t;
@@ -136,8 +140,9 @@ function createNode(node, parent) {
 		n.y -= n.pivot.y;
 	}
 	
+	n.childGroups = [];
 	for (let i = 0; i < node.children.length; i++) {
-		createNode(node.children[i], n);
+		n.childGroups.push(createNode(node.children[i], n));
 	}
 	
 	for(let key in node.animatedProperties) {
@@ -169,6 +174,31 @@ function createNode(node, parent) {
 	
     //game.add.graphics(0, 0, n).lineStyle(1, 0xFFFFFF).drawRect(0, 0, n.nodeSize.x-1, n.nodeSize.y-1);
 	return n;
+}
+
+function updateNode(n) {
+	let node = n.nodeData;
+	
+	for (let i = 0; i < n.childGroups.length; i++) {
+		updateNode(n.childGroups[i]);
+	}
+	
+	for(let key in node.animatedProperties) {
+		if (! node.animatedProperties.hasOwnProperty(key)) continue;
+		for(let prop in node.animatedProperties[key]){
+			if (! node.animatedProperties[key].hasOwnProperty(prop)) continue;
+			handleAnimProp(n, node.animatedProperties[key][prop]);
+		}
+	}
+	
+	// TODO: can't stack these
+	if (n.tint) {
+		n.setAllChildren("tint", n.tint, false, false, 0, true);
+		if (n.tintGraphic) n.tintGraphic.tint = 0xFFFFFF;
+	}
+	if (n.blendMode) {
+		n.setAllChildren("blendMode", n.blendMode, false, false, 0, true);
+	}
 }
 
 function handleProp(group, prop) {
