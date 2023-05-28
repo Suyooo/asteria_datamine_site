@@ -137,9 +137,20 @@
 </head>
 <body>
 	<div class="fullwidth header">
-		<div class="container">
+		<div class="container menubar">
 			<a href="/asteria">Asteria Database</a>
-			<div><a href="https://suyo.be/asteria/unitlist">Units</a> &bull; <a href="https://suyo.be/asteria/soullist">Souls</a> &bull; <a href="https://suyo.be/asteria/voices">Voices</a> &bull; <a href="https://suyo.be/asteria/animations">Animations</a> &bull; <a href="https://suyo.be/asteria/newslist">News</a> &bull; <a href="https://suyo.be/asteria/patchlist">Patches</a> &bull; <a href="https://suyo.be/asteria/collection/">Collection</a><a href="https://suyo.be/asteria/collection/" style="text-decoration: none">&nbsp;<span class="collectionno" id="collectionNumber"><?=$v(count($collection_ids))?></span></a></div>
+			<div>
+			    <span class="linkgroup">
+			        <a href="https://suyo.be/asteria/unitlist">Units</a> &bull; 
+			        <a href="https://suyo.be/asteria/soullist">Souls</a> &bull; 
+			        <a href="https://suyo.be/asteria/voices">Voices</a> &bull; 
+			        <a href="https://suyo.be/asteria/animations">Animations</a>
+		        </span>
+			    <span class="linkgroup">
+		            <a href="https://suyo.be/asteria/newslist">News</a> &bull; 
+		            <a href="https://suyo.be/asteria/patchlist">Patches</a> &bull; 
+		            <a href="https://suyo.be/asteria/collection/">Collection</a><a href="https://suyo.be/asteria/collection/" style="text-decoration: none">&nbsp;<span class="collectionno" id="collectionNumber"><?=$v(count($collection_ids))?></span></a></div>
+	            </span>
 		</div><!--
 		<div class="container" style="display: block; width: 100%; text-align: center; background-color: #b55234; padding: 3px;">
 			<a href="https://docs.google.com/forms/d/e/1FAIpQLScsJv0q0r5Gs4Kgy8u9slel2TjdXJPfgYG4R_RYzUo0PTbJ0A/viewform" style="font-size:100%;font-weight:bold; text-decoration: underline;">If you have a minute, please answer this short survey about unit information - thank you :)</a>

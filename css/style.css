@@ -117,7 +117,6 @@ select {
 .fullwidth {
 	background: var(--shade1);
 	color: white;
-	padding: 1em 0;
 	text-align: center;
 
 }
@@ -148,7 +147,6 @@ a.smallbutton:hover, a.smallbutton:active, a.smallbutton:focus, a.smallbutton:vi
 	width: 100%;
 	position: fixed;
 	top: 0;
-	height: 4em;
 	z-index: 999;
 }
 
@@ -164,16 +162,31 @@ a.smallbutton:hover, a.smallbutton:active, a.smallbutton:focus, a.smallbutton:vi
 }
 
 .header .container {
-	padding-top: 0;
-	display: grid;
-	grid-template-columns: 1fr;
+    height: 6em;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding: 0;
+	justify-content: center;
 }
-@media (min-width: 800px) {
+
+.header .linkgroup {
+	display: block;
+}
+
+@media (min-width: 900px) {
 	.header .container {
-		display: flex;
+	    flex-direction: row;
 		justify-content: space-between;
-		align-items: center;
 	}
+	
+	.header .linkgroup {
+	    display: inline;
+    }
+    
+    .header .linkgroup:last-child:before {
+	    content: "•";
+    }
 }
 
 .header .container:after {
@@ -182,7 +195,10 @@ a.smallbutton:hover, a.smallbutton:active, a.smallbutton:focus, a.smallbutton:vi
 
 .header .container > a:first-child {
 	font-size: 200%;
+	margin-top: -.25em;
+	margin-bottom: -.25em;
 	text-decoration: none;
+	flex-shrink: 0;
 }
 
 .header a {
@@ -195,7 +211,7 @@ a.smallbutton:hover, a.smallbutton:active, a.smallbutton:focus, a.smallbutton:vi
     min-width: 1em;
     height: 1em;
     display: inline-block;
-    padding: 0 0.25em 0.5em 0.25em;
+    padding: 0 0.33em 0.66em 0.33em;
 }
 
 .footer {

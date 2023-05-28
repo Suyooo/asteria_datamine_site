@@ -1,4 +1,3 @@
-Options -Indexes
 RedirectMatch 404 /\.git
 RewriteEngine On
 RewriteRule ^$ views/index.php [L]
