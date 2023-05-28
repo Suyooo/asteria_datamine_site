@@ -215,8 +215,8 @@ function handleProp(group, prop) {
 			console.log(prop);
 		}
 	} else if (prop.name === "skew") {
-		group.skew.x = prop.value[0] / 720.0 * Phaser.Math.PI2;
-		group.skew.y = prop.value[1] / 720.0 * Phaser.Math.PI2;
+		group.skew.x = prop.value[0] / 360.0 * Phaser.Math.PI2;
+		group.skew.y = prop.value[1] / 360.0 * Phaser.Math.PI2;
 	} else if (prop.name === "flip") {
 		group.flip = prop.value;
 	} else if (prop.name === "ignoreAnchorPointForPosition") {
@@ -304,8 +304,8 @@ function handleAnimProp(group, prop) {
 			group.tintGraphic.graphicsData[0].fillColor = group.tint;
 		}
 	} else if (prop.name === "skew") {
-        group.skew.x = val[0] / 720.0 * Phaser.Math.PI2;
-		group.skew.y = val[1] / 720.0 * Phaser.Math.PI2;
+        group.skew.x = val[0] / 360.0 * Phaser.Math.PI2;
+		group.skew.y = val[1] / 360.0 * Phaser.Math.PI2;
 	} else if (prop.name === "displayFrame") {
     	group.removeAll();
 		let s = game.add.sprite(0,0,val[0],val[1],group);
