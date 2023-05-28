@@ -1,4 +1,12 @@
 /**
+*
+* Modified by Suyooo <me@suyo.be> 2023
+* Changed skew to behave as a shear instead of a rotational skew
+* Changes are licensed under the same license as the original code - original copyright notice follows
+*
+*/
+
+/**
 * @author       Richard Davey <rich@photonstorm.com>
 * @copyright    2016 Photon Storm Ltd.
 * @license      {@link https://github.com/photonstorm/phaser/blob/master/license.txt|MIT License}
