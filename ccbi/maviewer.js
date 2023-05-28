@@ -107,7 +107,8 @@ function save() {
 
 function createNode(node, parent) {
 	let n = game.add.group(parent, node.displayName);
-	n.y = n.parent.nodeSize.y;
+	n.parentGroup = parent;
+	n.y = parent.nodeSize.y;
 	n.flip = [false, false];
 	n.ignorePivotForPos = false;
 	
@@ -186,7 +187,7 @@ function handleProp(group, prop) {
 	    group.posType = prop.value[2];
 	    if (group.posType == 0) {
 		    group.x = prop.value[0] - (group.ignorePivotForPos ? group.pivot.x : 0);
-		    group.y = group.parent.nodeSize.y - prop.value[1] - (group.ignorePivotForPos ? group.pivot.y : 0);
+		    group.y = group.parentGroup.nodeSize.y - prop.value[1] - (group.ignorePivotForPos ? group.pivot.y : 0);
 	    } else {
 			console.log("Unimplemented position type " + group.posType);
 			console.log(prop);
@@ -196,7 +197,7 @@ function handleProp(group, prop) {
 		if (group.sizeType == 0) {
 			group.nodeSize = new Phaser.Point(prop.value[0],prop.value[1]);
 		} else if (group.sizeType == 1) {
-			group.nodeSize = new Phaser.Point(group.parent.nodeSize.x*prop.value[0]/100.0,group.parent.nodeSize.y*prop.value[1]/100.0);
+			group.nodeSize = new Phaser.Point(group.parentGroup.nodeSize.x*prop.value[0]/100.0,group.parentGroup.nodeSize.y*prop.value[1]/100.0);
 		} else {
 			console.log("Unimplemented size type " + group.sizeType);
 			console.log(prop);
@@ -278,7 +279,7 @@ function handleAnimProp(group, prop) {
 	if (prop.name === "position") {
 	    if (group.posType == 0) {
 		    group.x = val[0] - (group.ignorePivotForPos ? group.pivot.x : 0);
-		    group.y = group.parent.nodeSize.y - val[1] - (group.ignorePivotForPos ? group.pivot.y : 0);
+		    group.y = group.parentGroup.nodeSize.y - val[1] - (group.ignorePivotForPos ? group.pivot.y : 0);
 	    } else {
 			console.log("Unimplemented position type " + group.posType);
 			console.log(prop);

@@ -14023,9 +14023,9 @@ PIXI.DisplayObject.prototype = {
 
 				// recalculate expensive ops
 				this._crA = Math.cos(this.rotation);
-				this._srB = Math.sin(this.rotation) - this.skew.y;
+				this._srB = Math.sin(this.rotation) - Math.tan(this.skew.y);
 
-				this._srC = Math.sin(-this.rotation) - this.skew.x;
+				this._srC = Math.sin(-this.rotation) - Math.tan(this.skew.x);
 				this._crD = Math.cos(this.rotation);
             }
 
