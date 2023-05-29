@@ -1,6 +1,7 @@
 var game = new Phaser.Game(640, 1136, Phaser.WEBGL, 'maviewer', { preload: preload, create: create, update: update, render: render });
 
 var rootNode;
+var enemyNode;
 var prevtime = 0;
 var time = 0;
 var blendModeCounter = 17;
@@ -9,6 +10,7 @@ var sounds = undefined;
 
 function preload() {
     game.load.image('maviewer_enemy', 'image/battle/boss/battle_boss_0084.png');
+    game.load.image('maviewer_enemy_flash', 'enemy_flash.png');
     
     for (let i = 0; i < ccb.resources.atlas.length; i++) {
         game.load.atlas(ccb.resources.atlas[i] + ".plist", ccb.resources.atlas[i] + ".png", ccb.resources.atlas[i] + ".json");
@@ -106,6 +108,7 @@ function jump(t) {
     end = !loop && time >= ccb.endTime;
     playing = false;
     updateNode(rootNode);
+    handleCallbacks(0, time, true);
     game.sound.stopAll();
 }
 var saveNext=false;
@@ -151,6 +154,13 @@ function createNode(node, parent) {
         let enemySprite = game.add.sprite(0,0,"maviewer_enemy",undefined,n);
         enemySprite.x = 320 - enemySprite.width / 2;
         enemySprite.y = -1136;
+        n.flash = game.add.sprite(0,0,"maviewer_enemy_flash",undefined,n);
+        n.flash.x = 320 - enemySprite.width / 2;
+        n.flash.y = -1136;
+        n.flash.alpha = 0;
+        n.flashLastTime = -1;
+        
+        enemyNode = n;
     }
     
     if (! n.nodeSize) {
@@ -207,6 +217,11 @@ function updateNode(n) {
     
     for (let i = 0; i < n.childGroups.length; i++) {
         updateNode(n.childGroups[i]);
+    }
+    
+    if (n.flashLastTime) {
+        console.log(0.2 - (time - n.flashLastTime) * 5);
+        n.flash.alpha = Math.max(0, ease(0,1,(0.2 - (time - n.flashLastTime)) * 5,3));
     }
     
     for(let key in node.animatedProperties) {
@@ -282,9 +297,8 @@ function handleProp(group, prop) {
             PIXI.blendModesWebGL[blendModeCounter] = prop.value;
             blendModeLookup[prop.value] = blendModeCounter;
             blendModeCounter++;
-        } else {
-            group.blendMode = blendModeLookup[prop.value];
         }
+        group.blendMode = blendModeLookup[prop.value];
     } else if (prop.name === "opacity") {
         group.alpha = prop.value/255.0;
     } else if (prop.name === "color") {
@@ -382,16 +396,22 @@ function ease(a,b,t,type) {
     }
 }
 
-function handleCallbacks(prev, now) {
+function handleCallbacks(from, to, skipSounds) {
     let i = 0;
-    while (i < ccb.sequences[0].callbackChannel.keyframes.length && ccb.sequences[0].callbackChannel.keyframes[i].time < prevtime) {
+    while (i < ccb.sequences[0].callbackChannel.keyframes.length && ccb.sequences[0].callbackChannel.keyframes[i].time < from) {
         i++;
     }
     
-    while (i < ccb.sequences[0].callbackChannel.keyframes.length && ccb.sequences[0].callbackChannel.keyframes[i].time < time) {
+    while (i < ccb.sequences[0].callbackChannel.keyframes.length && ccb.sequences[0].callbackChannel.keyframes[i].time < to) {
         let val = ccb.sequences[0].callbackChannel.keyframes[i].value;
         if (val[0].startsWith("voiceplay") || val[0].startsWith("seplay")) {
-            sounds[val[0]].play();
+            if (skipSounds !== true) sounds[val[0]].play();
+        } else if (val[0].startsWith("enemyFadeOut")) {
+            if (enemyNode) enemyNode.visible = false;
+        } else if (val[0].startsWith("enemyFadeIn")) {
+            if (enemyNode) enemyNode.visible = true;
+        } else if (val[0].startsWith("damage_s")) {
+            if (enemyNode) enemyNode.flashLastTime = ccb.sequences[0].callbackChannel.keyframes[i].time;
         }
         i++;
     }
